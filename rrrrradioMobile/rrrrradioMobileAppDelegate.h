@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Rdio/Rdio.h>
 
 @class rrrrradioMobileViewController;
 
 @interface rrrrradioMobileAppDelegate : NSObject <UIApplicationDelegate> {
-
+    Rdio *rdio;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
++ (Rdio*)rdioInstance;
 
+@property (readonly) Rdio *rdio;
+@property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet rrrrradioMobileViewController *viewController;
 
 @end

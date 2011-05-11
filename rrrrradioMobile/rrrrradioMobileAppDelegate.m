@@ -7,43 +7,24 @@
 //
 
 #import "rrrrradioMobileAppDelegate.h"
-
 #import "rrrrradioMobileViewController.h"
 #import <YAJLiOS/YAJL.h>
-#import <Rdio/Rdio.h>
-
-#define RDIO_CONSKEY "q4ybz268x42yttz7k8fsfdn6"
-#define RDIO_CONSSEC "3KEeT5DAVf"
-
 
 @implementation rrrrradioMobileAppDelegate
-
-
 @synthesize window=_window;
-
 @synthesize viewController=_viewController;
+@synthesize rdio;
+
++ (Rdio*)rdioInstance {
+    return[(rrrrradioMobileAppDelegate*)[[UIApplication sharedApplication] delegate] rdio];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
-    
-    NSURL *queueURL = [[NSURL alloc] initWithString:@"http://rrrrradio.com/controller.php?r=getQueue"];
-    NSString *JSONData = [[NSString alloc] initWithContentsOfURL:queueURL];
-    NSDictionary *arrayData = [JSONData yajl_JSON];
-
-    NSArray *queue = [arrayData objectForKey:@"queue"];    
-    NSDictionary *currentTrack = [queue objectAtIndex:0];
-    NSLog(@"Attempting to play %@", [currentTrack yajl_JSONString]);
-    
-    Rdio *rdio = [[Rdio alloc] initWithConsumerKey:@"q4ybz268x42yttz7k8fsfdn6" andSecret:@"3KEeT5DAVf" delegate:nil];
-    [rdio.player playSource:[currentTrack objectForKey:@"key"]];    
-    NSLog(@"first key is: %@", [currentTrack objectForKey:@"key"]);
-
-    [Rdio release];
-    [queueURL release];
-    [JSONData release];    
+        
+    rdio = [[Rdio alloc] initWithConsumerKey:@"q4ybz268x42yttz7k8fsfdn6" andSecret:@"3KEeT5DAVf" delegate:nil];
     
     return YES;
 }
@@ -91,6 +72,7 @@
 {
     [_window release];
     [_viewController release];
+    [rdio release];
     [super dealloc];
 }
 

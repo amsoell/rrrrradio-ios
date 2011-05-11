@@ -7,8 +7,27 @@
 //
 
 #import "rrrrradioMobileViewController.h"
+#import <Rdio/Rdio.h>
+#import <YAJLiOS/YAJL.h>
+#import "rrrrradioMobileAppDelegate.h"
 
 @implementation rrrrradioMobileViewController
+
+- (void)playStream {
+    NSURL *queueURL = [[NSURL alloc] initWithString:@"http://rrrrradio.com/controller.php?r=getQueue"];
+    NSString *JSONData = [[NSString alloc] initWithContentsOfURL:queueURL];
+    
+    NSDictionary *arrayData = [JSONData yajl_JSON];
+    NSArray *queue = [arrayData objectForKey:@"queue"];    
+    NSDictionary *currentTrack = [queue objectAtIndex:0];
+    NSLog(@"Attempting to play %@", [currentTrack yajl_JSONString]);
+    
+    RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
+    [player playSource:[currentTrack objectForKey:@"key"]];
+    
+    [queueURL release];
+    [JSONData release];
+}
 
 - (void)dealloc
 {

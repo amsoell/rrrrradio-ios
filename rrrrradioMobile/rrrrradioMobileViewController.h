@@ -12,4 +12,6 @@
     
 }
 
+- (IBAction)playStream;
+
 @end
