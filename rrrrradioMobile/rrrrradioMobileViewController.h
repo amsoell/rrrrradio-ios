@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface rrrrradioMobileViewController : UIViewController {
-    
+    IBOutlet UIImageView *coverart;
+    IBOutlet UITextField *song_name;
+    IBOutlet UITextField *song_artist;
+    IBOutlet UITextField *song_album;
 }
 
 - (IBAction)playStream;
+
+@property (nonatomic, retain) IBOutlet UIImageView *coverart;
+@property (nonatomic, retain) IBOutlet UITextField *song_name;
+@property (nonatomic, retain) IBOutlet UITextField *song_artist;
+@property (nonatomic, retain) IBOutlet UITextField *song_album;
 
 @end

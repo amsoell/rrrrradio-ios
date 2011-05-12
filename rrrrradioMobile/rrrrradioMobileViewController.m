@@ -12,21 +12,40 @@
 #import "rrrrradioMobileAppDelegate.h"
 
 @implementation rrrrradioMobileViewController
+@synthesize coverart;
+@synthesize song_name;
+@synthesize song_artist;
+@synthesize song_album;
 
 - (void)playStream {
-    NSURL *queueURL = [[NSURL alloc] initWithString:@"http://rrrrradio.com/controller.php?r=getQueue"];
-    NSString *JSONData = [[NSString alloc] initWithContentsOfURL:queueURL];
-    
-    NSDictionary *arrayData = [JSONData yajl_JSON];
-    NSArray *queue = [arrayData objectForKey:@"queue"];    
-    NSDictionary *currentTrack = [queue objectAtIndex:0];
-    NSLog(@"Attempting to play %@", [currentTrack yajl_JSONString]);
-    
-    RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
-    [player playSource:[currentTrack objectForKey:@"key"]];
-    
-    [queueURL release];
-    [JSONData release];
+    if ([[rrrrradioMobileAppDelegate rdioInstance] user] == nil) {
+        [[rrrrradioMobileAppDelegate rdioInstance] authorizeFromController:self];
+    } else {
+        NSLog(@"Current user data: %@", [[rrrrradioMobileAppDelegate rdioInstance] user]);
+        
+        NSURL *queueURL = [[NSURL alloc] initWithString:@"http://rrrrradio.com/controller.php?r=getQueue"];
+        NSString *JSONData = [[NSString alloc] initWithContentsOfURL:queueURL];
+        
+        NSDictionary *arrayData = [JSONData yajl_JSON];
+        NSArray *queue = [arrayData objectForKey:@"queue"];    
+        NSDictionary *currentTrack = [queue objectAtIndex:0];
+        NSLog(@"Attempting to play %@", [currentTrack yajl_JSONString]);
+        
+        // Set UI elements
+        UIImage *art = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[currentTrack objectForKey:@"icon"]]]];
+        [coverart setImage:art];
+        [song_name setText:[currentTrack objectForKey:@"name"]];
+        [song_artist setText:[currentTrack objectForKey:@"artist"]];
+        [song_album setText:[currentTrack objectForKey:@"album"]];
+
+        
+        RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
+        [player playSource:[currentTrack objectForKey:@"key"]];
+//        [player seekToPosition:((double *)[arrayData objectForKey:@"timestamp"] - (double *)[currentTrack objectForKey:@"startplay"])];
+        
+        [queueURL release];
+        [JSONData release];
+    }
 }
 
 - (void)dealloc
