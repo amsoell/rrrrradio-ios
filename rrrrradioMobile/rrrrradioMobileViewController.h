@@ -15,6 +15,7 @@
     IBOutlet UILabel *song_name;
     IBOutlet UILabel *song_artist;
     IBOutlet UIImageView *trackmask;
+    IBOutlet UIImageView *artmask;    
     IBOutlet UIButton *playbutton;
     int skip;
     MusicQueue *_QUEUE;
@@ -22,6 +23,7 @@
 }
 
 - (void) playTrack:(NSDictionary *)trackData;
+- (void) displayTrack:(NSDictionary *)trackData;
 - (void) updateQueue;
 - (IBAction)playStream;
 - (IBAction)skipButton;
@@ -30,6 +32,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *song_name;
 @property (nonatomic, retain) IBOutlet UILabel *song_artist;
 @property (nonatomic, retain) IBOutlet UIImageView *trackmask;
+@property (nonatomic, retain) IBOutlet UIImageView *artmask;
 @property (nonatomic, retain) IBOutlet UIButton *playbutton;
 @property int skip;
 @property (retain) MusicQueue *_QUEUE;

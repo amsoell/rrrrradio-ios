@@ -42,6 +42,10 @@
     return [q objectAtIndex:ptr];
 }
 
+- (NSMutableDictionary*) firstTrack {
+    return [q objectAtIndex:0];
+}
+
 - (void) push:(NSMutableDictionary *)trackData {
     [q addObject:trackData];
 }

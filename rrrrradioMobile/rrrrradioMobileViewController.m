@@ -18,6 +18,7 @@
 @synthesize song_artist;
 @synthesize playbutton;
 @synthesize trackmask;
+@synthesize artmask;
 @synthesize skip;
 @synthesize _QUEUE;
 @synthesize queueLoader;
@@ -25,22 +26,17 @@
 - (void) playTrack:(NSDictionary *)trackData {
     // Set UI elements
     
-    UIImage *art = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[trackData objectForKey:@"bigIcon"]]]];
-    [coverart setImage:art];
-    [song_name setText:[trackData objectForKey:@"name"]];
-    [song_artist setText:[trackData objectForKey:@"artist"]];
+    [self displayTrack:trackData];
     
     RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
     [player playSource:[trackData objectForKey:@"key"]];  
-    
-    [art release];
 }
 
 - (void)playStream {
     if ([[rrrrradioMobileAppDelegate rdioInstance] user] == nil) {
         [[rrrrradioMobileAppDelegate rdioInstance] authorizeFromController:self];
     } else {
-        [playbutton setImage:[UIImage imageNamed:@"trackbg.png"] forState:UIControlStateNormal];
+        [playbutton setImage:[UIImage imageNamed:@"ajax-loader-large-dark.gif"] forState:UIControlStateNormal];
         
         RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
         [player setDelegate:self];        
@@ -52,6 +48,15 @@
         [self playTrack:currentTrack];
         queueLoader = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(updateQueue) userInfo:nil repeats:YES];
     }
+}
+
+- (void)displayTrack:(NSDictionary *)trackData {
+    UIImage *art = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[trackData objectForKey:@"bigIcon"]]]];
+    [coverart setImage:art];
+    [song_name setText:[trackData objectForKey:@"name"]];
+    [song_artist setText:[trackData objectForKey:@"artist"]];
+    
+    [art release];    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -97,6 +102,7 @@
 - (void)rdioPlayerChangedFromState:(RDPlayerState)oldState toState:(RDPlayerState)newState {
     if (newState == 2) {
         [playbutton setHidden:YES];
+        [artmask setHidden:YES];
 /*            
             NSLog(@"Jump to %i", skip);
             sleep(2);
@@ -137,8 +143,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [trackmask setImage:[UIImage imageNamed:@"trackbg.png"]];
-    
     NSURL *queueURL = [[NSURL alloc] initWithString:@"http://rrrrradio.com/controller.php?r=getQueue"];
     NSString *JSONData = [[NSString alloc] initWithContentsOfURL:queueURL];
     
@@ -146,6 +150,8 @@
     NSArray *queue = [arrayData objectForKey:@"queue"];    
     
     _QUEUE = [[MusicQueue alloc] initWithTrackData:queue];
+    
+    [self displayTrack:[_QUEUE firstTrack]];
  
     [JSONData release];
     [queueURL release];

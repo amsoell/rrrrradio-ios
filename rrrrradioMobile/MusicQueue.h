@@ -19,6 +19,7 @@
 -(void) unlock;
 -(NSMutableDictionary*) getNext;
 -(NSMutableDictionary*) currentTrack;
+-(NSMutableDictionary*) firstTrack;
 -(void) push:(NSDictionary*)trackData;
 -(id) initWithTrackData:(NSArray*)trackData;
 -(int) length;
