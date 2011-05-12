@@ -7,19 +7,32 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Rdio/Rdio.h>
+#import "MusicQueue.h"
 
-@interface rrrrradioMobileViewController : UIViewController {
-    IBOutlet UIImageView *coverart;
-    IBOutlet UITextField *song_name;
-    IBOutlet UITextField *song_artist;
-    IBOutlet UITextField *song_album;
+@interface rrrrradioMobileViewController : UIViewController <RDPlayerDelegate> {
+    IBOutlet UIImageView *coverart; 
+    IBOutlet UILabel *song_name;
+    IBOutlet UILabel *song_artist;
+    IBOutlet UIImageView *trackmask;
+    IBOutlet UIButton *playbutton;
+    int skip;
+    MusicQueue *_QUEUE;
+    NSTimer *queueLoader;
 }
 
+- (void) playTrack:(NSDictionary *)trackData;
+- (void) updateQueue;
 - (IBAction)playStream;
+- (IBAction)skipButton;
 
 @property (nonatomic, retain) IBOutlet UIImageView *coverart;
-@property (nonatomic, retain) IBOutlet UITextField *song_name;
-@property (nonatomic, retain) IBOutlet UITextField *song_artist;
-@property (nonatomic, retain) IBOutlet UITextField *song_album;
+@property (nonatomic, retain) IBOutlet UILabel *song_name;
+@property (nonatomic, retain) IBOutlet UILabel *song_artist;
+@property (nonatomic, retain) IBOutlet UIImageView *trackmask;
+@property (nonatomic, retain) IBOutlet UIButton *playbutton;
+@property int skip;
+@property (retain) MusicQueue *_QUEUE;
+@property (retain) NSTimer *queueLoader;
 
 @end
