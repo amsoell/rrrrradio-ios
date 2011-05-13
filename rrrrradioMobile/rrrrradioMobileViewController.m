@@ -24,6 +24,7 @@
 @synthesize _QUEUE;
 @synthesize queueLoader;
 @synthesize upcoming;
+@synthesize progress;
 
 - (void) playTrack:(NSDictionary *)trackData {
     // Set UI elements
@@ -68,6 +69,8 @@
     
     // populate next two songs
     [upcoming reloadData];
+
+
     
     
 }
@@ -77,15 +80,21 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-/*    
     RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
 
     if([keyPath isEqualToString:@"position"]) {
+        float x = [player position]/[[[_QUEUE currentTrack] objectForKey:@"duration"] doubleValue] *320 - 320;
+        if (x>0) x = 0; // Don't let it go too far to the right;
+        
         if(player.position > 0) {
-            [song_position setText:[NSString stringWithFormat:@"%f",[player position]]];
+            CGRect frame = [progress frame];
+            frame.origin.x = x;
+            frame.origin.y = 0.0;
+            
+            [progress setFrame:frame];
         }
     }
-*/ 
+
 }
 
 - (void)updateQueue {
@@ -111,27 +120,34 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:@"track"];
-    NSDictionary *track = [_QUEUE trackAt:indexPath.row+1];
     
-    UIImageView *cellBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCell-bg.jpg"]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"icon"];
     
-    cell.textLabel.text = [track objectForKey:@"name"];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:@"track"];
+
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+        
+        UIImageView *cellBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCell-bg.jpg"]];
+        cell.backgroundView = cellBg;   
+        [cellBg release];        
+    }
+
     
-    cell.detailTextLabel.text = [track objectForKey:@"artist"];
-    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-    
+    NSDictionary *track = [_QUEUE trackAt:indexPath.row+1];    
+    cell.textLabel.text = [track objectForKey:@"name"];    
+    cell.detailTextLabel.text = [track objectForKey:@"artist"];    
+
     UIImage *art = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[track objectForKey:@"icon"]]]];
     cell.imageView.image = art;
 
-    cell.backgroundView = cellBg;
-    
-    [cellBg release];
+
+    [cell autorelease];       
     [art release];
-    [cell autorelease];
+
     return cell;
 }
 

@@ -139,7 +139,7 @@
 						<string key="NSFrame">{{20, 333}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="11885434"/>
+						<reference key="NSNextKeyView" ref="274201884"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -198,7 +198,7 @@
 							<string key="NSResourceName">play_button_overlay.png</string>
 						</object>
 					</object>
-					<object class="IBUITableView" id="11885434">
+					<object class="IBUITableView" id="274201884">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 364}, {320, 96}}</string>
@@ -217,11 +217,27 @@
 						<float key="IBUISectionHeaderHeight">22</float>
 						<float key="IBUISectionFooterHeight">22</float>
 					</object>
+					<object class="IBUIImageView" id="881125564">
+						<reference key="NSNextResponder" ref="774585933"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{-320, 0}, {320, 44}}</string>
+						<reference key="NSSuperview" ref="774585933"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="356067149"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
+						<float key="IBUIAlpha">0.05000000074505806</float>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUIImage" ref="206242378"/>
+					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="356067149"/>
+				<reference key="NSNextKeyView" ref="881125564"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
 					<bytes key="NSRGB">MC4xMjk0MTE3NzE5IDAuMTQ1MDk4MDQ1NSAwLjE2MDc4NDMxOQA</bytes>
@@ -302,7 +318,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
-						<reference key="source" ref="11885434"/>
+						<reference key="source" ref="274201884"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">50</int>
@@ -310,7 +326,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="11885434"/>
+						<reference key="source" ref="274201884"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">51</int>
@@ -319,9 +335,17 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">upcoming</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="11885434"/>
+						<reference key="destination" ref="274201884"/>
 					</object>
 					<int key="connectionID">52</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">progress</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="881125564"/>
+					</object>
+					<int key="connectionID">55</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -356,7 +380,8 @@
 							<reference ref="254430830"/>
 							<reference ref="689145064"/>
 							<reference ref="692752674"/>
-							<reference ref="11885434"/>
+							<reference ref="274201884"/>
+							<reference ref="881125564"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -412,9 +437,15 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
-						<reference key="object" ref="11885434"/>
+						<reference key="object" ref="274201884"/>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">upcoming</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">54</int>
+						<reference key="object" ref="881125564"/>
+						<reference key="parent" ref="774585933"/>
+						<string key="objectName">progress</string>
 					</object>
 				</object>
 			</object>
@@ -433,6 +464,7 @@
 					<string>38.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>42.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
+					<string>54.IBPluginDependency</string>
 					<string>6.IBEditorWindowLastContentRect</string>
 					<string>6.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -449,6 +481,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="0.0"/>
 					<real value="0.0"/>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{239, 654}, {320, 480}}</string>
@@ -469,7 +502,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">52</int>
+			<int key="maxID">55</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -495,6 +528,7 @@
 							<string>artmask</string>
 							<string>coverart</string>
 							<string>playbutton</string>
+							<string>progress</string>
 							<string>song_artist</string>
 							<string>song_name</string>
 							<string>trackmask</string>
@@ -505,6 +539,7 @@
 							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
+							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UIImageView</string>
@@ -518,6 +553,7 @@
 							<string>artmask</string>
 							<string>coverart</string>
 							<string>playbutton</string>
+							<string>progress</string>
 							<string>song_artist</string>
 							<string>song_name</string>
 							<string>trackmask</string>
@@ -536,6 +572,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">playbutton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">progress</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">song_artist</string>

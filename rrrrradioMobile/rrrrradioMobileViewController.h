@@ -18,6 +18,7 @@
     IBOutlet UIImageView *artmask;    
     IBOutlet UIButton *playbutton;
     IBOutlet UITableView *upcoming;
+    IBOutlet UIImageView *progress;
     int skip;
     MusicQueue *_QUEUE;
     NSTimer *queueLoader;
@@ -35,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *artmask;
 @property (nonatomic, retain) IBOutlet UIButton *playbutton;
 @property (nonatomic, retain) IBOutlet UITableView *upcoming;
+@property (nonatomic, retain) IBOutlet UIImageView *progress;
 @property int skip;
 @property (retain) MusicQueue *_QUEUE;
 @property (retain) NSTimer *queueLoader;
