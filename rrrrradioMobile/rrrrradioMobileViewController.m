@@ -11,6 +11,7 @@
 #import <YAJLiOS/YAJL.h>
 #import "rrrrradioMobileAppDelegate.h"
 #import "MusicQueue.h"
+#import "Settings.h"
 
 @implementation rrrrradioMobileViewController
 @synthesize coverart;
@@ -22,14 +23,20 @@
 @synthesize skip;
 @synthesize _QUEUE;
 @synthesize queueLoader;
+@synthesize upcoming;
 
 - (void) playTrack:(NSDictionary *)trackData {
     // Set UI elements
     
-    [self displayTrack:trackData];
+    [self refreshQueueDisplay];
     
     RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
     [player playSource:[trackData objectForKey:@"key"]];  
+    if (skip>0) {
+        sleep(1);
+        [player seekToPosition:skip];    
+        skip = -1;
+    }
 }
 
 - (void)playStream {
@@ -50,13 +57,19 @@
     }
 }
 
-- (void)displayTrack:(NSDictionary *)trackData {
-    UIImage *art = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[trackData objectForKey:@"bigIcon"]]]];
+- (void)refreshQueueDisplay {
+    // current track in the spotlight
+    NSDictionary *currentTrack = [_QUEUE currentTrack];
+    UIImage *art = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[currentTrack objectForKey:@"bigIcon"]]]];
     [coverart setImage:art];
-    [song_name setText:[trackData objectForKey:@"name"]];
-    [song_artist setText:[trackData objectForKey:@"artist"]];
-    
+    [song_name setText:[currentTrack objectForKey:@"name"]];
+    [song_artist setText:[currentTrack objectForKey:@"artist"]];
     [art release];    
+    
+    // populate next two songs
+    [upcoming reloadData];
+    
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -90,27 +103,50 @@
     [JSONData release];
 }
 
+#pragma mark -
+#pragma mark Table View: Queue
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return ([_QUEUE length] - 1);
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:@"track"];
+    NSDictionary *track = [_QUEUE trackAt:indexPath.row+1];
+    
+    UIImageView *cellBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCell-bg.jpg"]];
+    
+    cell.textLabel.text = [track objectForKey:@"name"];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    
+    cell.detailTextLabel.text = [track objectForKey:@"artist"];
+    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    
+    UIImage *art = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[track objectForKey:@"icon"]]]];
+    cell.imageView.image = art;
+
+    cell.backgroundView = cellBg;
+    
+    [cellBg release];
+    [art release];
+    [cell autorelease];
+    return cell;
+}
 
 #pragma mark -
 #pragma mark RDPlayerDelegate
-
-- (void)skipButton {
-
- 
-}
 
 - (void)rdioPlayerChangedFromState:(RDPlayerState)oldState toState:(RDPlayerState)newState {
     if (newState == 2) {
         [playbutton setHidden:YES];
         [artmask setHidden:YES];
-/*            
-            NSLog(@"Jump to %i", skip);
-            sleep(2);
-            [player seekToPosition:skip];   
-*/
     } else if (newState == 3) {
         NSDictionary* currentTrack = [_QUEUE getNext];
         [self playTrack:currentTrack];
+        
+        [self refreshQueueDisplay];
     }
 	NSLog(@"*** Player changed from state: %d toState: %d", oldState, newState);
 }
@@ -138,7 +174,34 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark -
+#pragma mark RdioDelegate methods
+
+- (void)rdioDidAuthorizeUser:(NSDictionary *)user withAccessToken:(NSString *)accessToken {
+    [[Settings settings] setUser:[NSString stringWithFormat:@"%@ %@", [user valueForKey:@"firstName"], [user valueForKey:@"lastName"]]];
+    [[Settings settings] setAccessToken:accessToken];
+    [[Settings settings] setUserKey:[user objectForKey:@"key"]];
+    [[Settings settings] setIcon:[user objectForKey:@"icon"]];
+    [[Settings settings] save];  
+}
+
+/**
+ * Authentication failed so we should alert the user.
+ */
+- (void)rdioAuthorizationFailed:(NSString *)message {
+    NSLog(@"Rdio authorization failed: %@", message);
+}
+
+
 #pragma mark - View lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    /**
+     * Make sure we are sent delegate messages.
+     */
+    [[rrrrradioMobileAppDelegate rdioInstance] setDelegate:self];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -148,10 +211,11 @@
     
     NSDictionary *arrayData = [JSONData yajl_JSON];
     NSArray *queue = [arrayData objectForKey:@"queue"];    
-    
     _QUEUE = [[MusicQueue alloc] initWithTrackData:queue];
     
-    [self displayTrack:[_QUEUE firstTrack]];
+    skip = [[arrayData objectForKey:@"timestamp"] intValue] - [[[queue objectAtIndex:0] objectForKey:@"startplay"] intValue];
+    
+    [self refreshQueueDisplay];
  
     [JSONData release];
     [queueURL release];

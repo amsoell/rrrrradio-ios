@@ -39,11 +39,29 @@
 }
 
 - (NSMutableDictionary*) currentTrack {
-    return [q objectAtIndex:ptr];
+    if ((ptr>=0) && (ptr<[q count])) {
+        return [q objectAtIndex:ptr];
+    } else if ([q count]>0) {
+        return [q objectAtIndex:0];
+    } else {
+        return NO;
+    }
 }
 
 - (NSMutableDictionary*) firstTrack {
-    return [q objectAtIndex:0];
+    int index = 0;
+    if (ptr>0) index += ptr;
+    return [self trackAt:index];
+}
+
+- (NSMutableDictionary*) trackAt:(int)index {
+    if (ptr>0) index+=ptr;
+    
+    if ((index>=0) && (index<[q count])) {
+        return [q objectAtIndex:index];
+    } else {
+        return NO;
+    }
 }
 
 - (void) push:(NSMutableDictionary *)trackData {
