@@ -44,7 +44,7 @@
     if ([[rrrrradioMobileAppDelegate rdioInstance] user] == nil) {
         [[rrrrradioMobileAppDelegate rdioInstance] authorizeFromController:self];
     } else {
-        [playbutton setImage:[UIImage imageNamed:@"ajax-loader-large-dark.gif"] forState:UIControlStateNormal];
+        [[self playbutton] setHidden:YES];
         
         RDPlayer *player = [[rrrrradioMobileAppDelegate rdioInstance] player];
         [player setDelegate:self];        
@@ -98,7 +98,9 @@
 }
 
 - (void)updateQueue {
-    NSURL *queueURL = [[NSURL alloc] initWithString:@"http://rrrrradio.com/controller.php?r=getQueue"];
+    NSString* userKey = [[Settings settings] userKey];    
+    NSURL *queueURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://rrrrradio.com/controller.php?r=getQueue&userKey=%@", userKey]];
+    NSLog(@"http://rrrrradio.com/controller.php?r=getQueue&userKey=%@", userKey);
     NSString *JSONData = [[NSString alloc] initWithContentsOfURL:queueURL];
     
     NSLog(@"Running update queue");    
@@ -133,7 +135,8 @@
         
         UIImageView *cellBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCell-bg.jpg"]];
         cell.backgroundView = cellBg;   
-        [cellBg release];        
+        [cellBg release];      
+        [cell autorelease];         
     }
 
     
@@ -145,9 +148,8 @@
     cell.imageView.image = art;
 
 
-    [cell autorelease];       
+      
     [art release];
-
     return cell;
 }
 
@@ -156,7 +158,6 @@
 
 - (void)rdioPlayerChangedFromState:(RDPlayerState)oldState toState:(RDPlayerState)newState {
     if (newState == 2) {
-        [playbutton setHidden:YES];
         [artmask setHidden:YES];
     } else if (newState == 3) {
         NSDictionary* currentTrack = [_QUEUE getNext];
