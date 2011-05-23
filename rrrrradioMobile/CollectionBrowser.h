@@ -11,9 +11,14 @@
 
 @interface CollectionBrowser : UIViewController <UITableViewDataSource,UITableViewDelegate> {
     NSArray *dataSource;
+    NSString *indexChars;
+    NSMutableArray *indexSize;
 }
 
 - (void) close;
 
 @property (nonatomic, retain) NSArray *dataSource;
+@property (nonatomic, retain) NSString *indexChars;
+@property (nonatomic, retain) NSMutableArray *indexSize;
+
 @end

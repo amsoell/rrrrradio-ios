@@ -12,6 +12,8 @@
 
 @implementation CollectionBrowser
 @synthesize dataSource;
+@synthesize indexChars;
+@synthesize indexSize;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,12 +24,52 @@
     return self;
 }
 
+/*
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [dataSource count];
 }
+ */
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if ([self.title isEqualToString:@"Artists"]) {
+        return [indexChars length];
+    } else {
+        return 1;
+    }
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if ([self.title isEqualToString:@"Artists"]) {    
+        NSMutableArray *indices = [[NSMutableArray alloc] init];
+        for (int i=0;i<[indexChars length];i++) {
+            [indices insertObject:[indexChars substringWithRange:NSMakeRange(i, 1)] atIndex:[indices count]];
+        }
+        
+        [indices autorelease];
+        return indices;
+    } else {
+        return [NSArray arrayWithObject:[NSString stringWithString:@""]];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([self.title isEqualToString:@"Artists"]) {    
+        return [[indexSize objectAtIndex:section] intValue];
+    } else {
+        return [dataSource count];
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *item = [dataSource objectAtIndex:indexPath.row];
+    int increment = 0;
+    if ([self.title isEqualToString:@"Artists"]) {        
+        for (int i=0;i<indexPath.section;i++) {
+            increment+=[[indexSize objectAtIndex:i] intValue];
+        }
+    }
+
+    NSDictionary *item = [dataSource objectAtIndex:indexPath.row+increment];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (cell == nil) {    
@@ -67,6 +109,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    int increment = 0;
+    if ([self.title isEqualToString:@"Artists"]) {        
+        for (int i=0;i<indexPath.section;i++) {
+            increment+=[[indexSize objectAtIndex:i] intValue];
+        }    
+    }
      
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
@@ -75,7 +123,7 @@
     [cell setAccessoryView:activityView];
     [activityView release];    
     
-    NSDictionary *item = [dataSource objectAtIndex:indexPath.row];
+    NSDictionary *item = [dataSource objectAtIndex:indexPath.row+increment];
     
     if ([[item valueForKey:@"type"] isEqualToString:@"tl"] || [[item valueForKey:@"type"] isEqualToString:@"t"]) {
         NSString *requestUrl = [NSString stringWithFormat:@"controller.php?key=%@", [item valueForKey:@"key"]];
@@ -134,8 +182,41 @@
 {
     [super viewDidLoad];
     UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(close)];
-    
     [self.navigationItem setRightBarButtonItem:done];
+    [done release];
+    
+    indexChars = [NSString stringWithString:@"#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    int currentIndex = 0;
+    
+    indexSize = [[NSMutableArray alloc] init];
+    for (NSDictionary *item in dataSource) {
+        NSString *name = [item objectForKey:@"name"];
+        if ([name hasPrefix:@"The "]) {
+            name = [name substringFromIndex:4];
+        } else if ([name hasPrefix:@"A "]) {
+            name = [name substringFromIndex:2];
+        }
+
+        if (currentIndex<[indexChars length] && [[[name substringWithRange:NSMakeRange(0, 1)] uppercaseString] isEqualToString:[indexChars substringWithRange:NSMakeRange(currentIndex+1, 1)]]) {
+            currentIndex++;            
+            if ([indexSize count]>currentIndex) {
+                //increment
+                [indexSize replaceObjectAtIndex:currentIndex withObject:[NSNumber numberWithInt:[[indexSize objectAtIndex:currentIndex] intValue]+1]];               
+            } else {
+                //initialize
+                [indexSize insertObject:[NSNumber numberWithInt:1] atIndex:currentIndex];
+            }
+        } else {
+            if ([indexSize count]>currentIndex) {
+                //increment
+                [indexSize replaceObjectAtIndex:currentIndex withObject:[NSNumber numberWithInt:[[indexSize objectAtIndex:currentIndex] intValue]+1]];            
+            } else {
+                //initialize
+                [indexSize insertObject:[NSNumber numberWithInt:1] atIndex:currentIndex];
+            }
+        }
+    }
+    
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -143,6 +224,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [indexSize release];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
