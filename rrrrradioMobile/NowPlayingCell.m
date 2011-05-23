@@ -28,7 +28,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{    
         // big icon - see if the image exists on disk
-        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [track objectForKey:@"key"]];
+        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [track objectForKey:@"albumKey"]];
         NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
                                             stringByAppendingPathComponent:albumArtCachedName];
         UIImage *image = nil;

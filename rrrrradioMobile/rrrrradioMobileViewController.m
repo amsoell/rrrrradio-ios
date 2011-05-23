@@ -10,6 +10,7 @@
 #import <Rdio/Rdio.h>
 #import <YAJLiOS/YAJL.h>
 #import <MediaPlayer/MPVolumeView.h>
+#import <AVFoundation/AVFoundation.h>
 #import "rrrrradioMobileAppDelegate.h"
 #import "CollectionBrowser.h"
 #import "MusicQueue.h"
@@ -93,6 +94,13 @@
 // a track isn't already playing.
 - (void) reset {
     NSLog(@"resetting");
+    
+    if (_QUEUE!=nil) {
+        [_QUEUE release];
+        _QUEUE = nil;
+    }
+
+    
     NSDictionary *arrayData = [[DataInterface issueCommand:@"controller.php?r=getQueue"] yajl_JSON];
     NSArray *queue = [arrayData objectForKey:@"queue"];    
     _QUEUE = [[MusicQueue alloc ] initWithTrackData:queue];
@@ -451,12 +459,29 @@
         });
 
     }
+    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
  
     [super viewDidLoad];
 }
 
+-(BOOL) canBecomeFirstResponder {
+    return YES;
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [self becomeFirstResponder];
+}
+
+-(void) remoteControlReceivedWithEvent:(UIEvent *)event {
+    
+}
+
 - (void)viewDidUnload
 {
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [_QUEUE release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -478,7 +503,13 @@
 -(void)foregrounding:(NSNotification *)notification {
     NSLog(@"We're back!");
     
-    [self updateQueue];        
+    RDPlayer* player = [[rrrrradioMobileAppDelegate rdioInstance] player];    
+    if (player.state != RDPlayerStatePlaying) {
+        [self reset];
+    } else {
+        [self updateQueue];        
+    }
+    
     [self enableBackgroundPooling];    
 
 }

@@ -69,7 +69,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{    
         // little icon - see if the image exists on disk
-        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-icon.png", [track objectForKey:@"key"]];
+        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-icon.png", [track objectForKey:@"albumKey"]];
         NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
                                             stringByAppendingPathComponent:albumArtCachedName];
         UIImage *image = nil;
@@ -89,7 +89,7 @@
         });
         
         // Get the big one in advance
-        albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [track objectForKey:@"key"]];
+        albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [track objectForKey:@"albumKey"]];
         albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
                                             stringByAppendingPathComponent:albumArtCachedName];
         image = nil;
