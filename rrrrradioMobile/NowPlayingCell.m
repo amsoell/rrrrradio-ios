@@ -44,8 +44,10 @@
             [imageData writeToFile:albumArtCachedFullPath atomically:YES];
         }
 
-        [self.imageView setImage:image];   
-        [spinner stopAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.imageView setImage:image];   
+            [spinner stopAnimating];
+        });
     });
 
 }

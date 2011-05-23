@@ -50,16 +50,18 @@
                 [imageData writeToFile:userArtCachedFullPath atomically:YES];
             }
             
-            [self.userView setImage:image];
-            
-            // Round the corners
-            CALayer * l = [self.userView layer];
-            [l setMasksToBounds:YES];
-            [l setCornerRadius:4.0];
-            
-            // Add border
-            [l setBorderWidth:1.0];
-            [l setBorderColor:[[UIColor blackColor] CGColor]];        
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.userView setImage:image];
+                
+                // Round the corners
+                CALayer * l = [self.userView layer];
+                [l setMasksToBounds:YES];
+                [l setCornerRadius:4.0];
+                
+                // Add border
+                [l setBorderWidth:1.0];
+                [l setBorderColor:[[UIColor blackColor] CGColor]];        
+            });
             
         });
         
@@ -81,8 +83,10 @@
             [imageData writeToFile:albumArtCachedFullPath atomically:YES];
         }
                 
-        [self.imageView setImage:image];
-        [spinner stopAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.imageView setImage:image];
+            [spinner stopAnimating];
+        });
         
         // Get the big one in advance
         albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [track objectForKey:@"key"]];

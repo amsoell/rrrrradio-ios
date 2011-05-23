@@ -9,6 +9,7 @@
 #import "CollectionBrowser.h"
 #import "DataInterface.h"
 #import <YAJLiOS/YAJL.h>
+#import <dispatch/dispatch.h>
 
 @implementation CollectionBrowser
 @synthesize dataSource;
@@ -83,24 +84,30 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;   
     } else if ([[item objectForKey:@"type"] isEqualToString:@"al"] || [[item objectForKey:@"type"] isEqualToString:@"a"]) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
-        
+
         NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-icon.png", [item objectForKey:@"key"]];
         NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
                                             stringByAppendingPathComponent:albumArtCachedName];
-        UIImage *image = nil;
         if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
-            image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
+            UIImage *image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
             NSLog(@"Pulling art from cache");
+            [cell.imageView setImage:image];            
         } else {
             NSLog(@"Pulling art from web");
             NSString *artUrl = [item objectForKey:@"icon"];
-            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-            // save it to disk
-            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-            [imageData writeToFile:albumArtCachedFullPath atomically:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                                            
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
+                // save it to disk
+                NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+                [imageData writeToFile:albumArtCachedFullPath atomically:YES];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [cell.imageView setImage:image];            
+                });
+            });
         }
         
-        [cell.imageView setImage:image];
+
     }
 
     
@@ -124,6 +131,7 @@
     [activityView release];    
     
     NSDictionary *item = [dataSource objectAtIndex:indexPath.row+increment];
+    NSLog(@"Item::%@", item);
     
     if ([[item valueForKey:@"type"] isEqualToString:@"tl"] || [[item valueForKey:@"type"] isEqualToString:@"t"]) {
         NSString *requestUrl = [NSString stringWithFormat:@"controller.php?key=%@", [item valueForKey:@"key"]];
@@ -132,15 +140,15 @@
         [cell setAccessoryView:nil];
         [self dismissModalViewControllerAnimated:YES];        
     } else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
-            CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
-            collection.title = [item valueForKey:@"name"];
-            
+        CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
+        collection.title = [item valueForKey:@"name"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                                
             if ([[item valueForKey:@"type"] isEqualToString:@"al"] || [[item valueForKey:@"type"] isEqualToString:@"a"]) {
-                NSString *requestUrl = [NSString stringWithFormat:@"data.php?a=%@", [item valueForKey:@"key"]];
-                NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
+//                NSString *requestUrl = [NSString stringWithFormat:@"data.php?a=%@", [item valueForKey:@"key"]];
+//                NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
                 
-                collection.dataSource = albumInformation;
+                collection.dataSource = [item objectForKey:@"tracks"];
             } else if ([[item valueForKey:@"type"] isEqualToString:@"rl"] || [[item valueForKey:@"type"] isEqualToString:@"r"]) {
                 NSString *requestUrl = [NSString stringWithFormat:@"data.php?r=%@", [item valueForKey:@"key"]];
                 NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
@@ -148,13 +156,16 @@
                 collection.dataSource = albumInformation;
             }
 
-            [cell setAccessoryView:nil];
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];        
-            
-            //Push the new table view on the stack
-            [self.navigationController pushViewController:collection animated:YES];
-            
-            [collection release];    
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [cell setAccessoryView:nil];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];        
+                
+                //Push the new table view on the stack
+                [self.navigationController pushViewController:collection animated:YES];
+                
+                [collection release];    
+            });
         });
     }
 }
@@ -188,34 +199,36 @@
     indexChars = [NSString stringWithString:@"#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
     int currentIndex = 0;
     
-    indexSize = [[NSMutableArray alloc] init];
-    for (NSDictionary *item in dataSource) {
-        NSString *name = [item objectForKey:@"name"];
-        if ([name hasPrefix:@"The "]) {
-            name = [name substringFromIndex:4];
-        } else if ([name hasPrefix:@"A "]) {
-            name = [name substringFromIndex:2];
-        }
+    if ([self.title isEqualToString:@"Artists"]) {
+        indexSize = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in dataSource) {
+            NSString *name = [item objectForKey:@"name"];
+            if ([name hasPrefix:@"The "]) {
+                name = [name substringFromIndex:4];
+            } else if ([name hasPrefix:@"A "]) {
+                name = [name substringFromIndex:2];
+            }
 
-        if (currentIndex<[indexChars length] && [[[name substringWithRange:NSMakeRange(0, 1)] uppercaseString] isEqualToString:[indexChars substringWithRange:NSMakeRange(currentIndex+1, 1)]]) {
-            currentIndex++;            
-            if ([indexSize count]>currentIndex) {
-                //increment
-                [indexSize replaceObjectAtIndex:currentIndex withObject:[NSNumber numberWithInt:[[indexSize objectAtIndex:currentIndex] intValue]+1]];               
+            if (currentIndex<[indexChars length] && [[[name substringWithRange:NSMakeRange(0, 1)] uppercaseString] isEqualToString:[indexChars substringWithRange:NSMakeRange(currentIndex+1, 1)]]) {
+                currentIndex++;            
+                if ([indexSize count]>currentIndex) {
+                    //increment
+                    [indexSize replaceObjectAtIndex:currentIndex withObject:[NSNumber numberWithInt:[[indexSize objectAtIndex:currentIndex] intValue]+1]];               
+                } else {
+                    //initialize
+                    [indexSize insertObject:[NSNumber numberWithInt:1] atIndex:currentIndex];
+                }
             } else {
-                //initialize
-                [indexSize insertObject:[NSNumber numberWithInt:1] atIndex:currentIndex];
-            }
-        } else {
-            if ([indexSize count]>currentIndex) {
-                //increment
-                [indexSize replaceObjectAtIndex:currentIndex withObject:[NSNumber numberWithInt:[[indexSize objectAtIndex:currentIndex] intValue]+1]];            
-            } else {
-                //initialize
-                [indexSize insertObject:[NSNumber numberWithInt:1] atIndex:currentIndex];
+                if ([indexSize count]>currentIndex) {
+                    //increment
+                    [indexSize replaceObjectAtIndex:currentIndex withObject:[NSNumber numberWithInt:[[indexSize objectAtIndex:currentIndex] intValue]+1]];            
+                } else {
+                    //initialize
+                    [indexSize insertObject:[NSNumber numberWithInt:1] atIndex:currentIndex];
+                }
             }
         }
-    }
+    };
     
     
     // Do any additional setup after loading the view from its nib.

@@ -16,6 +16,10 @@
 	<array>
 		<string>appIcon.png</string>
 		<string>appIcon@2x.png</string>
+		<string>appIcon@2x.png</string>
+		<string>appIcon@2x.png</string>
+		<string>appIcon.png</string>
+		<string>appIcon.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.rrrrradio.${PRODUCT_NAME:rfc1034identifier}</string>

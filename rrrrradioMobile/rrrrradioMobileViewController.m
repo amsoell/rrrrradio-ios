@@ -317,7 +317,9 @@
         
         // If the queue size changed, update the display
         if ([_QUEUE length]!=size) {
-            [self refreshQueueDisplay];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self refreshQueueDisplay];
+            });
         }
     });
 }
@@ -343,11 +345,13 @@
             NSLog(@"We're in the background, clean stuff up");
             [self stopStream];
             [self reset];                
-        } else if (skip < 0) {
+        } else 
+        if (skip < 0) {
             NSLog(@"New Track!");
             NSDictionary* currentTrack = [_QUEUE getNext];
             [self playTrack:currentTrack];
             [self refreshQueueDisplay];
+            sleep(5);            
         } else {
             NSLog(@"Stopping. Skip is %d", skip);
         }
@@ -441,7 +445,9 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
             self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]]; 
 
-            [self enableRequests];            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self enableRequests];            
+            });
         });
 
     }
