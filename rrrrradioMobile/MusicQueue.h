@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface MusicQueue : NSObject {
     NSMutableArray *q;
     int ptr;
     BOOL locked;
+    BOOL needsRefresh;
 }
 
--(void) lock;
+-(void) lock:(NSString*)lockedBy;
 -(void) unlock;
 -(NSMutableDictionary*) getNext;
+-(void) cancelPlayback;
 -(NSMutableDictionary*) currentTrack;
 -(NSMutableDictionary*) trackAt:(int)index;
 -(NSMutableDictionary*) firstTrack;
@@ -25,9 +26,12 @@
 -(id) initWithTrackData:(NSArray*)trackData;
 -(int) length;
 -(void) updateQueue:(NSArray*)trackData;
+-(void) prune:(int) allTracks;
 
 @property (retain) NSMutableArray *q;
 @property int ptr;
 @property BOOL locked;
+@property BOOL needsRefresh;
+
 
 @end

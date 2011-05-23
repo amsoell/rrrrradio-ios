@@ -13,29 +13,45 @@
 @synthesize q;
 @synthesize ptr;
 @synthesize locked;
+@synthesize needsRefresh;
 
-- (void) lock {
+- (void) lock:(NSString*)lockedBy {
+//    NSLog(@"**%@: LOCKED**", lockedBy);
     locked = YES;
 }
 
 - (void) unlock {
+//    NSLog(@"**UNLOCKED**");    
     locked = NO;
 }
 
+-(void) cancelPlayback {
+    while ([self locked]) { }
+    [self lock:@"cancelPlayback"];
+    ptr --;
+    [self unlock];
+}
+
 - (NSMutableDictionary*) getNext {
-    [self lock];
     
     ptr++;
-    for (int i=0; i<ptr; i++) {
+    [self prune:ptr];
+
+    return [self currentTrack];
+}
+
+- (void) prune:(int) max {
+    while ([self locked]) { }
+    [self lock:@"prune"];
+    
+    for (int i=0; (i<max) && (i<[q count]); i++) {
         if ([[[q objectAtIndex:i] objectForKey:@"prune"] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
             [q removeObjectAtIndex:i];
-            ptr--;
+            if (ptr>=0) ptr--;
             i--;
         }
-    }
-    
-    [self unlock];
-    return [self currentTrack];
+    }    
+    [self unlock]; 
 }
 
 - (NSMutableDictionary*) currentTrack {
@@ -65,33 +81,51 @@
 }
 
 - (void) push:(NSMutableDictionary *)trackData {
-    [q addObject:trackData];
+    while ([self locked]) { }
+    if (!locked) {    
+        [self lock:@"push"];
+        if ([trackData objectForKey:@"bigIcon"]!=nil) {
+            [trackData setObject:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[trackData objectForKey:@"bigIcon"]]]] forKey:@"bigIcon"];
+        }
+        if ([trackData objectForKey:@"icon"]!=nil) {
+            [trackData setObject:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[trackData objectForKey:@"icon"]]]] forKey:@"icon"];
+        }
+        
+        [q addObject:trackData];
+        [self unlock];
+    }
 }
 
 - (id) initWithTrackData:(NSArray *)tracks {
+    while ([self locked]) { }
+    [self lock:@"initWithTrackData"];
     ptr = -1;
     q = [[NSMutableArray alloc] initWithArray:tracks];
     
+    [self unlock];
+
     return [super init];
 }
 
 - (int) length {
-    return [q count];
+    if (ptr<0) {
+        return [q count];
+    } else {
+        return [q count] - ptr;
+    }
 }
 
 - (void) updateQueue:(NSArray *)trackData {
     if (!locked) {
+        [self lock:@"updateQueue"];
         int offset = 0;
         
         for (int i = 0; i < [q count]; i++) {
-            NSLog(@"Comparing %@ to %@.", [[q objectAtIndex:i] objectForKey:@"key"], [[trackData objectAtIndex:0] objectForKey:@"key"]);
             if ([[[q objectAtIndex:i] objectForKey:@"key"] isEqualToString:[[trackData objectAtIndex:0] objectForKey:@"key"]]) {
-                NSLog(@"Equal!");
                 offset = i;
                 break;
             }
         }
-        NSLog(@"Offset: %i", offset);
 
         for (int i=0; i<offset; i++) {
             [[q objectAtIndex:i] setValue:[NSNumber numberWithBool:YES] forKey:@"prune"]; 
@@ -99,17 +133,17 @@
 
         for (int i=0; i<[trackData count]; i++) {
             if ((i+offset) >= [q count]) {
-                [q insertObject:[trackData objectAtIndex:i] atIndex:(i+offset)];  
+                [q insertObject:[trackData objectAtIndex:i] atIndex:(i+offset)];                  
             } else {
+                [[trackData objectAtIndex:i] setValue:[[q objectAtIndex:(i+offset)] objectForKey:@"NowPlayingCell"] forKey:@"NowPlayingCell"];
+                [[trackData objectAtIndex:i] setValue:[[q objectAtIndex:(i+offset)] objectForKey:@"UpcomingCell"] forKey:@"UpcomingCell"];
+                
                 [q replaceObjectAtIndex:(i+offset) withObject:[trackData objectAtIndex:i]];
             }
             [q objectAtIndex:(i+offset)];
         }
         
-        NSLog(@"Pointer: %i", ptr);
-        for (NSDictionary *track in q) {
-            NSLog(@"Track %@ has prune set to %@", [track objectForKey:@"name"], [track objectForKey:@"prune"]);
-        }
+        [self unlock];
     }
 }
 

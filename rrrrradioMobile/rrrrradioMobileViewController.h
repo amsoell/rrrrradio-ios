@@ -9,36 +9,40 @@
 #import <UIKit/UIKit.h>
 #import <Rdio/Rdio.h>
 #import "MusicQueue.h"
+#import "NowPlayingCell.h"
+#import "UpcomingCell.h"
 
-@interface rrrrradioMobileViewController : UIViewController <RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate> {
-    IBOutlet UIImageView *coverart; 
-    IBOutlet UILabel *song_name;
-    IBOutlet UILabel *song_artist;
-    IBOutlet UIImageView *trackmask;
-    IBOutlet UIImageView *artmask;    
-    IBOutlet UIButton *playbutton;
+@interface rrrrradioMobileViewController : UIViewController <RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate> {
     IBOutlet UITableView *upcoming;
     IBOutlet UIImageView *progress;
+    IBOutlet UIToolbar *volumeToolbar;  
+    IBOutlet UIToolbar *opsToolbar;
+    IBOutlet UIView *blackout;
     int skip;
     MusicQueue *_QUEUE;
     NSTimer *queueLoader;
+    NSArray *artistData;
 }
 
 - (void) playTrack:(NSDictionary *)trackData;
 - (void) refreshQueueDisplay;
 - (void) updateQueue;
-- (IBAction)playStream;
+- (void) enableRequests;
+- (void) enableBackgroundPooling;
+- (IBAction) playStream;
+- (void)stopStream;
+- (IBAction) toggleHUD;
+- (IBAction) handleVolumeToolbar:(id)selected;
+- (IBAction) handleOpsToolbar:(id)selected;
 
-@property (nonatomic, retain) IBOutlet UIImageView *coverart;
-@property (nonatomic, retain) IBOutlet UILabel *song_name;
-@property (nonatomic, retain) IBOutlet UILabel *song_artist;
-@property (nonatomic, retain) IBOutlet UIImageView *trackmask;
-@property (nonatomic, retain) IBOutlet UIImageView *artmask;
-@property (nonatomic, retain) IBOutlet UIButton *playbutton;
 @property (nonatomic, retain) IBOutlet UITableView *upcoming;
 @property (nonatomic, retain) IBOutlet UIImageView *progress;
+@property (nonatomic, retain) IBOutlet UIToolbar *volumeToolbar;
+@property (nonatomic, retain) IBOutlet UIToolbar *opsToolbar;
+@property (nonatomic, retain) IBOutlet UIView *blackout;
 @property int skip;
 @property (retain) MusicQueue *_QUEUE;
 @property (retain) NSTimer *queueLoader;
+@property (nonatomic, retain) NSArray *artistData;
 
 @end
