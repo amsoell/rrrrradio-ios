@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DE0B0634137AF23A00B674C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0633137AF23A00B674C2 /* UIKit.framework */; };
+		DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0635137AF23A00B674C2 /* Foundation.framework */; };
+		DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0637137AF23A00B674C2 /* CoreGraphics.framework */; };
+		DE0B0641137AF23A00B674C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0B0640137AF23A00B674C2 /* main.m */; };
+		DE0B0644137AF23A00B674C2 /* rrrrradioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0B0643137AF23A00B674C2 /* rrrrradioAppDelegate.m */; };
+		DE0B064A137AF23A00B674C2 /* rrrrradioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0B0649137AF23A00B674C2 /* rrrrradioViewController.m */; };
+		DE0B0654137AF26F00B674C2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0653137AF26F00B674C2 /* CFNetwork.framework */; };
+		DE0B0656137AF27600B674C2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0655137AF27600B674C2 /* SystemConfiguration.framework */; };
+		DE0B0658137AF27D00B674C2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0657137AF27D00B674C2 /* AudioToolbox.framework */; };
+		DE0B065A137AF28400B674C2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0659137AF28400B674C2 /* Security.framework */; };
+		DE0B065C137AF2D000B674C2 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */; };
+		DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0665137AF35E00B674C2 /* Rdio.framework */; };
+		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
+		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
+		DE6ED95F137DDEA700282BB8 /* trackbg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED956137DDEA600282BB8 /* trackbg.png */; };
+		DE6ED960137DDEA700282BB8 /* UITableViewCell-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED957137DDEA600282BB8 /* UITableViewCell-bg.jpg */; };
+		DE6ED962137DDF8700282BB8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED961137DDF8700282BB8 /* Default.png */; };
+		DE6ED964137DDF9400282BB8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED963137DDF9400282BB8 /* Default@2x.png */; };
+		DE7D103813800E0800FDA0A5 /* NowPlayingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */; };
+		DE7D103A13800E2500FDA0A5 /* NowPlayingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */; };
+		DE7D104C13813F7100FDA0A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */; };
+		DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */; };
+		DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793E138C226B00B03B3D /* MainWindow.xib */; };
+		DEE413001383FCF2000AA02C /* UpcomingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE412FF1383FCF2000AA02C /* UpcomingCell.m */; };
+		DEE413031383FD0F000AA02C /* UpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEE413021383FD0F000AA02C /* UpcomingCell.xib */; };
+		DEF50522138816D10004847E /* DataInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF50521138816D10004847E /* DataInterface.m */; };
+		DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF505321389EDD80004847E /* CollectionBrowser.m */; };
+		DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF505331389EDD80004847E /* CollectionBrowser.xib */; };
+		DEF5053B138AEF090004847E /* appIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053A138AEF080004847E /* appIcon@2x.png */; };
+		DEF5053D138AEF110004847E /* appIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053C138AEF110004847E /* appIcon.png */; };
+		DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF5053E138B02450004847E /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		DEEB5AC9138C2485006302A8 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = text.plist;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# builtin-copyPlist\n";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		DE0B062F137AF23A00B674C2 /* rrrrradio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rrrrradio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE0B0633137AF23A00B674C2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DE0B0635137AF23A00B674C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DE0B0637137AF23A00B674C2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DE0B063B137AF23A00B674C2 /* rrrrradio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rrrrradio-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DE0B063F137AF23A00B674C2 /* rrrrradio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rrrrradio-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		DE0B0640137AF23A00B674C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
+		DE0B0642137AF23A00B674C2 /* rrrrradioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rrrrradioAppDelegate.h; path = classes/rrrrradioAppDelegate.h; sourceTree = "<group>"; };
+		DE0B0643137AF23A00B674C2 /* rrrrradioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = rrrrradioAppDelegate.m; path = classes/rrrrradioAppDelegate.m; sourceTree = "<group>"; };
+		DE0B0648137AF23A00B674C2 /* rrrrradioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rrrrradioViewController.h; path = classes/rrrrradioViewController.h; sourceTree = "<group>"; };
+		DE0B0649137AF23A00B674C2 /* rrrrradioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = rrrrradioViewController.m; path = classes/rrrrradioViewController.m; sourceTree = "<group>"; };
+		DE0B0653137AF26F00B674C2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		DE0B0655137AF27600B674C2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DE0B0657137AF27D00B674C2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DE0B0659137AF28400B674C2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = contrib/YAJLiOS.framework; sourceTree = SOURCE_ROOT; };
+		DE0B0665137AF35E00B674C2 /* Rdio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rdio.framework; path = contrib/Rdio.framework; sourceTree = SOURCE_ROOT; };
+		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = classes/Settings.h; sourceTree = "<group>"; };
+		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = classes/Settings.m; sourceTree = "<group>"; };
+		DE6ED953137DDEA600282BB8 /* MusicQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MusicQueue.h; path = classes/MusicQueue.h; sourceTree = "<group>"; };
+		DE6ED954137DDEA600282BB8 /* MusicQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MusicQueue.m; path = classes/MusicQueue.m; sourceTree = "<group>"; };
+		DE6ED956137DDEA600282BB8 /* trackbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trackbg.png; sourceTree = "<group>"; };
+		DE6ED957137DDEA600282BB8 /* UITableViewCell-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "UITableViewCell-bg.jpg"; sourceTree = "<group>"; };
+		DE6ED961137DDF8700282BB8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DE6ED963137DDF9400282BB8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DE7D103613800E0800FDA0A5 /* NowPlayingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NowPlayingCell.h; path = classes/NowPlayingCell.h; sourceTree = "<group>"; };
+		DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NowPlayingCell.m; path = classes/NowPlayingCell.m; sourceTree = "<group>"; };
+		DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowPlayingCell.xib; sourceTree = "<group>"; };
+		DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewController.xib; sourceTree = "<group>"; };
+		DEA1793E138C226B00B03B3D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		DEE412FE1383FCF2000AA02C /* UpcomingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpcomingCell.h; path = classes/UpcomingCell.h; sourceTree = "<group>"; };
+		DEE412FF1383FCF2000AA02C /* UpcomingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpcomingCell.m; path = classes/UpcomingCell.m; sourceTree = "<group>"; };
+		DEE413021383FD0F000AA02C /* UpcomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingCell.xib; sourceTree = "<group>"; };
+		DEF50520138816D10004847E /* DataInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataInterface.h; path = classes/DataInterface.h; sourceTree = "<group>"; };
+		DEF50521138816D10004847E /* DataInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataInterface.m; path = classes/DataInterface.m; sourceTree = "<group>"; };
+		DEF505311389EDD80004847E /* CollectionBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollectionBrowser.h; path = classes/CollectionBrowser.h; sourceTree = "<group>"; };
+		DEF505321389EDD80004847E /* CollectionBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollectionBrowser.m; path = classes/CollectionBrowser.m; sourceTree = "<group>"; };
+		DEF505331389EDD80004847E /* CollectionBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrowser.xib; sourceTree = "<group>"; };
+		DEF5053A138AEF080004847E /* appIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appIcon@2x.png"; sourceTree = "<group>"; };
+		DEF5053C138AEF110004847E /* appIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appIcon.png; sourceTree = "<group>"; };
+		DEF5053E138B02450004847E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE0B062C137AF23A00B674C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */,
+				DE7D104C13813F7100FDA0A5 /* MediaPlayer.framework in Frameworks */,
+				DE0B065A137AF28400B674C2 /* Security.framework in Frameworks */,
+				DE0B0658137AF27D00B674C2 /* AudioToolbox.framework in Frameworks */,
+				DE0B0656137AF27600B674C2 /* SystemConfiguration.framework in Frameworks */,
+				DE0B0654137AF26F00B674C2 /* CFNetwork.framework in Frameworks */,
+				DE0B0634137AF23A00B674C2 /* UIKit.framework in Frameworks */,
+				DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */,
+				DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */,
+				DE0B065C137AF2D000B674C2 /* YAJLiOS.framework in Frameworks */,
+				DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DE0B0624137AF23A00B674C2 = {
+			isa = PBXGroup;
+			children = (
+				DEE95AD5138C1D6F00FDFF15 /* contrib */,
+				DEE95AD4138C1D6100FDFF15 /* resources */,
+				DEE95AD3138C1D5A00FDFF15 /* assets */,
+				DEE95AD1138C1D3F00FDFF15 /* classes */,
+				DE0B063B137AF23A00B674C2 /* rrrrradio-Info.plist */,
+				DE0B063F137AF23A00B674C2 /* rrrrradio-Prefix.pch */,
+				DE0B0640137AF23A00B674C2 /* main.m */,
+				DE0B0630137AF23A00B674C2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DE0B0630137AF23A00B674C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DE0B062F137AF23A00B674C2 /* rrrrradio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEE95AD1138C1D3F00FDFF15 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				DE0B0642137AF23A00B674C2 /* rrrrradioAppDelegate.h */,
+				DE0B0643137AF23A00B674C2 /* rrrrradioAppDelegate.m */,
+				DE0B0648137AF23A00B674C2 /* rrrrradioViewController.h */,
+				DE0B0649137AF23A00B674C2 /* rrrrradioViewController.m */,
+				DEF505311389EDD80004847E /* CollectionBrowser.h */,
+				DEF505321389EDD80004847E /* CollectionBrowser.m */,
+				DEF50520138816D10004847E /* DataInterface.h */,
+				DEF50521138816D10004847E /* DataInterface.m */,
+				DE6ED953137DDEA600282BB8 /* MusicQueue.h */,
+				DE6ED954137DDEA600282BB8 /* MusicQueue.m */,
+				DE7D103613800E0800FDA0A5 /* NowPlayingCell.h */,
+				DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */,
+				DEE412FE1383FCF2000AA02C /* UpcomingCell.h */,
+				DEE412FF1383FCF2000AA02C /* UpcomingCell.m */,
+				DE6ED94B137DDE8300282BB8 /* Settings.h */,
+				DE6ED94C137DDE8300282BB8 /* Settings.m */,
+			);
+			name = classes;
+			path = /Users/asoell/Projects/rrrrradio;
+			sourceTree = "<absolute>";
+		};
+		DEE95AD3138C1D5A00FDFF15 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				DEF5053C138AEF110004847E /* appIcon.png */,
+				DEF5053A138AEF080004847E /* appIcon@2x.png */,
+				DE6ED963137DDF9400282BB8 /* Default@2x.png */,
+				DE6ED961137DDF8700282BB8 /* Default.png */,
+				DE6ED956137DDEA600282BB8 /* trackbg.png */,
+				DE6ED957137DDEA600282BB8 /* UITableViewCell-bg.jpg */,
+			);
+			path = assets;
+			sourceTree = SOURCE_ROOT;
+		};
+		DEE95AD4138C1D6100FDFF15 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1793E138C226B00B03B3D /* MainWindow.xib */,
+				DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */,
+				DEF505331389EDD80004847E /* CollectionBrowser.xib */,
+				DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */,
+				DEE413021383FD0F000AA02C /* UpcomingCell.xib */,
+			);
+			path = resources;
+			sourceTree = SOURCE_ROOT;
+		};
+		DEE95AD5138C1D6F00FDFF15 /* contrib */ = {
+			isa = PBXGroup;
+			children = (
+				DEF5053E138B02450004847E /* AVFoundation.framework */,
+				DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */,
+				DE0B0665137AF35E00B674C2 /* Rdio.framework */,
+				DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */,
+				DE0B0659137AF28400B674C2 /* Security.framework */,
+				DE0B0657137AF27D00B674C2 /* AudioToolbox.framework */,
+				DE0B0655137AF27600B674C2 /* SystemConfiguration.framework */,
+				DE0B0653137AF26F00B674C2 /* CFNetwork.framework */,
+				DE0B0633137AF23A00B674C2 /* UIKit.framework */,
+				DE0B0635137AF23A00B674C2 /* Foundation.framework */,
+				DE0B0637137AF23A00B674C2 /* CoreGraphics.framework */,
+			);
+			name = contrib;
+			path = /Users/asoell/Projects/rrrrradio;
+			sourceTree = "<absolute>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DE0B062E137AF23A00B674C2 /* rrrrradio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE0B0650137AF23A00B674C2 /* Build configuration list for PBXNativeTarget "rrrrradio" */;
+			buildPhases = (
+				DE0B062B137AF23A00B674C2 /* Sources */,
+				DE0B062C137AF23A00B674C2 /* Frameworks */,
+				DE0B062D137AF23A00B674C2 /* Resources */,
+			);
+			buildRules = (
+				DEEB5AC9138C2485006302A8 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = rrrrradio;
+			productName = rrrrradio;
+			productReference = DE0B062F137AF23A00B674C2 /* rrrrradio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE0B0626137AF23A00B674C2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = rrrrradio;
+			};
+			buildConfigurationList = DE0B0629137AF23A00B674C2 /* Build configuration list for PBXProject "rrrrradio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DE0B0624137AF23A00B674C2;
+			productRefGroup = DE0B0630137AF23A00B674C2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE0B062E137AF23A00B674C2 /* rrrrradio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE0B062D137AF23A00B674C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE6ED95F137DDEA700282BB8 /* trackbg.png in Resources */,
+				DE6ED960137DDEA700282BB8 /* UITableViewCell-bg.jpg in Resources */,
+				DE6ED962137DDF8700282BB8 /* Default.png in Resources */,
+				DE6ED964137DDF9400282BB8 /* Default@2x.png in Resources */,
+				DE7D103A13800E2500FDA0A5 /* NowPlayingCell.xib in Resources */,
+				DEE413031383FD0F000AA02C /* UpcomingCell.xib in Resources */,
+				DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */,
+				DEF5053B138AEF090004847E /* appIcon@2x.png in Resources */,
+				DEF5053D138AEF110004847E /* appIcon.png in Resources */,
+				DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */,
+				DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE0B062B137AF23A00B674C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE0B0641137AF23A00B674C2 /* main.m in Sources */,
+				DE0B0644137AF23A00B674C2 /* rrrrradioAppDelegate.m in Sources */,
+				DE0B064A137AF23A00B674C2 /* rrrrradioViewController.m in Sources */,
+				DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */,
+				DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */,
+				DE7D103813800E0800FDA0A5 /* NowPlayingCell.m in Sources */,
+				DEE413001383FCF2000AA02C /* UpcomingCell.m in Sources */,
+				DEF50522138816D10004847E /* DataInterface.m in Sources */,
+				DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DE0B064E137AF23A00B674C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DE0B064F137AF23A00B674C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		DE0B0651137AF23A00B674C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/contrib\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				INFOPLIST_FILE = "rrrrradio-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CODE_SIGN_FLAGS = "";
+				PRODUCT_NAME = rrrrradio;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DE0B0652137AF23A00B674C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/contrib\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				INFOPLIST_FILE = "rrrrradio-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CODE_SIGN_FLAGS = "";
+				PRODUCT_NAME = rrrrradio;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DE0B0629137AF23A00B674C2 /* Build configuration list for PBXProject "rrrrradio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE0B064E137AF23A00B674C2 /* Debug */,
+				DE0B064F137AF23A00B674C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE0B0650137AF23A00B674C2 /* Build configuration list for PBXNativeTarget "rrrrradio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE0B0651137AF23A00B674C2 /* Debug */,
+				DE0B0652137AF23A00B674C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE0B0626137AF23A00B674C2 /* Project object */;
+}
