@@ -15,6 +15,7 @@
 @synthesize dataSource;
 @synthesize indexChars;
 @synthesize indexSize;
+@synthesize owner;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -132,14 +133,16 @@
     NSLog(@"Item::%@", item);
     
     if ([[item valueForKey:@"type"] isEqualToString:@"tl"] || [[item valueForKey:@"type"] isEqualToString:@"t"]) {
-        NSString *requestUrl = [NSString stringWithFormat:@"controller.php?key=%@", [item valueForKey:@"key"]];
-        [[DataInterface issueCommand:requestUrl] yajl_JSON];        
+        NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
+        [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
+        [owner updateQueue];
         
         [cell setAccessoryView:nil];
         [self dismissModalViewControllerAnimated:YES];        
     } else {
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
-        collection.title = [item valueForKey:@"name"];
+        [collection setOwner:self.owner];
+        [collection setTitle:[item valueForKey:@"name"]];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                                
             if ([[item valueForKey:@"type"] isEqualToString:@"al"] || [[item valueForKey:@"type"] isEqualToString:@"a"]) {

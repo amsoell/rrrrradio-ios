@@ -46,8 +46,11 @@
 // Start the audio
 - (void)playStream {
     if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
+        [self resignFirstResponder];
         [[rrrrradioAppDelegate rdioInstance] authorizeFromController:self];
     } else {
+        if (![self isFirstResponder]) [self becomeFirstResponder];        
+        
         RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
         [player setDelegate:self];        
         [player addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:nil];        
@@ -261,6 +264,7 @@
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
         [collection setDataSource:artistData];
         [collection setTitle:@"Artists"];
+        [collection setOwner:self];
         
         [navigationController pushViewController:collection animated:NO];        
         [self presentModalViewController:navigationController animated:YES];

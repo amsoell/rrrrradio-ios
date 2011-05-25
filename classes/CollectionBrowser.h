@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rrrrradioViewController.h"
 
 
 @interface CollectionBrowser : UIViewController <UITableViewDataSource,UITableViewDelegate> {
     NSArray *dataSource;
     NSString *indexChars;
     NSMutableArray *indexSize;
+    rrrrradioViewController *owner;
 }
 
 - (void) close;
@@ -20,5 +22,6 @@
 @property (nonatomic, retain) NSArray *dataSource;
 @property (nonatomic, retain) NSString *indexChars;
 @property (nonatomic, retain) NSMutableArray *indexSize;
+@property (nonatomic, retain) rrrrradioViewController *owner;
 
 @end

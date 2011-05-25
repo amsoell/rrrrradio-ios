@@ -14,8 +14,9 @@
 // Basic wrapper to get the contents of a URL
 + (NSString*)issueCommand:(NSString*)command {
     NSString* userKey = [[Settings settings] userKey];  
-    NSString*	version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];    
-    NSURL *reqURL = [[NSURL alloc] initWithString:[[NSString stringWithFormat:@"http://rrrrradio.com/%@&userKey=%@&client=ios&version=%@&%@", command, userKey, version, [[Settings settings] accessToken]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString* accessToken = [[Settings settings] accessToken];
+    NSURL *reqURL = [[NSURL alloc] initWithString:[[NSString stringWithFormat:@"http://rrrrradio.com/%@&userKey=%@&client=ios&version=%@&%@", command, userKey, version, accessToken] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSLog(@"Data Interface Request: %@", [reqURL absoluteURL]);
     NSString *reqData = [[NSString alloc] initWithContentsOfURL:reqURL];   
     
