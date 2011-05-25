@@ -30,6 +30,7 @@
 		DE7D104C13813F7100FDA0A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */; };
 		DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */; };
 		DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793E138C226B00B03B3D /* MainWindow.xib */; };
+		DEC83CE1138D3D0C00772F57 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC83CE0138D3D0C00772F57 /* Reachability.m */; };
 		DEE413001383FCF2000AA02C /* UpcomingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE412FF1383FCF2000AA02C /* UpcomingCell.m */; };
 		DEE413031383FD0F000AA02C /* UpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEE413021383FD0F000AA02C /* UpcomingCell.xib */; };
 		DEF50522138816D10004847E /* DataInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF50521138816D10004847E /* DataInterface.m */; };
@@ -84,6 +85,8 @@
 		DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewController.xib; sourceTree = "<group>"; };
 		DEA1793E138C226B00B03B3D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		DEC83CDF138D3D0C00772F57 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = classes/Reachability.h; sourceTree = "<group>"; };
+		DEC83CE0138D3D0C00772F57 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = classes/Reachability.m; sourceTree = "<group>"; };
 		DEE412FE1383FCF2000AA02C /* UpcomingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpcomingCell.h; path = classes/UpcomingCell.h; sourceTree = "<group>"; };
 		DEE412FF1383FCF2000AA02C /* UpcomingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpcomingCell.m; path = classes/UpcomingCell.m; sourceTree = "<group>"; };
 		DEE413021383FD0F000AA02C /* UpcomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingCell.xib; sourceTree = "<group>"; };
@@ -122,13 +125,13 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
-				DEE95AD5138C1D6F00FDFF15 /* contrib */,
 				DEE95AD4138C1D6100FDFF15 /* resources */,
-				DEE95AD3138C1D5A00FDFF15 /* assets */,
 				DEE95AD1138C1D3F00FDFF15 /* classes */,
 				DE0B063B137AF23A00B674C2 /* rrrrradio-Info.plist */,
 				DE0B063F137AF23A00B674C2 /* rrrrradio-Prefix.pch */,
 				DE0B0640137AF23A00B674C2 /* main.m */,
+				DEE95AD3138C1D5A00FDFF15 /* assets */,
+				DEE95AD5138C1D6F00FDFF15 /* contrib */,
 				DE0B0630137AF23A00B674C2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -158,6 +161,8 @@
 				DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */,
 				DEE412FE1383FCF2000AA02C /* UpcomingCell.h */,
 				DEE412FF1383FCF2000AA02C /* UpcomingCell.m */,
+				DEC83CDF138D3D0C00772F57 /* Reachability.h */,
+				DEC83CE0138D3D0C00772F57 /* Reachability.m */,
 				DE6ED94B137DDE8300282BB8 /* Settings.h */,
 				DE6ED94C137DDE8300282BB8 /* Settings.m */,
 			);
@@ -290,6 +295,7 @@
 				DEE413001383FCF2000AA02C /* UpcomingCell.m in Sources */,
 				DEF50522138816D10004847E /* DataInterface.m in Sources */,
 				DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */,
+				DEC83CE1138D3D0C00772F57 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Soell (C6SVBW8NK2)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -313,6 +319,7 @@
 					"-ObjC",
 					"-all_load",
 				);
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BDAC9946-4D35-449A-BB55-13B42B6E1218";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -321,7 +328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Soell (C6SVBW8NK2)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -332,6 +339,7 @@
 					"-ObjC",
 					"-all_load",
 				);
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BDAC9946-4D35-449A-BB55-13B42B6E1218";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
