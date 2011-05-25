@@ -11,6 +11,9 @@
 #import "MusicQueue.h"
 #import "NowPlayingCell.h"
 #import "UpcomingCell.h"
+#import "Reachability.h"
+
+@class Reachability;
 
 @interface rrrrradioViewController : UIViewController <RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate> {
     IBOutlet UITableView *upcoming;
@@ -22,13 +25,18 @@
     MusicQueue *_QUEUE;
     NSTimer *queueLoader;
     NSArray *artistData;
+    Reachability* internetReachable;
+    Reachability* hostReachable;    
+    BOOL internetActive;
+    BOOL hostActive;
+    NetworkStatus networkSpeed;
 }
 
 - (void) playTrack:(NSDictionary *)trackData;
 - (void) refreshQueueDisplay;
 - (void) updateQueue;
 - (void) enableRequests;
-- (void) enableBackgroundPooling;
+- (void) enableBackgroundPooling:(int)seconds;
 - (IBAction) playStream;
 - (void)stopStream;
 - (IBAction) toggleHUD;
@@ -44,5 +52,8 @@
 @property (retain) MusicQueue *_QUEUE;
 @property (retain) NSTimer *queueLoader;
 @property (nonatomic, retain) NSArray *artistData;
+@property (nonatomic) BOOL internetActive;
+@property (nonatomic) BOOL hostActive;
+@property (nonatomic) NetworkStatus networkSpeed;
 
 @end

@@ -27,13 +27,7 @@
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
         
     rdio = [[Rdio alloc] initWithConsumerKey:@"q4ybz268x42yttz7k8fsfdn6" andSecret:@"3KEeT5DAVf" delegate:nil];
-    
-    NSString* savedToken = [[Settings settings] accessToken];
-    if(savedToken != nil) {
-        NSLog(@"Found access token! %@", savedToken);
-        [rdio authorizeUsingAccessToken:savedToken fromController:nil];
-    }       
-    
+        
     
     return YES;
 }

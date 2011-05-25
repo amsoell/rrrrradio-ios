@@ -15,6 +15,7 @@
 #import "CollectionBrowser.h"
 #import "MusicQueue.h"
 #import "DataInterface.h"
+#import "Reachability.h"
 #import "Settings.h"
 
 @implementation rrrrradioViewController
@@ -27,6 +28,8 @@
 @synthesize opsToolbar;
 @synthesize blackout;
 @synthesize artistData;
+@synthesize internetActive, hostActive, networkSpeed;
+
 
 #pragma mark -
 #pragma mark Audio interaction methods
@@ -45,28 +48,42 @@
 
 // Start the audio
 - (void)playStream {
-    if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
-        [self resignFirstResponder];
-        [[rrrrradioAppDelegate rdioInstance] authorizeFromController:self];
-    } else {
-        if (![self isFirstResponder]) [self becomeFirstResponder];        
-        
-        RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
-        [player setDelegate:self];        
-        [player addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:nil];        
-        
-        NSDictionary* currentTrack =  [_QUEUE getNext];
+    if (hostActive) {
+        if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
+            [self resignFirstResponder];
+            [[rrrrradioAppDelegate rdioInstance] authorizeFromController:self];
+        } else {
+            if (![self isFirstResponder]) [self becomeFirstResponder];        
+            
+            RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
+            [player setDelegate:self];        
+            [player addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:nil];        
+            
+            NSDictionary* currentTrack =  [_QUEUE getNext];
 
-        [self playTrack:currentTrack];
+            [self playTrack:currentTrack];
+            
+            UIBarButtonItem *btnOld = [[volumeToolbar items] objectAtIndex:0];
+            UIBarButtonItem *btnNew = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:btnOld.action];
+            [btnNew setTag:2];
+            NSMutableArray *volumeToolbarItems = [NSMutableArray arrayWithArray:volumeToolbar.items];
+            [volumeToolbarItems replaceObjectAtIndex:0 withObject:btnNew];
+            [volumeToolbar setItems:volumeToolbarItems];
+            
+            [btnNew release];
+        }
+    } else {
+        if (!self.internetActive) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
+            [alert show];
+            [alert release];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            [alert release];
+            
+        }
         
-        UIBarButtonItem *btnOld = [[volumeToolbar items] objectAtIndex:0];
-        UIBarButtonItem *btnNew = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:btnOld.action];
-        [btnNew setTag:2];
-        NSMutableArray *volumeToolbarItems = [NSMutableArray arrayWithArray:volumeToolbar.items];
-        [volumeToolbarItems replaceObjectAtIndex:0 withObject:btnNew];
-        [volumeToolbar setItems:volumeToolbarItems];
-        
-        [btnNew release];
     }
 }
 
@@ -79,8 +96,8 @@
     frame.origin.x = -320;
     
     [progress setFrame:frame];
+    if (player.state!=RDPlayerStateStopped) [_QUEUE cancelPlayback];
     [player stop];
-    [_QUEUE cancelPlayback];
 
     // Change stop button to play button
     UIBarButtonItem *btnOld = [[volumeToolbar items] objectAtIndex:0];    
@@ -178,8 +195,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSDictionary *track = [_QUEUE trackAt:indexPath.row];   
-    NSLog(@"Loading: %@", track);    
+    NSDictionary *track = [_QUEUE trackAt:indexPath.row];     
     
     NSString *cellType;
     UITableViewCell *cell;
@@ -258,24 +274,37 @@
 - (void) handleOpsToolbar:(id) selected {
     UIBarButtonItem *item = (UIBarButtonItem *)selected;
     
-    if (item.tag == 1) {
-        UINavigationController *navigationController = [[UINavigationController alloc] init];
-        
-        CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
-        [collection setDataSource:artistData];
-        [collection setTitle:@"Artists"];
-        [collection setOwner:self];
-        
-        [navigationController pushViewController:collection animated:NO];        
-        [self presentModalViewController:navigationController animated:YES];
+    if (hostActive) {
+        if (item.tag == 1) {
+            UINavigationController *navigationController = [[UINavigationController alloc] init];
+            
+            CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
+            [collection setDataSource:artistData];
+            [collection setTitle:@"Artists"];
+            [collection setOwner:self];
+            
+            [navigationController pushViewController:collection animated:NO];        
+            [self presentModalViewController:navigationController animated:YES];
 
-        [collection release];        
-        [navigationController release];
-    } else if (item.tag == 2) {
-        UIActionSheet *ops = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Love it", @"Hate it", nil];
-        [ops showInView:self.view];
-        
-        [ops autorelease];
+            [collection release];        
+            [navigationController release];
+        } else if (item.tag == 2) {
+            UIActionSheet *ops = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Love it", @"Hate it", nil];
+            [ops showInView:self.view];
+            
+            [ops autorelease];
+        }
+    } else {
+        if (!self.internetActive) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
+            [alert show];
+            [alert release];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            [alert release];
+            
+        }        
     }
 }
 
@@ -354,6 +383,101 @@
 }
 
 #pragma mark -
+#pragma mark Network Code
+- (void) checkNetworkStatus:(NSNotification *)notice
+{
+    // called after network status changes
+    NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+    NetworkStatus hostStatus = [hostReachable currentReachabilityStatus];
+    
+    NSLog(@"** activity update:: internetActive=%i hostActive=%i internetStatus=%@ hostStatus=%@", self.internetActive, self.hostActive, (internetStatus==NotReachable?@"No":@"Yes"), (hostStatus==NotReachable?@"No":@"Yes"));
+    
+    
+    if (internetStatus==NotReachable) {
+        self.internetActive = NO;
+    } else {
+        self.internetActive = YES;
+    }
+    
+    // handle first time callback
+    if (hostActive==NO &&
+        hostStatus!=NotReachable) {
+        NSLog(@"Host is reachable but before it wasn't");
+        self.hostActive = YES;
+        if (hostStatus == ReachableViaWiFi) {
+            [self setNetworkSpeed:ReachableViaWiFi];
+        } else {
+            [self setNetworkSpeed:ReachableViaWWAN];
+        }
+        
+        if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
+            NSString* savedToken = [[Settings settings] accessToken];
+            if(savedToken != nil) {
+                NSLog(@"Found access token! %@", savedToken);
+                [[rrrrradioAppDelegate rdioInstance] authorizeUsingAccessToken:savedToken fromController:nil];
+            }       
+        }
+        
+        [self reset];        
+        
+        if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
+                self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]]; 
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self enableRequests];            
+                });
+            });
+        }      
+        
+        int poolingInterval;
+        if (networkSpeed==ReachableViaWiFi) {
+            poolingInterval = 20;
+        } else if (networkSpeed==ReachableViaWWAN) {
+            poolingInterval = 60;
+        }
+        
+        if (poolingInterval>0) {
+            [self enableBackgroundPooling:poolingInterval];            
+        }
+        
+    } else if (hostActive==YES && (
+                 hostStatus==NotReachable ||
+                                   internetStatus==NotReachable)) {
+        NSLog(@"internet suddenly down -- shut it all down");
+        self.hostActive = NO;
+        self.networkSpeed = NotReachable;
+        
+        [self stopStream];
+        [queueLoader invalidate];
+        queueLoader = nil;         
+        
+        if (internetStatus==NotReachable) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
+            [alert show];
+            [alert release];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            [alert release];
+            
+        }
+    } else if (hostStatus != networkSpeed) {
+        [self setNetworkSpeed:hostStatus];
+        // connection to host changed. update background pooling
+        if ([queueLoader isValid]) {
+            NSLog(@"Resetting background pooling");
+            int poolingInterval;
+            if (hostStatus==ReachableViaWiFi) {
+                poolingInterval = 20;
+            } else if (hostStatus==ReachableViaWWAN) {
+                poolingInterval = 60;
+            }
+            
+            [self enableBackgroundPooling:poolingInterval];            
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark RDPlayerDelegate
@@ -406,10 +530,15 @@
 }
 
 
-- (void) enableBackgroundPooling {
+- (void) enableBackgroundPooling:(int) seconds {
+    if ([queueLoader isValid]) {
+        [queueLoader invalidate];                            
+        queueLoader = nil;
+    }
+        
     if (queueLoader==nil) {
-        NSLog(@"Enabling background pooling");
-        queueLoader = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(updateQueue) userInfo:nil repeats:YES];    
+        NSLog(@"Enabling background pooling at a %i second interval", seconds);
+        queueLoader = [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(updateQueue) userInfo:nil repeats:YES];    
     }
 
 }
@@ -448,10 +577,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    NSLog(@"View Did Load");
-    
-    // Initialize the player pieces
-    [self reset];    
     
     // Let me know when the app goes foreground/background
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backgrounding:) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -463,16 +588,17 @@
     [volumeView sizeToFit];
     [volumeToolbar addSubview:volumeView];
     
-    if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
-            self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]]; 
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self enableRequests];            
-            });
-        });
-
-    }
+    // check for internet connection
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+    
+    internetReachable = [[Reachability reachabilityForInternetConnection] retain];
+    [internetReachable startNotifier];
+    
+    // check if a pathway to a random host exists
+    hostReachable = [[Reachability reachabilityWithHostName: @"rrrrradio.com"] retain];
+    [hostReachable startNotifier];
+    
+    // now patiently wait for the notification    
     
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
@@ -491,6 +617,10 @@
 
 -(void) remoteControlReceivedWithEvent:(UIEvent *)event {
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];    
 }
 
 - (void)viewDidUnload
@@ -517,14 +647,25 @@
 -(void)foregrounding:(NSNotification *)notification {
     NSLog(@"We're back!");
     
-    RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];    
-    if (player.state != RDPlayerStatePlaying) {
-        [self reset];
-    } else {
-        [self updateQueue];        
+    if (internetActive && hostActive) {
+        RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];    
+        if (player.state != RDPlayerStatePlaying) {
+            [self reset];
+        } else {
+            [self updateQueue];        
+        }
+        
+        int poolingInterval;
+        if (networkSpeed==ReachableViaWiFi) {
+            poolingInterval = 20;
+        } else if (networkSpeed==ReachableViaWWAN) {
+            poolingInterval = 60;
+        }
+        
+        if (poolingInterval>0) {
+            [self enableBackgroundPooling:poolingInterval];            
+        }        
     }
-    
-    [self enableBackgroundPooling];    
 
 }
 

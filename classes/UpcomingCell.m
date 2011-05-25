@@ -27,7 +27,6 @@
     [self.detailTextLabel setText:[track objectForKey:@"artist"]];   
     
     // add user info if available
-    NSLog(@"User data: %@", [track objectForKey:@"user"]);
     if (![[track objectForKey:@"user"] isKindOfClass:[NSNull class]]) {
         NSDictionary *user = [track objectForKey:@"user"];
 
