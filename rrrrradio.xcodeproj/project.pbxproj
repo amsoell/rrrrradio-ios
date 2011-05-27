@@ -144,6 +144,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DEC86012138F2DE600D2FF30 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1793E138C226B00B03B3D /* MainWindow.xib */,
+				DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */,
+				DEF505331389EDD80004847E /* CollectionBrowser.xib */,
+				DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */,
+				DEE413021383FD0F000AA02C /* UpcomingCell.xib */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
 		DEE95AD1138C1D3F00FDFF15 /* classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,11 +198,7 @@
 		DEE95AD4138C1D6100FDFF15 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				DEA1793E138C226B00B03B3D /* MainWindow.xib */,
-				DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */,
-				DEF505331389EDD80004847E /* CollectionBrowser.xib */,
-				DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */,
-				DEE413021383FD0F000AA02C /* UpcomingCell.xib */,
+				DEC86012138F2DE600D2FF30 /* iPhone */,
 			);
 			path = resources;
 			sourceTree = SOURCE_ROOT;
