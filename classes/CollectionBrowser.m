@@ -193,9 +193,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(close)];
-    [self.navigationItem setRightBarButtonItem:done];
-    [done release];
     
     indexChars = [NSString stringWithString:@"#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
     int currentIndex = 0;
@@ -246,7 +243,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

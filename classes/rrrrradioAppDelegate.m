@@ -8,6 +8,8 @@
 
 #import "rrrrradioAppDelegate.h"
 #import "rrrrradioViewController.h"
+#import "CollectionBrowser.h"
+#import "DataInterface.h"
 #import <YAJLiOS/YAJL.h>
 #import "Settings.h"
 
@@ -15,6 +17,7 @@
 @synthesize window=_window;
 @synthesize viewController=_viewController;
 @synthesize rdio;
+@synthesize splitController, navigationController;
 
 + (Rdio*)rdioInstance {
     return[(rrrrradioAppDelegate*)[[UIApplication sharedApplication] delegate] rdio];
@@ -22,10 +25,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {    
+        NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]];
+
+        self.navigationController = [[UINavigationController alloc] init];
+        CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
+        [collection setDataSource:artistData];
+        [collection setTitle:@"Artists"];
+        [collection setOwner:self.viewController];
+        [self.navigationController pushViewController:collection animated:NO];   
+        [collection release];
         
+        splitController = [[UISplitViewController alloc] init];
+        self.splitController.viewControllers = [NSArray arrayWithObjects:navigationController, self.viewController, nil];
+        
+        [self.window addSubview:self.splitController.view];
+    } else {
+        self.window.rootViewController = self.viewController;
+    }
+    
+    [self.window makeKeyAndVisible];
+    
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     rdio = [[Rdio alloc] initWithConsumerKey:@"q4ybz268x42yttz7k8fsfdn6" andSecret:@"3KEeT5DAVf" delegate:nil];
         
     
@@ -69,12 +90,17 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    
 }
 
 - (void)dealloc
 {
     [_window release];
     [_viewController release];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
+        [self.splitController release];
+        [self.navigationController release];    
+    }
     [rdio release];
     [super dealloc];
 }

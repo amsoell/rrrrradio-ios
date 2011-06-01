@@ -283,6 +283,10 @@
             [collection setTitle:@"Artists"];
             [collection setOwner:self];
             
+            UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:collection action:@selector(close)];
+            [collection.navigationItem setRightBarButtonItem:done];
+            [done release];
+            
             [navigationController pushViewController:collection animated:NO];        
             [self presentModalViewController:navigationController animated:YES];
 
@@ -430,7 +434,7 @@
             });
         }      
         
-        int poolingInterval;
+        int poolingInterval=0;
         if (networkSpeed==ReachableViaWiFi) {
             poolingInterval = 20;
         } else if (networkSpeed==ReachableViaWWAN) {
@@ -467,7 +471,7 @@
         // connection to host changed. update background pooling
         if ([queueLoader isValid]) {
             NSLog(@"Resetting background pooling");
-            int poolingInterval;
+            int poolingInterval = 120;
             if (hostStatus==ReachableViaWiFi) {
                 poolingInterval = 20;
             } else if (hostStatus==ReachableViaWWAN) {
@@ -635,7 +639,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 -(void)backgrounding:(NSNotification *)notification {
@@ -655,7 +660,7 @@
             [self updateQueue];        
         }
         
-        int poolingInterval;
+        int poolingInterval=0;
         if (networkSpeed==ReachableViaWiFi) {
             poolingInterval = 20;
         } else if (networkSpeed==ReachableViaWWAN) {

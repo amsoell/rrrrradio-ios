@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <Rdio/Rdio.h>
+#import "CollectionBrowser.h"
+#import "rrrrradioViewController.h"
 
 @class rrrrradioViewController;
 
 @interface rrrrradioAppDelegate : NSObject <UIApplicationDelegate> {
     Rdio *rdio;
+    UISplitViewController *splitController;
+    UINavigationController *navigationController;
 }
 
 + (Rdio*)rdioInstance;
@@ -20,5 +24,7 @@
 @property (readonly) Rdio *rdio;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet rrrrradioViewController *viewController;
+@property (nonatomic, retain) UISplitViewController *splitController;
+@property (nonatomic, retain) UINavigationController *navigationController;
 
 @end

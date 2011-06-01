@@ -54,7 +54,6 @@
 								<int key="NSvFlags">310</int>
 								<string key="NSFrameSize">{320, 320}</string>
 								<reference key="NSSuperview" ref="259340748"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -76,7 +75,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 289}, {280, 21}}</string>
 								<reference key="NSSuperview" ref="259340748"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>

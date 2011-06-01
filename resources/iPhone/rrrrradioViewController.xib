@@ -86,7 +86,7 @@
 					</object>
 					<object class="IBUIToolbar" id="454922172">
 						<reference key="NSNextResponder" ref="774585933"/>
-						<int key="NSvFlags">266</int>
+						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{0, 44}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
@@ -116,7 +116,6 @@
 						<string key="NSFrame">{{0, 416}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -209,7 +208,7 @@
 					</object>
 					<object class="IBUIImageView" id="881125564">
 						<reference key="NSNextResponder" ref="774585933"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">294</int>
 						<string key="NSFrame">{{-320, 0}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
@@ -225,13 +224,13 @@
 					</object>
 					<object class="IBUIView" id="682003623">
 						<reference key="NSNextResponder" ref="774585933"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">310</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIActivityIndicatorView" id="213526630">
 								<reference key="NSNextResponder" ref="682003623"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{142, 189}, {37, 37}}</string>
+								<int key="NSvFlags">256</int>
+								<string key="NSFrame">{{141, 190}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="682003623"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="991390780"/>
