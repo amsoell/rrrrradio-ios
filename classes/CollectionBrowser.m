@@ -138,7 +138,7 @@
         [owner updateQueue];
         
         [cell setAccessoryView:nil];
-        [self dismissModalViewControllerAnimated:YES];        
+        [self dismissModalViewControllerAnimated:YES];
     } else {
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
         [collection setOwner:self.owner];

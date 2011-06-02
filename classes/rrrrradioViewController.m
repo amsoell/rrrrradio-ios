@@ -18,6 +18,11 @@
 #import "Reachability.h"
 #import "Settings.h"
 
+
+@interface rrrrradioViewController ()
+    @property (nonatomic, retain) UIPopoverController *popoverController;
+@end
+
 @implementation rrrrradioViewController
 @synthesize skip;
 @synthesize _QUEUE;
@@ -28,7 +33,9 @@
 @synthesize opsToolbar;
 @synthesize blackout;
 @synthesize artistData;
+@synthesize toolbar;
 @synthesize internetActive, hostActive, networkSpeed;
+@synthesize popoverController=_myPopoverController;
 
 
 #pragma mark -
@@ -385,6 +392,29 @@
         [self toggleHUD];
     }
 }
+
+#pragma mark -
+#pragma mark Split View Delegate code
+
+- (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc 
+{
+    NSMutableArray *items = [[self.toolbar items] mutableCopy];
+    [items insertObject:barButtonItem atIndex:0];
+    [self.toolbar setItems:items animated:YES];
+    [items release];
+
+    self.popoverController = pc;    
+}
+
+- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    
+    NSMutableArray *items = [[toolbar items] mutableCopy];
+    [items removeObjectAtIndex:0];
+    [toolbar setItems:items animated:YES];
+    [items release];
+    self.popoverController = nil;
+}
+
 
 #pragma mark -
 #pragma mark Network Code

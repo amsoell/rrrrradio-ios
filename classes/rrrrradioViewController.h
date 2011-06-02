@@ -15,12 +15,13 @@
 
 @class Reachability;
 
-@interface rrrrradioViewController : UIViewController <RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate> {
+@interface rrrrradioViewController : UIViewController <RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UISplitViewControllerDelegate> {
     IBOutlet UITableView *upcoming;
     IBOutlet UIImageView *progress;
     IBOutlet UIToolbar *volumeToolbar;  
     IBOutlet UIToolbar *opsToolbar;
     IBOutlet UIView *blackout;
+    IBOutlet UIToolbar *toolbar;
     int skip;
     MusicQueue *_QUEUE;
     NSTimer *queueLoader;
@@ -29,7 +30,7 @@
     Reachability* hostReachable;    
     BOOL internetActive;
     BOOL hostActive;
-    NetworkStatus networkSpeed;
+    NetworkStatus networkSpeed; 
 }
 
 - (void) playTrack:(NSDictionary *)trackData;
@@ -48,6 +49,7 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *volumeToolbar;
 @property (nonatomic, retain) IBOutlet UIToolbar *opsToolbar;
 @property (nonatomic, retain) IBOutlet UIView *blackout;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property int skip;
 @property (retain) MusicQueue *_QUEUE;
 @property (retain) NSTimer *queueLoader;

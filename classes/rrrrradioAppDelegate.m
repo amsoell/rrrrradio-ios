@@ -29,6 +29,8 @@
         NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]];
 
         self.navigationController = [[UINavigationController alloc] init];
+        [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
+        
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
         [collection setDataSource:artistData];
         [collection setTitle:@"Artists"];
@@ -37,6 +39,7 @@
         [collection release];
         
         splitController = [[UISplitViewController alloc] init];
+        [splitController setDelegate:self.viewController];
         self.splitController.viewControllers = [NSArray arrayWithObjects:navigationController, self.viewController, nil];
         
         [self.window addSubview:self.splitController.view];
