@@ -398,12 +398,19 @@
 
 - (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc 
 {
-    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-    [items insertObject:barButtonItem atIndex:0];
-    [self.toolbar setItems:items animated:YES];
-    [items release];
+    // configure barButton
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoLight];
+//    UIImage* image = [UIImage imageNamed:@ "trackbg.png"];
+//    [button setImage:image forState:UIControlStateNormal];    
+    [button addTarget:self action: @selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+    barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
-    self.popoverController = pc;    
+    NSMutableArray * items = [[toolbar items] mutableCopy];
+    [items insertObject: barButtonItem atIndex: 0];
+    [toolbar setItems: items animated: YES];
+    [items release];
+    self.popoverController = pc;
+    [barButtonItem release];
 }
 
 - (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
@@ -423,6 +430,10 @@
             [subview sizeToFit];
         }
     }
+}
+
+- (void)pop: (UIButton *)sender {
+    [self.popoverController presentPopoverFromRect:sender.frame                                      inView: self.view permittedArrowDirections: UIPopoverArrowDirectionUp                                          animated: YES];
 }
 
 
@@ -629,9 +640,8 @@
     
     // Add volume slider
     MPVolumeView *volumeView = [[[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)] autorelease];
-    [volumeView setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+45, 22)];
+    [volumeView setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+35, 22)];
     [volumeView sizeToFit];
-    [volumeView setBackgroundColor:[UIColor redColor]];
     [volumeToolbar addSubview:volumeView];
     
     // check for internet connection

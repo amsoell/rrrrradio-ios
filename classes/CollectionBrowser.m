@@ -107,8 +107,15 @@
                 });
             });
         }
+    } else if ([[item objectForKey:@"type"] isEqualToString:@"tl"] || [[item objectForKey:@"type"] isEqualToString:@"t"]) {
+            if ([[item objectForKey:@"randomable"] intValue] > 0) {
+                NSLog(@"randomable");
+                cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+            } else {
+                NSLog(@"notrandomable");
+                cell.textLabel.font = [UIFont systemFontOfSize:20];
+            }
         
-
     }
     
     return cell;
@@ -147,6 +154,7 @@
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
         [collection setOwner:self.owner];
         [collection setTitle:[item valueForKey:@"name"]];
+        [collection.navigationItem setRightBarButtonItem:self.navigationItem.rightBarButtonItem];        
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                                
             if ([[item valueForKey:@"type"] isEqualToString:@"al"] || [[item valueForKey:@"type"] isEqualToString:@"a"]) {
@@ -229,8 +237,11 @@
             }
         }
     };
-    
-    
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];    
+    NSLog(@"rotated");
     // Do any additional setup after loading the view from its nib.
 }
 
