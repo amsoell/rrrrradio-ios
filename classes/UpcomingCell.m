@@ -49,6 +49,11 @@
                 [imageData writeToFile:userArtCachedFullPath atomically:YES];
             }
             
+            UIColor *borderColor = [UIColor blackColor];
+            if (!([[track objectForKey:@"dedicationName"] isKindOfClass:[NSNull class]] || [[track objectForKey:@"dedicationName"] isEqualToString:@""])) {
+                    borderColor = [UIColor redColor];
+            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.userView setImage:image];
                 
@@ -59,7 +64,7 @@
                 
                 // Add border
                 [l setBorderWidth:1.0];
-                [l setBorderColor:[[UIColor blackColor] CGColor]];        
+                [l setBorderColor:[borderColor CGColor]];        
             });
             
         });

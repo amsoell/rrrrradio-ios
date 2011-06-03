@@ -11,6 +11,7 @@
 #import <YAJLiOS/YAJL.h>
 #import <MediaPlayer/MPVolumeView.h>
 #import <AVFoundation/AVFoundation.h>
+#import <QuartzCore/QuartzCore.h>
 #import "rrrrradioAppDelegate.h"
 #import "CollectionBrowser.h"
 #import "MusicQueue.h"
@@ -33,7 +34,10 @@
 @synthesize opsToolbar;
 @synthesize blackout;
 @synthesize artistData;
+@synthesize listeners;
 @synthesize toolbar;
+@synthesize listenersLabel;
+@synthesize listenersBg;
 @synthesize internetActive, hostActive, networkSpeed;
 @synthesize popoverController=_myPopoverController;
 
@@ -135,7 +139,8 @@
         sleep(5);
         
         NSDictionary *arrayData = [[DataInterface issueCommand:@"controller.php?r=getQueue"] yajl_JSON];
-        NSArray *queue = [arrayData objectForKey:@"queue"];    
+        NSArray *queue = [arrayData objectForKey:@"queue"];  
+        [self setListeners:[arrayData objectForKey:@"listeners"]];
         _QUEUE = [[MusicQueue alloc ] initWithTrackData:queue];
         
         skip = [[arrayData objectForKey:@"timestamp"] intValue] - [[[queue objectAtIndex:0] objectForKey:@"startplay"] intValue];
@@ -178,11 +183,7 @@
 // Tell the UITableView to refresh itself. Probably a better way to do this
 - (void)refreshQueueDisplay {
     [upcoming reloadData];
-/*
-    for (UITableViewCell *cell in [upcoming visibleCells]) {
-        [cell setNeedsDisplay];
-    }
-*/ 
+    [self.listenersLabel setText:[NSString stringWithFormat:@"%i Listeners", [self.listeners count]]];    
 }
 
 - (void) enableRequests {
@@ -366,7 +367,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSDictionary *arrayData = [[DataInterface issueCommand:@"controller.php?r=getQueue"] yajl_JSON];
         NSArray *queue = [arrayData objectForKey:@"queue"];   
-
+        [self setListeners:[arrayData objectForKey:@"listeners"]];
+        
         int size = [_QUEUE length];
         [_QUEUE updateQueue:queue];
         
@@ -428,6 +430,12 @@
             [subview setFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)];
             [subview setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+45, 22)];
             [subview sizeToFit];
+        }
+    }
+    
+    for (UIView *subview in opsToolbar.subviews) {
+        if ([subview isKindOfClass:[UIImageView class]]) {
+            [subview setFrame:CGRectMake(self.opsToolbar.frame.size.width/2-50, self.opsToolbar.frame.size.height/2-12, 100, 24)];
         }
     }
 }
@@ -658,6 +666,27 @@
     
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
+    // Build and display the "current listeners" box
+    self.listenersBg = [[UIImageView alloc] initWithFrame:CGRectMake(self.opsToolbar.frame.size.width/2-50, self.opsToolbar.frame.size.height/2-12, 100, 24)];
+    [self.listenersBg setBackgroundColor:[UIColor blackColor]];
+    // Round the corners
+    CALayer *l = [self.listenersBg layer];
+    [l setMasksToBounds:YES];
+    [l setCornerRadius:8.0];
+    // Add border
+    [l setBorderWidth:1.0];
+    [l setBorderColor:[[UIColor blackColor] CGColor]];        
+    
+    self.listenersLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 4, 80, 16)];
+    [self.listenersLabel setText:@"0 Listeners"];
+    [self.listenersLabel setBackgroundColor:[UIColor clearColor]];
+    [self.listenersLabel setTextColor:[UIColor grayColor]];
+    [self.listenersLabel setFont:[UIFont fontWithName:@"Trebuchet MS" size:12]];
+    [self.listenersLabel setTextAlignment:UITextAlignmentCenter];
+    
+    [listenersBg addSubview:listenersLabel];
+    [self.opsToolbar addSubview:listenersBg];
 
  
     [super viewDidLoad];
@@ -683,6 +712,8 @@
 {
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [_QUEUE release];
+    [listenersBg release];
+    [listenersLabel release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

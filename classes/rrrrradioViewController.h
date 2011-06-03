@@ -22,10 +22,13 @@
     IBOutlet UIToolbar *opsToolbar;
     IBOutlet UIView *blackout;
     IBOutlet UIToolbar *toolbar;
+    UILabel *listenersLabel;
+    UIImageView *listenersBg;
     int skip;
     MusicQueue *_QUEUE;
     NSTimer *queueLoader;
     NSArray *artistData;
+    NSArray *listeners;
     Reachability* internetReachable;
     Reachability* hostReachable;    
     BOOL internetActive;
@@ -50,10 +53,13 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *opsToolbar;
 @property (nonatomic, retain) IBOutlet UIView *blackout;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) UILabel *listenersLabel;
+@property (nonatomic, retain) UIImageView *listenersBg;
 @property int skip;
 @property (retain) MusicQueue *_QUEUE;
 @property (retain) NSTimer *queueLoader;
 @property (nonatomic, retain) NSArray *artistData;
+@property (nonatomic, retain) NSArray *listeners;
 @property (nonatomic) BOOL internetActive;
 @property (nonatomic) BOOL hostActive;
 @property (nonatomic) NetworkStatus networkSpeed;
