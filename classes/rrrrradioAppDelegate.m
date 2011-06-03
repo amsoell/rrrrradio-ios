@@ -40,6 +40,7 @@
         
         splitController = [[UISplitViewController alloc] init];
         [splitController setDelegate:self.viewController];
+        
         self.splitController.viewControllers = [NSArray arrayWithObjects:navigationController, self.viewController, nil];
         
         [self.window addSubview:self.splitController.view];

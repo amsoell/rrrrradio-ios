@@ -100,7 +100,9 @@
     
     skip = [player position];
     CGRect frame = [progress frame];
-    frame.origin.x = -320;
+    frame.origin.x = 0.0;
+    frame.origin.y = 0.0;
+    frame.size.width = 0.0;
     
     [progress setFrame:frame];
     if (player.state!=RDPlayerStateStopped) [_QUEUE cancelPlayback];
@@ -342,14 +344,12 @@
 {
     if([keyPath isEqualToString:@"position"]) {
         RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];        
-        
-        float x = [player position]/[[[_QUEUE currentTrack] objectForKey:@"duration"] doubleValue] *320 - 320;
-        if (x>0) x = 0; // Don't let it go too far to the right;
-        
-        if(player.position > 0) {
-            CGRect frame = [progress frame];
-            frame.origin.x = x;
+        if(player.position > 0) {        
+            CGRect frame = [progress frame];     
+            
+            frame.origin.x = 0.0;
             frame.origin.y = 0.0;
+            frame.size.width = ([player position]/[[[_QUEUE currentTrack] objectForKey:@"duration"] doubleValue]) * self.toolbar.frame.size.width;
             
             [progress setFrame:frame];
         }
@@ -402,7 +402,7 @@
     [items insertObject:barButtonItem atIndex:0];
     [self.toolbar setItems:items animated:YES];
     [items release];
-
+    
     self.popoverController = pc;    
 }
 
@@ -413,6 +413,16 @@
     [toolbar setItems:items animated:YES];
     [items release];
     self.popoverController = nil;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    for (UIView *subview in volumeToolbar.subviews) {
+        if ([subview isKindOfClass:[MPVolumeView class]]) {
+            [subview setFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)];
+            [subview setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+45, 22)];
+            [subview sizeToFit];
+        }
+    }
 }
 
 
@@ -454,15 +464,17 @@
         
         [self reset];        
         
-        if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
-                self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]]; 
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self enableRequests];            
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {                    
+            if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
+                    self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]]; 
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self enableRequests];            
+                    });
                 });
-            });
-        }      
+            }      
+        }
         
         int poolingInterval=0;
         if (networkSpeed==ReachableViaWiFi) {
@@ -611,15 +623,15 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    
     // Let me know when the app goes foreground/background
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backgrounding:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foregrounding:) name:UIApplicationDidBecomeActiveNotification object: nil];
     
     // Add volume slider
-    MPVolumeView *volumeView = [[[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, 265, 20)] autorelease];
-    [volumeView setCenter:CGPointMake(170, 22)];
+    MPVolumeView *volumeView = [[[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)] autorelease];
+    [volumeView setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+45, 22)];
     [volumeView sizeToFit];
+    [volumeView setBackgroundColor:[UIColor redColor]];
     [volumeToolbar addSubview:volumeView];
     
     // check for internet connection

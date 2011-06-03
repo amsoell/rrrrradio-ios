@@ -138,7 +138,11 @@
         [owner updateQueue];
         
         [cell setAccessoryView:nil];
-        [self dismissModalViewControllerAnimated:YES];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            [self dismissModalViewControllerAnimated:YES];
+        }
     } else {
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
         [collection setOwner:self.owner];
@@ -146,8 +150,6 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                                
             if ([[item valueForKey:@"type"] isEqualToString:@"al"] || [[item valueForKey:@"type"] isEqualToString:@"a"]) {
-//                NSString *requestUrl = [NSString stringWithFormat:@"data.php?a=%@", [item valueForKey:@"key"]];
-//                NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
                 
                 collection.dataSource = [item objectForKey:@"tracks"];
             } else if ([[item valueForKey:@"type"] isEqualToString:@"rl"] || [[item valueForKey:@"type"] isEqualToString:@"r"]) {
