@@ -38,6 +38,7 @@
 @synthesize toolbar;
 @synthesize listenersLabel;
 @synthesize listenersBg;
+@synthesize listenerController;
 @synthesize internetActive, hostActive, networkSpeed;
 @synthesize popoverController=_myPopoverController;
 
@@ -198,6 +199,32 @@
      [opsToolbar setItems:opsToolbarItems];
     
      [btnNew release];    
+}
+
+- (void) displayListeners {
+    NSLog(@"Show current listeners");    
+    
+    UITableViewController *listenerView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [listenerView setTitle:@"Now Listening"];
+
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] 
+                             initWithTitle:@"Done" 
+                             style:UIBarButtonItemStyleDone 
+                             target:self action:@selector(dismissListeners)];
+    [listenerView.navigationItem setRightBarButtonItem:done];
+    [done release];    
+    
+    listenerController = [[UINavigationController alloc] initWithRootViewController:listenerView];
+    [listenerController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
+
+    [self presentModalViewController:listenerController animated:YES];    
+    [listenerController release];
+    [listenerView release];
+}
+
+- (void) dismissListeners {
+    [listenerController dismissModalViewControllerAnimated:YES];
+    listenerController = nil;
 }
 
 #pragma mark Queue UITableView construction
@@ -682,7 +709,7 @@
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     
     // Build and display the "current listeners" box
-    self.listenersBg = [[UIImageView alloc] initWithFrame:CGRectMake(self.opsToolbar.frame.size.width/2-50, self.opsToolbar.frame.size.height/2-12, 100, 24)];
+    self.listenersBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
     [self.listenersBg setBackgroundColor:[UIColor blackColor]];
     // Round the corners
     CALayer *l = [self.listenersBg layer];
@@ -700,9 +727,16 @@
     [self.listenersLabel setTextAlignment:UITextAlignmentCenter];
     
     [listenersBg addSubview:listenersLabel];
-    [self.opsToolbar addSubview:listenersBg];
+    
+    UIButton *listenerButton = [[UIButton alloc] initWithFrame:CGRectMake(self.opsToolbar.frame.size.width/2-50, self.opsToolbar.frame.size.height/2-12, 100, 24)];
+    [listenerButton addTarget:self action:@selector(displayListeners) forControlEvents:UIControlEventTouchUpInside];
+    [listenerButton setShowsTouchWhenHighlighted:YES];
+    [listenerButton addSubview:listenersBg];
+    
+    [self.opsToolbar addSubview:listenerButton];
+    
+    [listenerButton release];
 
- 
     [super viewDidLoad];
 }
 

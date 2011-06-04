@@ -24,6 +24,7 @@
     IBOutlet UIToolbar *toolbar;
     UILabel *listenersLabel;
     UIImageView *listenersBg;
+    UINavigationController *listenerController;
     int skip;
     MusicQueue *_QUEUE;
     NSTimer *queueLoader;
@@ -40,6 +41,8 @@
 - (void) refreshQueueDisplay;
 - (void) updateQueue;
 - (void) enableRequests;
+- (void) displayListeners;
+- (void) dismissListeners;
 - (void) enableBackgroundPooling:(int)seconds;
 - (IBAction) playStream;
 - (void)stopStream;
@@ -55,6 +58,7 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) UILabel *listenersLabel;
 @property (nonatomic, retain) UIImageView *listenersBg;
+@property (nonatomic, retain) UINavigationController *listenerController;
 @property int skip;
 @property (retain) MusicQueue *_QUEUE;
 @property (retain) NSTimer *queueLoader;
