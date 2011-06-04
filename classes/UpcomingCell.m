@@ -49,9 +49,13 @@
                 [imageData writeToFile:userArtCachedFullPath atomically:YES];
             }
             
-            UIColor *borderColor = [UIColor blackColor];
-            if (!([[track objectForKey:@"dedicationName"] isKindOfClass:[NSNull class]] || [[track objectForKey:@"dedicationName"] isEqualToString:@""])) {
-                    borderColor = [UIColor redColor];
+            UIColor *borderColor;
+            if ([track objectForKey:@"dedicationName"] == nil) {
+                borderColor = [UIColor blackColor];
+            } else {
+                borderColor = [UIColor redColor];
+                NSLog(@"dedicated to: %@", [track objectForKey:@"dedicationName"]);
+                NSLog(@"detail: %@", track);
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{

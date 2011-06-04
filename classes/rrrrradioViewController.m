@@ -183,7 +183,7 @@
 // Tell the UITableView to refresh itself. Probably a better way to do this
 - (void)refreshQueueDisplay {
     [upcoming reloadData];
-    [self.listenersLabel setText:[NSString stringWithFormat:@"%i Listeners", [self.listeners count]]];    
+    [self.listenersLabel setText:[NSString stringWithFormat:@"%i Listener%@", [self.listeners count], [self.listeners count]!=1?@"s":@""]];    
 }
 
 - (void) enableRequests {
@@ -401,18 +401,28 @@
 - (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc 
 {
     // configure barButton
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoLight];
-//    UIImage* image = [UIImage imageNamed:@ "trackbg.png"];
-//    [button setImage:image forState:UIControlStateNormal];    
+/*    
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage* image = [UIImage imageNamed:@"UIBarButtonAdd.png"];
+    [button setImage:image forState:UIControlStateNormal];    
+    [button setFrame:CGRectMake(0, 0, image.size.width+10, image.size.width+10)];
     [button addTarget:self action: @selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+    
+    CALayer *buttonLayer = [button layer];
+    [buttonLayer setMasksToBounds:YES];
+    [buttonLayer setCornerRadius:10.0];
+    [buttonLayer setBorderWidth:1.0];
+    [buttonLayer setBorderColor:[[UIColor grayColor] CGColor]];
+    
     barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+*/    
+    [barButtonItem setTitle:@"Request"];
     
     NSMutableArray * items = [[toolbar items] mutableCopy];
     [items insertObject: barButtonItem atIndex: 0];
     [toolbar setItems: items animated: YES];
     [items release];
     self.popoverController = pc;
-    [barButtonItem release];
 }
 
 - (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
@@ -441,6 +451,7 @@
 }
 
 - (void)pop: (UIButton *)sender {
+    NSLog(@"Pop!");
     [self.popoverController presentPopoverFromRect:sender.frame                                      inView: self.view permittedArrowDirections: UIPopoverArrowDirectionUp                                          animated: YES];
 }
 

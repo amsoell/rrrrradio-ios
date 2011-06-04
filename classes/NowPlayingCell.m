@@ -49,7 +49,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.userImage setImage:image];
                 UIColor *borderColor;
-                if ([[track objectForKey:@"dedicationName"] isKindOfClass:[NSNull class]] || [[track objectForKey:@"dedicationName"] isEqualToString:@""]) {
+                if ([track objectForKey:@"dedicationName"] == nil) {
                     [self.userLabel setText:[NSString stringWithFormat:@"Requested by %@", [user objectForKey:@"username"]]];
                     borderColor = [UIColor blackColor];
                 } else {
