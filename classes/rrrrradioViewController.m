@@ -166,15 +166,18 @@
     if (volumeToolbar.alpha==0.0) {
         [volumeToolbar setFrame:CGRectOffset([volumeToolbar frame], 0, +volumeToolbar.frame.size.height)];
         [volumeToolbar setAlpha:1.0];     
-        
+/*        
         [opsToolbar setFrame:CGRectOffset([opsToolbar frame], 0, -opsToolbar.frame.size.height)];
         [opsToolbar setAlpha:1.0];         
+ */
     } else {
         [volumeToolbar setFrame:CGRectOffset([volumeToolbar frame], 0, -volumeToolbar.frame.size.height)];
         [volumeToolbar setAlpha:0.0];
-        
+   
+/*        
         [opsToolbar setFrame:CGRectOffset([opsToolbar frame], 0, +opsToolbar.frame.size.height)];
         [opsToolbar setAlpha:0.0];    
+ */
     }
     [UIView commitAnimations];
 }
