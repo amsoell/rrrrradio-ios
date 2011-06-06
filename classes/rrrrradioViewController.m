@@ -205,6 +205,9 @@
     NSLog(@"Show current listeners");    
     
     UITableViewController *listenerView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [listenerView.tableView setTag:2];
+    [listenerView.tableView setDelegate:self];
+    [listenerView.tableView setDataSource:self];
     [listenerView setTitle:@"Now Listening"];
 
     UIBarButtonItem *done = [[UIBarButtonItem alloc] 
@@ -217,7 +220,11 @@
     listenerController = [[UINavigationController alloc] initWithRootViewController:listenerView];
     [listenerController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
 
-    [self presentModalViewController:listenerController animated:YES];    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {                    
+        [listenerView setModalTransitionStyle:UIModalPresentationFormSheet];
+    }
+    
+    [self presentModalViewController:listenerView animated:YES];    
     [listenerController release];
     [listenerView release];
 }
@@ -230,57 +237,89 @@
 #pragma mark Queue UITableView construction
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ([_QUEUE length]);
+    if (tableView.tag==2) {
+        // Listeners
+        return ([listeners count]);
+    } else {
+        // Queue
+        return ([_QUEUE length]);        
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;    
+    
+    if (tableView.tag==2) {
+        // Listeners
+        NSDictionary *listener = [listeners objectAtIndex:indexPath.row];
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ListenerCell"];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%@ %@", [listener objectForKey:@"firstName"], [listener objectForKey:@"lastName"]]];
 
-    NSDictionary *track = [_QUEUE trackAt:indexPath.row];     
-    
-    NSString *cellType;
-    UITableViewCell *cell;
-    
-    if (indexPath.row == 0) {
-        cellType = @"NowPlayingCell";
-        cell = (NowPlayingCell*)[track objectForKey:cellType];
+        NSString *userArtCachedName = [NSString stringWithFormat:@"%@.png", [listener objectForKey:@"key"]];
+        NSString *userArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
+                                           stringByAppendingPathComponent:userArtCachedName];
+        UIImage *image = nil;
+        if([[NSFileManager defaultManager] fileExistsAtPath:userArtCachedFullPath]) {
+            image = [UIImage imageWithContentsOfFile:userArtCachedFullPath];
+        } else {
+            NSString *artUrl = [listener objectForKey:@"icon"];
+            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
+            // save it to disk
+            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+            [imageData writeToFile:userArtCachedFullPath atomically:YES];
+        }
+        
+        [cell.imageView setImage:image];
+        [cell autorelease];
     } else {
-        cellType = @"UpcomingCell";
-        cell = (UpcomingCell*)[track objectForKey:cellType];        
-    }
-    
-    if (cell == nil) {
-        // Create the now playing cell
-        NSArray *nibObjects = [[NSBundle mainBundle] loadNibNamed:@"NowPlayingCell" owner:self options:nil];
-        for (id obj in nibObjects) {
-            if ([obj isKindOfClass:[NowPlayingCell class]]) {
-                cell = (NowPlayingCell*)obj;
-                [cell performSelector:@selector(setTrackData:) withObject:track]; 
-                [track setValue:cell forKey:@"NowPlayingCell"];                  
-            }
+        NSDictionary *track = [_QUEUE trackAt:indexPath.row];     
+        NSString *cellType;
+
+        
+        if (indexPath.row == 0) {
+            cellType = @"NowPlayingCell";
+            cell = (NowPlayingCell*)[track objectForKey:cellType];
+        } else {
+            cellType = @"UpcomingCell";
+            cell = (UpcomingCell*)[track objectForKey:cellType];        
         }
         
-        nibObjects = [[NSBundle mainBundle] loadNibNamed:@"UpcomingCell" owner:self options:nil];            
-        for (id obj in nibObjects) {
-            if ([obj isKindOfClass:[UpcomingCell class]]) {
-                cell = (UpcomingCell*)obj;
-                
-                cell.textLabel.textColor = [UIColor whiteColor];
-                cell.textLabel.backgroundColor = [UIColor clearColor];
-                cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-                cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-                
-                UIImageView *cellBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCell-bg.jpg"]];
-                cell.backgroundView = cellBg;   
-                
-                [cell performSelector:@selector(setTrackData:) withObject:track]; 
-                [track setValue:cell forKey:@"UpcomingCell"];                  
-                
-                
-                [cellBg release];                                     
+        if (cell == nil) {
+            // Create the now playing cell
+            NSArray *nibObjects = [[NSBundle mainBundle] loadNibNamed:@"NowPlayingCell" owner:self options:nil];
+            for (id obj in nibObjects) {
+                if ([obj isKindOfClass:[NowPlayingCell class]]) {
+                    cell = (NowPlayingCell*)obj;
+                    [cell performSelector:@selector(setTrackData:) withObject:track]; 
+                    [track setValue:cell forKey:@"NowPlayingCell"];                  
+                }
             }
+            
+            nibObjects = [[NSBundle mainBundle] loadNibNamed:@"UpcomingCell" owner:self options:nil];            
+            for (id obj in nibObjects) {
+                if ([obj isKindOfClass:[UpcomingCell class]]) {
+                    cell = (UpcomingCell*)obj;
+                    
+                    cell.textLabel.textColor = [UIColor whiteColor];
+                    cell.textLabel.backgroundColor = [UIColor clearColor];
+                    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+                    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+                    
+                    UIImageView *cellBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCell-bg.jpg"]];
+                    cell.backgroundView = cellBg;   
+                    
+                    [cell performSelector:@selector(setTrackData:) withObject:track]; 
+                    [track setValue:cell forKey:@"UpcomingCell"];                  
+                    
+                    
+                    [cellBg release];                                     
+                }
+            }
+            
+            cell = [track objectForKey:cellType];
         }
-        
-        cell = [track objectForKey:cellType];
     }
 
     return cell;
@@ -288,7 +327,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath row]==0) return 320.0;
+    if ((tableView.tag != 2) && (indexPath.row==0)) return 320.0;
     return 44.0;
 }
 
@@ -420,8 +459,13 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==0) {
-        [self toggleHUD];
+    if (tableView.tag==2) {
+        // Listeners
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];               
+    } else {
+        if (indexPath.row==0) {
+            [self toggleHUD];
+        }
     }
 }
 
