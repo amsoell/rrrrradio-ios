@@ -221,10 +221,10 @@
     [listenerController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {                    
-        [listenerView setModalTransitionStyle:UIModalPresentationFormSheet];
+        [listenerController setModalPresentationStyle:UIModalPresentationFormSheet];
     }
     
-    [self presentModalViewController:listenerView animated:YES];    
+    [self presentModalViewController:listenerController animated:YES];    
     [listenerController release];
     [listenerView release];
 }
@@ -236,13 +236,26 @@
 
 #pragma mark Queue UITableView construction
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (tableView.tag==2) {
+        return 1;
+    } else {
+        // Queue
+        return 2;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag==2) {
         // Listeners
         return ([listeners count]);
     } else {
         // Queue
-        return ([_QUEUE length]);        
+        if (section==0) {
+            return 1;
+        } else {
+            return ([_QUEUE length] - 1);
+        }
     }
 
 }
@@ -270,15 +283,15 @@
             NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
             [imageData writeToFile:userArtCachedFullPath atomically:YES];
         }
-        
+                
         [cell.imageView setImage:image];
         [cell autorelease];
     } else {
-        NSDictionary *track = [_QUEUE trackAt:indexPath.row];     
+        NSDictionary *track = [_QUEUE trackAt:indexPath.row+indexPath.section];     
         NSString *cellType;
 
         
-        if (indexPath.row == 0) {
+        if ((indexPath.row+indexPath.section) == 0) {
             cellType = @"NowPlayingCell";
             cell = (NowPlayingCell*)[track objectForKey:cellType];
         } else {
@@ -287,13 +300,34 @@
         }
         
         if (cell == nil) {
-            // Create the now playing cell
+            // Create the cell
             NSArray *nibObjects = [[NSBundle mainBundle] loadNibNamed:@"NowPlayingCell" owner:self options:nil];
             for (id obj in nibObjects) {
                 if ([obj isKindOfClass:[NowPlayingCell class]]) {
                     cell = (NowPlayingCell*)obj;
                     [cell performSelector:@selector(setTrackData:) withObject:track]; 
-                    [track setValue:cell forKey:@"NowPlayingCell"];                  
+                    [track setValue:cell forKey:@"NowPlayingCell"];              
+                    
+                    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {      
+                        // Shift the labels
+                        CGRect frame = cell.textLabel.frame;
+                        frame.origin.x += 20;
+                        frame.size.width -= 40;
+                        [cell.textLabel setFrame:frame];
+
+                        frame = cell.detailTextLabel.frame;
+                        frame.origin.x += 20;
+                        frame.size.width -= 40;
+                        [cell.detailTextLabel setFrame:frame];                        
+                        
+                        // Round the corners
+                        CALayer *l = [cell layer];
+                        [l setMasksToBounds:YES];
+                        [l setCornerRadius:20.0];
+                        // Add border
+                        [l setBorderWidth:4.0];
+                        [l setBorderColor:[[UIColor blackColor] CGColor]];        
+                    }                    
                 }
             }
             
@@ -313,8 +347,13 @@
                     [cell performSelector:@selector(setTrackData:) withObject:track]; 
                     [track setValue:cell forKey:@"UpcomingCell"];                  
                     
+                    [cellBg release];        
                     
-                    [cellBg release];                                     
+                    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {                          
+                        CALayer *l = [cell layer];
+                        [l setMasksToBounds:YES];
+                        [l setCornerRadius:8.0];                        
+                    }
                 }
             }
             
@@ -327,8 +366,44 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ((tableView.tag != 2) && (indexPath.row==0)) return 320.0;
-    return 44.0;
+    if ((tableView.tag != 2) && (indexPath.row+indexPath.section==0)) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {                
+            return 320.0;
+        } else {
+            return self.upcoming.frame.size.width;
+        }
+    } else {
+        return 44.0;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {      
+        if (tableView.tag!=2) {
+            if (section==1) {
+                return 10.0;
+            } else {
+                return 0.0;
+            }
+        } else {
+            return 0.0;
+        }
+    } else {
+        return 0.0;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *header = [[UIView alloc] init];
+    
+    if (tableView.tag!=2) {
+        if (section==1) {
+            
+            header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10.0)];
+        }
+    }
+    
+    return [header autorelease];
 }
 
 
@@ -651,6 +726,9 @@
         } else {
             NSLog(@"Stopping. Skip is %d", skip);
         }
+    } else {
+        [self stopStream];
+        [self reset];                
     }
 	NSLog(@"*** Player changed from state: %d toState: %d", oldState, newState);
 
@@ -761,7 +839,18 @@
     [l setCornerRadius:8.0];
     // Add border
     [l setBorderWidth:1.0];
-    [l setBorderColor:[[UIColor blackColor] CGColor]];        
+    [l setBorderColor:[[UIColor blackColor] CGColor]];    
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {                    
+        // iPad specific tweaks
+        
+        UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, upcoming.frame.size.width , 40)] autorelease];
+        [upcoming setTableHeaderView:containerView];
+        
+        [upcoming setSeparatorColor:[UIColor clearColor]];
+        [upcoming setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    }
+
     
     self.listenersLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 4, 80, 16)];
     [self.listenersLabel setText:@"0 Listeners"];

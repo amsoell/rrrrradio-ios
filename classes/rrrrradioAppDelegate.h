@@ -17,6 +17,7 @@
     Rdio *rdio;
     UISplitViewController *splitController;
     UINavigationController *navigationController;
+    rrrrradioViewController *mainController;
 }
 
 + (Rdio*)rdioInstance;
@@ -26,5 +27,6 @@
 @property (nonatomic, retain) IBOutlet rrrrradioViewController *viewController;
 @property (nonatomic, retain) UISplitViewController *splitController;
 @property (nonatomic, retain) UINavigationController *navigationController;
+@property (nonatomic, retain) rrrrradioViewController *mainController;
 
 @end

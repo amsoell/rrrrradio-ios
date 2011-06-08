@@ -17,7 +17,7 @@
 @synthesize window=_window;
 @synthesize viewController=_viewController;
 @synthesize rdio;
-@synthesize splitController, navigationController;
+@synthesize splitController, navigationController, mainController;
 
 + (Rdio*)rdioInstance {
     return[(rrrrradioAppDelegate*)[[UIApplication sharedApplication] delegate] rdio];
@@ -41,7 +41,9 @@
         splitController = [[UISplitViewController alloc] init];
         [splitController setDelegate:self.viewController];
         
-        self.splitController.viewControllers = [NSArray arrayWithObjects:navigationController, self.viewController, nil];
+        mainController = [[rrrrradioViewController alloc] initWithNibName:@"rrrrradioViewControllerIpad" bundle:nil];
+        
+        self.splitController.viewControllers = [NSArray arrayWithObjects:navigationController, mainController, nil];
         
         [self.window addSubview:self.splitController.view];
     } else {
@@ -103,7 +105,8 @@
     [_viewController release];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
         [self.splitController release];
-        [self.navigationController release];    
+        [self.navigationController release]; 
+        [self.mainController release];
     }
     [rdio release];
     [super dealloc];
