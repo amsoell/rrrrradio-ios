@@ -23,8 +23,9 @@
 }
 
 - (void)setTrackData:(NSDictionary *)track {
-    [self.textLabel setText:[track objectForKey:@"name"]];
-    [self.detailTextLabel setText:[track objectForKey:@"artist"]];   
+
+    [textLabel setText:[track objectForKey:@"name"]];
+    [detailTextLabel setText:[track objectForKey:@"artist"]];   
     
     // add user info if available
     if (![[track objectForKey:@"user"] isKindOfClass:[NSNull class]]) {
@@ -47,30 +48,30 @@
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.userImage setImage:image];
+                [userImage setImage:image];
                 UIColor *borderColor;
                 if ([track objectForKey:@"dedicationName"] == nil) {
-                    [self.userLabel setText:[NSString stringWithFormat:@"Requested by %@", [user objectForKey:@"username"]]];
+                    [userLabel setText:[NSString stringWithFormat:@"Requested by %@", [user objectForKey:@"username"]]];
                     borderColor = [UIColor blackColor];
                 } else {
-                    [self.userLabel setText:[NSString stringWithFormat:@"Dedicated by %@ to %@", [user objectForKey:@"username"], [track objectForKey:@"dedicationName"]]];
+                    [userLabel setText:[NSString stringWithFormat:@"Dedicated by %@ to %@", [user objectForKey:@"username"], [track objectForKey:@"dedicationName"]]];
                     borderColor = [UIColor redColor];
                 }
                 
-                [self.userView setHidden:NO];
-                [self.userImage setHidden:NO];
-                [self.userLabel setHidden:NO];
+                [userView setHidden:NO];
+                [userImage setHidden:NO];
+                [userLabel setHidden:NO];
                 
                 CGSize maximumSize = CGSizeMake(264, 32);                
                 UIFont *userLabelFont = [UIFont fontWithName:@"Trebuchet MS" size:14];                
                 CGSize userLabelStringSize = [userLabel.text sizeWithFont:userLabelFont 
                                                constrainedToSize:maximumSize 
-                                                   lineBreakMode:self.userLabel.lineBreakMode];                
+                                                   lineBreakMode:userLabel.lineBreakMode];                
                 CGRect userLabelFrame = CGRectMake(48, 8, 264, userLabelStringSize.height);
-                [self.userLabel setFrame:userLabelFrame];
+                [userLabel setFrame:userLabelFrame];
 
                 // Round the corners
-                CALayer *l = [self.userImage layer];
+                CALayer *l = [userImage layer];
                 [l setMasksToBounds:YES];
                 [l setCornerRadius:6.0];
                 
@@ -104,7 +105,7 @@
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.imageView setImage:image];   
+            [imageView setImage:image];   
             [spinner stopAnimating];
         });
     });
@@ -113,9 +114,9 @@
 
 - (void) reset {
     [spinner startAnimating];
-    [self.textLabel setText:nil];
-    [self.detailTextLabel setText:nil];
-    [self.imageView setImage:nil];
+    [textLabel setText:nil];
+    [detailTextLabel setText:nil];
+    [imageView setImage:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

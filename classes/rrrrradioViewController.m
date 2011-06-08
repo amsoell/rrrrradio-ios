@@ -222,9 +222,11 @@
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {                    
         [listenerController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [listenerController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [listenerController setModalInPopover:YES];
     }
     
-    [self presentModalViewController:listenerController animated:YES];    
+    [self.parentViewController presentModalViewController:listenerController animated:YES];    
     [listenerController release];
     [listenerView release];
 }
@@ -359,6 +361,8 @@
                         CALayer *l = [cell layer];
                         [l setMasksToBounds:YES];
                         [l setCornerRadius:8.0];                        
+                        // Add border
+                        
                     }
                 }
             }
@@ -399,18 +403,18 @@
     }
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UIView *header = [[UIView alloc] init];
-//    
-//    if (tableView.tag!=2) {
-//        if (section==1) {
-//            
-//            header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10.0)];
-//        }
-//    }
-//    [header autorelease];
-//    return header;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *header = [[UIView alloc] init];
+    
+    if (tableView.tag!=2) {
+        if (section==1) {
+            
+            header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10.0)];
+        }
+    }
+    [header autorelease];
+    return header;
+}
 
 
 #pragma mark -
@@ -599,7 +603,7 @@
     }
     
     for (UIView *subview in opsToolbar.subviews) {
-        if ([subview isKindOfClass:[UIImageView class]]) {
+        if ([subview isKindOfClass:[UIButton class]]) {
             [subview setFrame:CGRectMake(self.opsToolbar.frame.size.width/2-50, self.opsToolbar.frame.size.height/2-12, 100, 24)];
         }
     }
@@ -815,9 +819,10 @@
 - (void)viewDidLoad
 {
     // Let me know when the app goes foreground/background
+/*    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backgrounding:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foregrounding:) name:UIApplicationDidBecomeActiveNotification object: nil];
-    
+*/    
     // Add volume slider
     MPVolumeView *volumeView = [[[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)] autorelease];
     [volumeView setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+35, 22)];
@@ -914,18 +919,19 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    return YES;
+    // iPhone: Portrait only
+    // iPad: Any orientation
+    return ((interfaceOrientation == UIInterfaceOrientationPortrait) ||
+            (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad));
 }
 
--(void)backgrounding:(NSNotification *)notification {
+-(void)backgrounding {
     NSLog(@"Backgrounding");
     [queueLoader invalidate];
     queueLoader = nil;
 }
 
--(void)foregrounding:(NSNotification *)notification {
+-(void)foregrounding {
     NSLog(@"We're back!");
     
     if (internetActive && hostActive) {

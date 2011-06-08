@@ -49,6 +49,8 @@
 - (IBAction) toggleHUD;
 - (IBAction) handleVolumeToolbar:(id)selected;
 - (IBAction) handleOpsToolbar:(id)selected;
+- (void) foregrounding;
+- (void) backgrounding;
 
 @property (nonatomic, retain) IBOutlet UITableView *upcoming;
 @property (nonatomic, retain) IBOutlet UIImageView *progress;
