@@ -241,7 +241,13 @@
         return 1;
     } else {
         // Queue
-        return 2;
+        if (_QUEUE.length>1) {
+            return 2;
+        } else if (_QUEUE.length>0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
 
@@ -393,18 +399,18 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *header = [[UIView alloc] init];
-    
-    if (tableView.tag!=2) {
-        if (section==1) {
-            
-            header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10.0)];
-        }
-    }
-    
-    return [header autorelease];
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UIView *header = [[UIView alloc] init];
+//    
+//    if (tableView.tag!=2) {
+//        if (section==1) {
+//            
+//            header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10.0)];
+//        }
+//    }
+//    [header autorelease];
+//    return header;
+//}
 
 
 #pragma mark -
@@ -709,8 +715,10 @@
 
 - (void)rdioPlayerChangedFromState:(RDPlayerState)oldState toState:(RDPlayerState)newState {
     if (newState == 2) {
+        NSLog(@"Play State");
         // Enter a playing state
     } else if (newState == 3) {
+        NSLog(@"Play State");        
         // Enter a stopped state
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
             NSLog(@"We're in the background, clean stuff up");
@@ -727,6 +735,7 @@
             NSLog(@"Stopping. Skip is %d", skip);
         }
     } else {
+        NSLog(@"Some other State");        
         [self stopStream];
         [self reset];                
     }
@@ -831,8 +840,8 @@
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     
     // Build and display the "current listeners" box
-    self.listenersBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
-    [self.listenersBg setBackgroundColor:[UIColor blackColor]];
+    listenersBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
+    [listenersBg setBackgroundColor:[UIColor blackColor]];
     // Round the corners
     CALayer *l = [self.listenersBg layer];
     [l setMasksToBounds:YES];
@@ -852,12 +861,12 @@
     }
 
     
-    self.listenersLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 4, 80, 16)];
-    [self.listenersLabel setText:@"0 Listeners"];
-    [self.listenersLabel setBackgroundColor:[UIColor clearColor]];
-    [self.listenersLabel setTextColor:[UIColor grayColor]];
-    [self.listenersLabel setFont:[UIFont fontWithName:@"Trebuchet MS" size:12]];
-    [self.listenersLabel setTextAlignment:UITextAlignmentCenter];
+    listenersLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 4, 80, 16)];
+    [listenersLabel setText:@"0 Listeners"];
+    [listenersLabel setBackgroundColor:[UIColor clearColor]];
+    [listenersLabel setTextColor:[UIColor grayColor]];
+    [listenersLabel setFont:[UIFont fontWithName:@"Trebuchet MS" size:12]];
+    [listenersLabel setTextAlignment:UITextAlignmentCenter];
     
     [listenersBg addSubview:listenersLabel];
     
@@ -866,8 +875,11 @@
     [listenerButton setShowsTouchWhenHighlighted:YES];
     [listenerButton addSubview:listenersBg];
     
+    
     [self.opsToolbar addSubview:listenerButton];
     
+    [listenersLabel release];
+    [listenersBg release];
     [listenerButton release];
 
     [super viewDidLoad];
@@ -919,8 +931,10 @@
     if (internetActive && hostActive) {
         RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];    
         if (player.state != RDPlayerStatePlaying) {
+            NSLog(@"Initializing: Reset");
             [self reset];
         } else {
+            NSLog(@"Initializing: UpdateQueue");            
             [self updateQueue];        
         }
         

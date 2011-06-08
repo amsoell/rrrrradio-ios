@@ -28,8 +28,8 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {    
         NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]];
 
-        self.navigationController = [[UINavigationController alloc] init];
-        [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
+        navigationController = [[UINavigationController alloc] init];
+        [navigationController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
         
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
         [collection setDataSource:artistData];
@@ -43,9 +43,9 @@
         
         mainController = [[rrrrradioViewController alloc] initWithNibName:@"rrrrradioViewControllerIpad" bundle:nil];
         
-        self.splitController.viewControllers = [NSArray arrayWithObjects:navigationController, mainController, nil];
+        splitController.viewControllers = [NSArray arrayWithObjects:navigationController, mainController, nil];
         
-        [self.window addSubview:self.splitController.view];
+        [self.window addSubview:splitController.view];
     } else {
         self.window.rootViewController = self.viewController;
     }
@@ -104,9 +104,9 @@
     [_window release];
     [_viewController release];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
-        [self.splitController release];
-        [self.navigationController release]; 
-        [self.mainController release];
+        [splitController release];
+        [navigationController release]; 
+        [mainController release];
     }
     [rdio release];
     [super dealloc];
