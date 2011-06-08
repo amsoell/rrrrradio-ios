@@ -19,6 +19,7 @@
 		DE0B065A137AF28400B674C2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0659137AF28400B674C2 /* Security.framework */; };
 		DE0B065C137AF2D000B674C2 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */; };
 		DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0665137AF35E00B674C2 /* Rdio.framework */; };
+		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
 		DE6ED95F137DDEA700282BB8 /* trackbg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED956137DDEA600282BB8 /* trackbg.png */; };
@@ -36,9 +37,13 @@
 		DEF50522138816D10004847E /* DataInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF50521138816D10004847E /* DataInterface.m */; };
 		DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF505321389EDD80004847E /* CollectionBrowser.m */; };
 		DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF505331389EDD80004847E /* CollectionBrowser.xib */; };
-		DEF5053B138AEF090004847E /* appIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053A138AEF080004847E /* appIcon@2x.png */; };
-		DEF5053D138AEF110004847E /* appIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053C138AEF110004847E /* appIcon.png */; };
+		DEF5053B138AEF090004847E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053A138AEF080004847E /* Icon@2x.png */; };
+		DEF5053D138AEF110004847E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053C138AEF110004847E /* Icon.png */; };
 		DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF5053E138B02450004847E /* AVFoundation.framework */; };
+		DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */; };
+		DEFFCAA813998A6B007DF447 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA513998A6B007DF447 /* Default-Landscape.png */; };
+		DEFFCAA913998A6B007DF447 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA613998A6B007DF447 /* Default-Portrait.png */; };
+		DEFFCAAA13998A6B007DF447 /* Icon-Ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA713998A6B007DF447 /* Icon-Ipad.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -71,6 +76,7 @@
 		DE0B0659137AF28400B674C2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = contrib/YAJLiOS.framework; sourceTree = SOURCE_ROOT; };
 		DE0B0665137AF35E00B674C2 /* Rdio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rdio.framework; path = contrib/Rdio.framework; sourceTree = SOURCE_ROOT; };
+		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
 		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = classes/Settings.h; sourceTree = "<group>"; };
 		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = classes/Settings.m; sourceTree = "<group>"; };
 		DE6ED953137DDEA600282BB8 /* MusicQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MusicQueue.h; path = classes/MusicQueue.h; sourceTree = "<group>"; };
@@ -95,9 +101,13 @@
 		DEF505311389EDD80004847E /* CollectionBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollectionBrowser.h; path = classes/CollectionBrowser.h; sourceTree = "<group>"; };
 		DEF505321389EDD80004847E /* CollectionBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollectionBrowser.m; path = classes/CollectionBrowser.m; sourceTree = "<group>"; };
 		DEF505331389EDD80004847E /* CollectionBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrowser.xib; sourceTree = "<group>"; };
-		DEF5053A138AEF080004847E /* appIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appIcon@2x.png"; sourceTree = "<group>"; };
-		DEF5053C138AEF110004847E /* appIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appIcon.png; sourceTree = "<group>"; };
+		DEF5053A138AEF080004847E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		DEF5053C138AEF110004847E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DEF5053E138B02450004847E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonAdd.png; sourceTree = "<group>"; };
+		DEFFCAA513998A6B007DF447 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		DEFFCAA613998A6B007DF447 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		DEFFCAA713998A6B007DF447 /* Icon-Ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Ipad.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +159,7 @@
 			children = (
 				DEA1793E138C226B00B03B3D /* MainWindow.xib */,
 				DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */,
+				DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */,
 				DEF505331389EDD80004847E /* CollectionBrowser.xib */,
 				DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */,
 				DEE413021383FD0F000AA02C /* UpcomingCell.xib */,
@@ -185,8 +196,12 @@
 		DEE95AD3138C1D5A00FDFF15 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				DEF5053C138AEF110004847E /* appIcon.png */,
-				DEF5053A138AEF080004847E /* appIcon@2x.png */,
+				DEFFCAA513998A6B007DF447 /* Default-Landscape.png */,
+				DEFFCAA613998A6B007DF447 /* Default-Portrait.png */,
+				DEFFCAA713998A6B007DF447 /* Icon-Ipad.png */,
+				DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */,
+				DEF5053C138AEF110004847E /* Icon.png */,
+				DEF5053A138AEF080004847E /* Icon@2x.png */,
 				DE6ED963137DDF9400282BB8 /* Default@2x.png */,
 				DE6ED961137DDF8700282BB8 /* Default.png */,
 				DE6ED956137DDEA600282BB8 /* trackbg.png */,
@@ -249,6 +264,7 @@
 		DE0B0626137AF23A00B674C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = rrrrradio;
 			};
 			buildConfigurationList = DE0B0629137AF23A00B674C2 /* Build configuration list for PBXProject "rrrrradio" */;
@@ -280,10 +296,15 @@
 				DE7D103A13800E2500FDA0A5 /* NowPlayingCell.xib in Resources */,
 				DEE413031383FD0F000AA02C /* UpcomingCell.xib in Resources */,
 				DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */,
-				DEF5053B138AEF090004847E /* appIcon@2x.png in Resources */,
-				DEF5053D138AEF110004847E /* appIcon.png in Resources */,
+				DEF5053B138AEF090004847E /* Icon@2x.png in Resources */,
+				DEF5053D138AEF110004847E /* Icon.png in Resources */,
 				DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */,
 				DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */,
+				DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */,
+				DEFFCAA813998A6B007DF447 /* Default-Landscape.png in Resources */,
+				DEFFCAA913998A6B007DF447 /* Default-Portrait.png in Resources */,
+				DEFFCAAA13998A6B007DF447 /* Icon-Ipad.png in Resources */,
+				DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +341,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -339,6 +361,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Soell (C6SVBW8NK2)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -365,7 +388,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -385,7 +408,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				TARGETED_DEVICE_FAMILY = "1,2";
