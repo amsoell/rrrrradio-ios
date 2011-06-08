@@ -14,6 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "rrrrradioAppDelegate.h"
 #import "CollectionBrowser.h"
+#import "ListenerController.h"
 #import "MusicQueue.h"
 #import "DataInterface.h"
 #import "Reachability.h"
@@ -217,16 +218,17 @@
     [listenerView.navigationItem setRightBarButtonItem:done];
     [done release];    
     
-    listenerController = [[UINavigationController alloc] initWithRootViewController:listenerView];
+    listenerController = [[ListenerController alloc] initWithRootViewController:listenerView];
     [listenerController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
-
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {                    
         [listenerController setModalPresentationStyle:UIModalPresentationFormSheet];
-        [listenerController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [listenerController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
         [listenerController setModalInPopover:YES];
     }
     
-    [self.parentViewController presentModalViewController:listenerController animated:YES];    
+    [self presentModalViewController:listenerController animated:YES];    
+
     [listenerController release];
     [listenerView release];
 }
@@ -408,8 +410,7 @@
     
     if (tableView.tag!=2) {
         if (section==1) {
-            
-            header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10.0)];
+            [header setFrame:CGRectMake(0, 0, tableView.frame.size.width, 10.0)];
         }
     }
     [header autorelease];

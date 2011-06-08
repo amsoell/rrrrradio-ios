@@ -19,6 +19,8 @@
 		DE0B065A137AF28400B674C2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0659137AF28400B674C2 /* Security.framework */; };
 		DE0B065C137AF2D000B674C2 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */; };
 		DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0665137AF35E00B674C2 /* Rdio.framework */; };
+		DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2CAB3C139FF9C000D74C59 /* ListenerController.m */; };
+		DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
@@ -66,40 +68,43 @@
 		DE0B063B137AF23A00B674C2 /* rrrrradio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rrrrradio-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DE0B063F137AF23A00B674C2 /* rrrrradio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rrrrradio-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		DE0B0640137AF23A00B674C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
-		DE0B0642137AF23A00B674C2 /* rrrrradioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rrrrradioAppDelegate.h; path = classes/rrrrradioAppDelegate.h; sourceTree = "<group>"; };
-		DE0B0643137AF23A00B674C2 /* rrrrradioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = rrrrradioAppDelegate.m; path = classes/rrrrradioAppDelegate.m; sourceTree = "<group>"; };
-		DE0B0648137AF23A00B674C2 /* rrrrradioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rrrrradioViewController.h; path = classes/rrrrradioViewController.h; sourceTree = "<group>"; };
-		DE0B0649137AF23A00B674C2 /* rrrrradioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = rrrrradioViewController.m; path = classes/rrrrradioViewController.m; sourceTree = "<group>"; };
+		DE0B0642137AF23A00B674C2 /* rrrrradioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rrrrradioAppDelegate.h; sourceTree = "<group>"; };
+		DE0B0643137AF23A00B674C2 /* rrrrradioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rrrrradioAppDelegate.m; sourceTree = "<group>"; };
+		DE0B0648137AF23A00B674C2 /* rrrrradioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rrrrradioViewController.h; sourceTree = "<group>"; };
+		DE0B0649137AF23A00B674C2 /* rrrrradioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rrrrradioViewController.m; sourceTree = "<group>"; };
 		DE0B0653137AF26F00B674C2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		DE0B0655137AF27600B674C2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DE0B0657137AF27D00B674C2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DE0B0659137AF28400B674C2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = contrib/YAJLiOS.framework; sourceTree = SOURCE_ROOT; };
 		DE0B0665137AF35E00B674C2 /* Rdio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rdio.framework; path = contrib/Rdio.framework; sourceTree = SOURCE_ROOT; };
+		DE2CAB3B139FF9C000D74C59 /* ListenerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenerController.h; sourceTree = "<group>"; };
+		DE2CAB3C139FF9C000D74C59 /* ListenerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenerController.m; sourceTree = "<group>"; };
+		DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPadBg.jpg; sourceTree = "<group>"; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
-		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = classes/Settings.h; sourceTree = "<group>"; };
-		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = classes/Settings.m; sourceTree = "<group>"; };
-		DE6ED953137DDEA600282BB8 /* MusicQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MusicQueue.h; path = classes/MusicQueue.h; sourceTree = "<group>"; };
-		DE6ED954137DDEA600282BB8 /* MusicQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MusicQueue.m; path = classes/MusicQueue.m; sourceTree = "<group>"; };
+		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		DE6ED953137DDEA600282BB8 /* MusicQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicQueue.h; sourceTree = "<group>"; };
+		DE6ED954137DDEA600282BB8 /* MusicQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicQueue.m; sourceTree = "<group>"; };
 		DE6ED956137DDEA600282BB8 /* trackbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trackbg.png; sourceTree = "<group>"; };
 		DE6ED957137DDEA600282BB8 /* UITableViewCell-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "UITableViewCell-bg.jpg"; sourceTree = "<group>"; };
 		DE6ED961137DDF8700282BB8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DE6ED963137DDF9400282BB8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		DE7D103613800E0800FDA0A5 /* NowPlayingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NowPlayingCell.h; path = classes/NowPlayingCell.h; sourceTree = "<group>"; };
-		DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NowPlayingCell.m; path = classes/NowPlayingCell.m; sourceTree = "<group>"; };
+		DE7D103613800E0800FDA0A5 /* NowPlayingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingCell.h; sourceTree = "<group>"; };
+		DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingCell.m; sourceTree = "<group>"; };
 		DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowPlayingCell.xib; sourceTree = "<group>"; };
 		DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewController.xib; sourceTree = "<group>"; };
 		DEA1793E138C226B00B03B3D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		DEC83CDF138D3D0C00772F57 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = classes/Reachability.h; sourceTree = "<group>"; };
-		DEC83CE0138D3D0C00772F57 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = classes/Reachability.m; sourceTree = "<group>"; };
-		DEE412FE1383FCF2000AA02C /* UpcomingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpcomingCell.h; path = classes/UpcomingCell.h; sourceTree = "<group>"; };
-		DEE412FF1383FCF2000AA02C /* UpcomingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpcomingCell.m; path = classes/UpcomingCell.m; sourceTree = "<group>"; };
+		DEC83CDF138D3D0C00772F57 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		DEC83CE0138D3D0C00772F57 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		DEE412FE1383FCF2000AA02C /* UpcomingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpcomingCell.h; sourceTree = "<group>"; };
+		DEE412FF1383FCF2000AA02C /* UpcomingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpcomingCell.m; sourceTree = "<group>"; };
 		DEE413021383FD0F000AA02C /* UpcomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingCell.xib; sourceTree = "<group>"; };
-		DEF50520138816D10004847E /* DataInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataInterface.h; path = classes/DataInterface.h; sourceTree = "<group>"; };
-		DEF50521138816D10004847E /* DataInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataInterface.m; path = classes/DataInterface.m; sourceTree = "<group>"; };
-		DEF505311389EDD80004847E /* CollectionBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollectionBrowser.h; path = classes/CollectionBrowser.h; sourceTree = "<group>"; };
-		DEF505321389EDD80004847E /* CollectionBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollectionBrowser.m; path = classes/CollectionBrowser.m; sourceTree = "<group>"; };
+		DEF50520138816D10004847E /* DataInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataInterface.h; sourceTree = "<group>"; };
+		DEF50521138816D10004847E /* DataInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataInterface.m; sourceTree = "<group>"; };
+		DEF505311389EDD80004847E /* CollectionBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionBrowser.h; sourceTree = "<group>"; };
+		DEF505321389EDD80004847E /* CollectionBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionBrowser.m; sourceTree = "<group>"; };
 		DEF505331389EDD80004847E /* CollectionBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrowser.xib; sourceTree = "<group>"; };
 		DEF5053A138AEF080004847E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		DEF5053C138AEF110004847E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -184,18 +189,20 @@
 				DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */,
 				DEE412FE1383FCF2000AA02C /* UpcomingCell.h */,
 				DEE412FF1383FCF2000AA02C /* UpcomingCell.m */,
+				DE2CAB3B139FF9C000D74C59 /* ListenerController.h */,
+				DE2CAB3C139FF9C000D74C59 /* ListenerController.m */,
 				DEC83CDF138D3D0C00772F57 /* Reachability.h */,
 				DEC83CE0138D3D0C00772F57 /* Reachability.m */,
 				DE6ED94B137DDE8300282BB8 /* Settings.h */,
 				DE6ED94C137DDE8300282BB8 /* Settings.m */,
 			);
-			name = classes;
-			path = /Users/asoell/Projects/rrrrradio;
-			sourceTree = "<absolute>";
+			path = classes;
+			sourceTree = SOURCE_ROOT;
 		};
 		DEE95AD3138C1D5A00FDFF15 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */,
 				DEFFCAA513998A6B007DF447 /* Default-Landscape.png */,
 				DEFFCAA613998A6B007DF447 /* Default-Portrait.png */,
 				DEFFCAA713998A6B007DF447 /* Icon-Ipad.png */,
@@ -305,6 +312,7 @@
 				DEFFCAA913998A6B007DF447 /* Default-Portrait.png in Resources */,
 				DEFFCAAA13998A6B007DF447 /* Icon-Ipad.png in Resources */,
 				DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */,
+				DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +333,7 @@
 				DEF50522138816D10004847E /* DataInterface.m in Sources */,
 				DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */,
 				DEC83CE1138D3D0C00772F57 /* Reachability.m in Sources */,
+				DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

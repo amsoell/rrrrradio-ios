@@ -114,13 +114,7 @@
     [super dealloc];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // iPhone: Portrait only
-    // iPad: Any orientation
-    return ((interfaceOrientation == UIInterfaceOrientationPortrait) ||
-            (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad));
-}
+
 
 
 @end
