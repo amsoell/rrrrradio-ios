@@ -14,12 +14,9 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>appIcon.png</string>
-		<string>appIcon@2x.png</string>
-		<string>appIcon@2x.png</string>
-		<string>appIcon@2x.png</string>
-		<string>appIcon.png</string>
-		<string>appIcon.png</string>
+		<string>assets/Icon.png</string>
+		<string>assets/Icon@2x.png</string>
+		<string>assets/Icon-Ipad.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.rrrrradio.${PRODUCT_NAME:rfc1034identifier}</string>
@@ -48,6 +45,13 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array/>
