@@ -132,14 +132,12 @@
     [UIView beginAnimations:@"blackout" context:nil];
     [blackout setAlpha:0.60];
     [UIView commitAnimations];
+    if (_QUEUE!=nil) {
+        [_QUEUE release];
+        _QUEUE = nil;
+    }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        if (_QUEUE!=nil) {
-            [_QUEUE release];
-            _QUEUE = nil;
-        }
-        sleep(5);
-        
         NSDictionary *arrayData = [[DataInterface issueCommand:@"controller.php?r=getQueue"] yajl_JSON];
         NSArray *queue = [arrayData objectForKey:@"queue"];  
         [self setListeners:[arrayData objectForKey:@"listeners"]];
@@ -728,7 +726,12 @@
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
             NSLog(@"We're in the background, clean stuff up");
             [self stopStream];
-            [self reset];                
+            [self reset];      
+            
+            if ([queueLoader isValid]) {
+                [queueLoader invalidate];                            
+                queueLoader = nil;
+            }            
         } else 
         if (skip < 0) {
             NSLog(@"New Track!");
@@ -928,8 +931,10 @@
 
 -(void)backgrounding {
     NSLog(@"Backgrounding");
+/*    
     [queueLoader invalidate];
     queueLoader = nil;
+*/ 
 }
 
 -(void)foregrounding {
@@ -944,17 +949,18 @@
             NSLog(@"Initializing: UpdateQueue");            
             [self updateQueue];        
         }
-        
-        int poolingInterval=0;
-        if (networkSpeed==ReachableViaWiFi) {
-            poolingInterval = 20;
-        } else if (networkSpeed==ReachableViaWWAN) {
-            poolingInterval = 60;
+        if (queueLoader == nil) {
+            int poolingInterval=0;
+            if (networkSpeed==ReachableViaWiFi) {
+                poolingInterval = 20;
+            } else if (networkSpeed==ReachableViaWWAN) {
+                poolingInterval = 60;
+            }
+            
+            if (poolingInterval>0) {
+                [self enableBackgroundPooling:poolingInterval];            
+            }        
         }
-        
-        if (poolingInterval>0) {
-            [self enableBackgroundPooling:poolingInterval];            
-        }        
     }
 
 }
