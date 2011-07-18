@@ -17,6 +17,9 @@
 		<string>assets/Icon.png</string>
 		<string>assets/Icon@2x.png</string>
 		<string>assets/Icon-Ipad.png</string>
+		<string>Icon.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon-Ipad.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.rrrrradio.${PRODUCT_NAME:rfc1034identifier}</string>
@@ -27,13 +30,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.1</string>
+	<string>1.1.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array/>
 	<key>CFBundleVersion</key>
-	<string>1.1.1</string>
+	<string>1.1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>

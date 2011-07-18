@@ -37,11 +37,11 @@
         [collection setOwner:self.viewController];
         [self.navigationController pushViewController:collection animated:NO];   
         [collection release];
+
+        mainController = [[rrrrradioViewController alloc] initWithNibName:@"rrrrradioViewControllerIpad" bundle:nil];        
         
         splitController = [[UISplitViewController alloc] init];
-        [splitController setDelegate:self.viewController];
-        
-        mainController = [[rrrrradioViewController alloc] initWithNibName:@"rrrrradioViewControllerIpad" bundle:nil];
+        [splitController setDelegate:self.mainController];
         
         splitController.viewControllers = [NSArray arrayWithObjects:navigationController, mainController, nil];
         

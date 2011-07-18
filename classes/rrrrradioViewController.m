@@ -556,6 +556,11 @@
 #pragma mark -
 #pragma mark Split View Delegate code
 
+- (void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController *)aViewController
+{
+    NSLog(@"pop!");
+}
+
 - (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc 
 {
     // configure barButton
