@@ -14,9 +14,9 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>assets/Icon.png</string>
-		<string>assets/Icon@2x.png</string>
-		<string>assets/Icon-Ipad.png</string>
+		<string>Icon.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon-Ipad.png</string>
 		<string>Icon.png</string>
 		<string>Icon@2x.png</string>
 		<string>Icon-Ipad.png</string>

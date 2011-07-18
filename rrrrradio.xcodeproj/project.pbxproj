@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A4942C113D4AC0A0085B0DC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C013D4AC0A0085B0DC /* Icon.png */; };
+		5A4942C313D4AC120085B0DC /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C213D4AC120085B0DC /* Icon@2x.png */; };
+		5A4942C513D4AC210085B0DC /* Icon-Ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C413D4AC210085B0DC /* Icon-Ipad.png */; };
+		5A4942C713D4AC330085B0DC /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */; };
+		5A4942C913D4AC390085B0DC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */; };
 		DE0B0634137AF23A00B674C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0633137AF23A00B674C2 /* UIKit.framework */; };
 		DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0635137AF23A00B674C2 /* Foundation.framework */; };
 		DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0637137AF23A00B674C2 /* CoreGraphics.framework */; };
@@ -39,13 +44,10 @@
 		DEF50522138816D10004847E /* DataInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF50521138816D10004847E /* DataInterface.m */; };
 		DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF505321389EDD80004847E /* CollectionBrowser.m */; };
 		DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF505331389EDD80004847E /* CollectionBrowser.xib */; };
-		DEF5053B138AEF090004847E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053A138AEF080004847E /* Icon@2x.png */; };
-		DEF5053D138AEF110004847E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF5053C138AEF110004847E /* Icon.png */; };
 		DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF5053E138B02450004847E /* AVFoundation.framework */; };
 		DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */; };
 		DEFFCAA813998A6B007DF447 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA513998A6B007DF447 /* Default-Landscape.png */; };
 		DEFFCAA913998A6B007DF447 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA613998A6B007DF447 /* Default-Portrait.png */; };
-		DEFFCAAA13998A6B007DF447 /* Icon-Ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA713998A6B007DF447 /* Icon-Ipad.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -61,6 +63,11 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		5A4942C013D4AC0A0085B0DC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		5A4942C213D4AC120085B0DC /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		5A4942C413D4AC210085B0DC /* Icon-Ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Ipad.png"; sourceTree = "<group>"; };
+		5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		DE0B062F137AF23A00B674C2 /* rrrrradio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rrrrradio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0B0633137AF23A00B674C2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DE0B0635137AF23A00B674C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,6 +147,11 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
+				5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */,
+				5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */,
+				5A4942C413D4AC210085B0DC /* Icon-Ipad.png */,
+				5A4942C213D4AC120085B0DC /* Icon@2x.png */,
+				5A4942C013D4AC0A0085B0DC /* Icon.png */,
 				DEE95AD4138C1D6100FDFF15 /* resources */,
 				DEE95AD1138C1D3F00FDFF15 /* classes */,
 				DE0B063B137AF23A00B674C2 /* rrrrradio-Info.plist */,
@@ -241,7 +253,7 @@
 				DE0B0637137AF23A00B674C2 /* CoreGraphics.framework */,
 			);
 			name = contrib;
-			path = /Users/asoell/Projects/rrrrradio;
+			path = /Users/amsoell/Projects/rrrrradio;
 			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
@@ -303,16 +315,18 @@
 				DE7D103A13800E2500FDA0A5 /* NowPlayingCell.xib in Resources */,
 				DEE413031383FD0F000AA02C /* UpcomingCell.xib in Resources */,
 				DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */,
-				DEF5053B138AEF090004847E /* Icon@2x.png in Resources */,
-				DEF5053D138AEF110004847E /* Icon.png in Resources */,
 				DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */,
 				DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */,
 				DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */,
 				DEFFCAA813998A6B007DF447 /* Default-Landscape.png in Resources */,
 				DEFFCAA913998A6B007DF447 /* Default-Portrait.png in Resources */,
-				DEFFCAAA13998A6B007DF447 /* Icon-Ipad.png in Resources */,
 				DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */,
 				DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */,
+				5A4942C113D4AC0A0085B0DC /* Icon.png in Resources */,
+				5A4942C313D4AC120085B0DC /* Icon@2x.png in Resources */,
+				5A4942C513D4AC210085B0DC /* Icon-Ipad.png in Resources */,
+				5A4942C713D4AC330085B0DC /* Default-Portrait~ipad.png in Resources */,
+				5A4942C913D4AC390085B0DC /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,11 +354,55 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		5A07BAD713D4B64F004FE23E /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		5A07BAD813D4B64F004FE23E /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/contrib\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				INFOPLIST_FILE = "rrrrradio-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CODE_SIGN_FLAGS = "";
+				PRODUCT_NAME = rrrrradio;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
 		DE0B064E137AF23A00B674C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Soell (C6SVBW8NK2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -358,7 +416,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BDAC9946-4D35-449A-BB55-13B42B6E1218";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -367,7 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Soell (C6SVBW8NK2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -379,7 +437,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BDAC9946-4D35-449A-BB55-13B42B6E1218";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -434,6 +492,7 @@
 			buildConfigurations = (
 				DE0B064E137AF23A00B674C2 /* Debug */,
 				DE0B064F137AF23A00B674C2 /* Release */,
+				5A07BAD713D4B64F004FE23E /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -443,6 +502,7 @@
 			buildConfigurations = (
 				DE0B0651137AF23A00B674C2 /* Debug */,
 				DE0B0652137AF23A00B674C2 /* Release */,
+				5A07BAD813D4B64F004FE23E /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
