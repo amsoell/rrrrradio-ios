@@ -50,6 +50,11 @@ typedef enum {
  *
  * For now only track keys are supported, but future versions will accept 
  * album and playlist keys or dictionary objects.
+ *
+ * To observe track changes, position changes, etc., use KVO. For example:
+ * \code
+ *  [player addObserver:self forKeyPath:@"currentTrack" options:NSKeyValueObservingOptionNew context:nil];
+ * \endcode
  */
 @interface RDPlayer : NSObject {
 @private
