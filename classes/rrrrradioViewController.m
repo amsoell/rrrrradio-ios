@@ -10,6 +10,8 @@
 #import <Rdio/Rdio.h>
 #import <YAJLiOS/YAJL.h>
 #import <MediaPlayer/MPVolumeView.h>
+#import <MediaPlayer/MPNowPlayingInfoCenter.h>
+#import <MediaPlayer/MPMediaItem.h>
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "rrrrradioAppDelegate.h"
@@ -75,6 +77,7 @@
             NSDictionary* currentTrack =  [_QUEUE getNext];
 
             [self playTrack:currentTrack];
+            [self refreshLockDisplay];            
             
             UIBarButtonItem *btnOld = [[volumeToolbar items] objectAtIndex:0];
             UIBarButtonItem *btnNew = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:btnOld.action];
@@ -182,6 +185,34 @@
     [UIView commitAnimations];
 }
 
+- (void)refreshLockDisplay {
+    MPNowPlayingInfoCenter *infoCenter = [MPNowPlayingInfoCenter defaultCenter];
+    
+    NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [[_QUEUE currentTrack] objectForKey:@"albumKey"]];
+    NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
+                                        stringByAppendingPathComponent:albumArtCachedName];
+    UIImage *image = nil;
+    if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
+        image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
+        NSLog(@"Pulling art from cache");
+    } else {
+        NSLog(@"Pulling art from web");
+        NSString *artUrl = [[_QUEUE currentTrack] objectForKey:@"bigIcon"];
+        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
+        // save it to disk
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+        [imageData writeToFile:albumArtCachedFullPath atomically:YES];
+    }
+      
+    MPMediaItemArtwork *coverArt = [[MPMediaItemArtwork alloc] initWithImage:image];        
+    infoCenter.nowPlayingInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 coverArt, MPMediaItemPropertyArtwork,
+                                 [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
+                                 [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist, nil];
+    [coverArt release];
+    NSLog(@"Lock Info Set");
+
+}
 
 // Tell the UITableView to refresh itself. Probably a better way to do this
 - (void)refreshQueueDisplay {
@@ -743,6 +774,7 @@
             NSDictionary* currentTrack = [_QUEUE getNext];
             [self playTrack:currentTrack];
             [self refreshQueueDisplay];
+            [self refreshLockDisplay];
             sleep(5);            
         } else {
             NSLog(@"Stopping. Skip is %d", skip);

@@ -38,6 +38,7 @@
 }
 
 - (void) playTrack:(NSDictionary *)trackData;
+- (void) refreshLockDisplay;
 - (void) refreshQueueDisplay;
 - (void) updateQueue;
 - (void) enableRequests;
