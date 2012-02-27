@@ -186,32 +186,33 @@
 }
 
 - (void)refreshLockDisplay {
-    MPNowPlayingInfoCenter *infoCenter = [MPNowPlayingInfoCenter defaultCenter];
-    
-    NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [[_QUEUE currentTrack] objectForKey:@"albumKey"]];
-    NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
-                                        stringByAppendingPathComponent:albumArtCachedName];
-    UIImage *image = nil;
-    if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
-        image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
-        NSLog(@"Pulling art from cache");
-    } else {
-        NSLog(@"Pulling art from web");
-        NSString *artUrl = [[_QUEUE currentTrack] objectForKey:@"bigIcon"];
-        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-        // save it to disk
-        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-        [imageData writeToFile:albumArtCachedFullPath atomically:YES];
-    }
-      
-    MPMediaItemArtwork *coverArt = [[MPMediaItemArtwork alloc] initWithImage:image];        
-    infoCenter.nowPlayingInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 coverArt, MPMediaItemPropertyArtwork,
-                                 [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
-                                 [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist, nil];
-    [coverArt release];
-    NSLog(@"Lock Info Set");
-
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                    
+        MPNowPlayingInfoCenter *infoCenter = [MPNowPlayingInfoCenter defaultCenter];
+        
+        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [[_QUEUE currentTrack] objectForKey:@"albumKey"]];
+        NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
+                                            stringByAppendingPathComponent:albumArtCachedName];
+        UIImage *image = nil;
+        if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
+            image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
+        } else {
+            NSString *artUrl = [[_QUEUE currentTrack] objectForKey:@"bigIcon"];
+            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
+            // save it to disk
+            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+            [imageData writeToFile:albumArtCachedFullPath atomically:YES];
+        }
+          
+        MPMediaItemArtwork *coverArt = [[MPMediaItemArtwork alloc] initWithImage:image];  
+        
+        infoCenter.nowPlayingInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
+                                     [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist, 
+                                     coverArt, MPMediaItemPropertyArtwork,                                 
+                                     nil];
+        [coverArt release];
+  NSLog(@"Lock Info Set");
+//    });
 }
 
 // Tell the UITableView to refresh itself. Probably a better way to do this
