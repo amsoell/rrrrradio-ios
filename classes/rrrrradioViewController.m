@@ -567,6 +567,27 @@
                 // If we're in the foreground, do a full reload of the tracks to play
                 NSLog(@"Reloading with a new batch");
                 [player playSources:[_QUEUE getTrackKeys]];
+            } else {
+                if (([player currentTrackIndex]+1) >= [[player trackKeys] count]) {
+                    // Playing last track in RDPlayers queue:
+                    //   schedule a local notification for 20 seconds from the end of the track
+                    NSLog(@"Scheduling notification %i seconds from now", ([[[_QUEUE currentTrack] objectForKey:@"duration"] integerValue] - 20));
+                    
+                    NSDate *alertTime = [[NSDate date] 
+                                         dateByAddingTimeInterval:([[[_QUEUE currentTrack] objectForKey:@"duration"] integerValue] - 20)];
+                    UIApplication* app = [UIApplication sharedApplication];
+                    UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
+                    if (notifyAlarm)
+                    {
+                        notifyAlarm.fireDate = alertTime;
+                        notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
+                        notifyAlarm.repeatInterval = 0;
+                        notifyAlarm.soundName = @"Glass.aiff";
+                        notifyAlarm.alertBody = @"rrrrradio needs to be reloaded";
+                        [app scheduleLocalNotification:notifyAlarm];
+                    }            
+                    [notifyAlarm autorelease];
+                }                
             }
             [self refreshQueueDisplay];
             [self refreshLockDisplay];     
@@ -1007,25 +1028,6 @@
 
 -(void)backgrounding {
     NSLog(@"Backgrounding");
-    RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];        
-    if ([player state] == RDPlayerStatePlaying) {
-        NSLog(@"Scheduling notification %d seconds from now", ([_QUEUE secondsToEnd] - 20));
-        NSDate *alertTime = [[NSDate date] 
-                             dateByAddingTimeInterval:([_QUEUE secondsToEnd] - 20)];
-        UIApplication* app = [UIApplication sharedApplication];
-        UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
-        if (notifyAlarm)
-        {
-            notifyAlarm.fireDate = alertTime;
-            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
-            notifyAlarm.repeatInterval = 0;
-            notifyAlarm.soundName = @"Glass.aiff";
-            notifyAlarm.alertBody = @"rrrrradio needs to be reloaded";
-            [app scheduleLocalNotification:notifyAlarm];
-        }            
-        [notifyAlarm autorelease];
-    }
-    
 /*    
     [queueLoader invalidate];
     queueLoader = nil;
