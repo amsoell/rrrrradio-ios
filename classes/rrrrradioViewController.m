@@ -61,6 +61,12 @@
     }
 }
 
+// Tell the RDPlayer object to start playing a bunch of tracks
+- (void) playTracks:(NSMutableArray *)trackData {
+    RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
+    [player playSources:trackData];
+}
+
 // Start the audio
 - (void)playStream {
     if (hostActive) {
@@ -72,11 +78,13 @@
             
             RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
             [player setDelegate:self];        
-            [player addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:nil];        
+            [player addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:nil];    
+            [player addObserver:self forKeyPath:@"currentTrack" options:NSKeyValueObservingOptionNew context:nil];
             
-            NSDictionary* currentTrack =  [_QUEUE getNext];
+//            NSDictionary* currentTrack = [_QUEUE getNext];
+            [_QUEUE getNext];            
 
-            [self playTrack:currentTrack];
+            [self playTracks:[_QUEUE getTrackKeys]];
             [self refreshLockDisplay];            
             
             UIBarButtonItem *btnOld = [[volumeToolbar items] objectAtIndex:0];
@@ -104,7 +112,7 @@
 }
 
 // Stop the audio playback and reset the system back to infant state
-- (void)stopStream {
+- (void)stopStream {   
     RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
     
     skip = [player position];
@@ -193,24 +201,30 @@
         NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
                                             stringByAppendingPathComponent:albumArtCachedName];
         UIImage *image = nil;
+        NSMutableDictionary* nowPlayingInfo = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                               [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
+                                               [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist,
+                                               nil];
+    
         if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
-            image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
+            MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageWithContentsOfFile:albumArtCachedFullPath]];            
+            [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
+            [coverart autorelease];
         } else {
             NSString *artUrl = [[_QUEUE currentTrack] objectForKey:@"bigIcon"];
             image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
+            MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:image];
+            [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
+            [coverart autorelease];
+            
             // save it to disk
             NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
             [imageData writeToFile:albumArtCachedFullPath atomically:YES];
         }
-          
-        MPMediaItemArtwork *coverArt = [[MPMediaItemArtwork alloc] initWithImage:image];  
         
-        infoCenter.nowPlayingInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
-                                     [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist, 
-                                     coverArt, MPMediaItemPropertyArtwork,                                 
-                                     nil];
-        [coverArt release];
+        infoCenter.nowPlayingInfo = nowPlayingInfo;
+        [nowPlayingInfo autorelease];
+
   NSLog(@"Lock Info Set");
 //    });
 }
@@ -539,6 +553,24 @@
             
             [progress setFrame:frame];
         }
+        
+    } else if([keyPath isEqualToString:@"currentTrack"]) {
+        RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];    
+        
+        NSLog(@"Playing next track in batch: %@ ", [player currentTrack]);
+        if (([player state] == RDPlayerStatePlaying) && 
+            (! [[player currentTrack] isEqualToString:[[_QUEUE currentTrack] objectForKey:@"key"]]) &&
+            (skip<0)) {
+            [_QUEUE syncToTrack:[player currentTrack]];
+            
+            if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {   
+                // If we're in the foreground, do a full reload of the tracks to play
+                NSLog(@"Reloading with a new batch");
+                [player playSources:[_QUEUE getTrackKeys]];
+            }
+            [self refreshQueueDisplay];
+            [self refreshLockDisplay];     
+        }
     }
 
 }
@@ -757,8 +789,15 @@
     if (newState == 2) {
         NSLog(@"Play State");
         // Enter a playing state
+        if ((oldState!=2) && (skip>0)) {
+            RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];            
+            NSLog(@"Picking up at %d", skip);
+            sleep(1);
+            [player seekToPosition:skip];
+            skip = -1;
+        }
     } else if (newState == 3) {
-        NSLog(@"Play State");        
+        NSLog(@"Stopped State");        
         // Enter a stopped state
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
             NSLog(@"We're in the background, clean stuff up");
@@ -772,11 +811,10 @@
         } else 
         if (skip < 0) {
             NSLog(@"New Track!");
-            NSDictionary* currentTrack = [_QUEUE getNext];
-            [self playTrack:currentTrack];
+            [_QUEUE getNext];
+            [self playTracks:[_QUEUE getTrackKeys]];
             [self refreshQueueDisplay];
             [self refreshLockDisplay];
-            sleep(5);            
         } else {
             NSLog(@"Stopping. Skip is %d", skip);
         }
@@ -969,6 +1007,25 @@
 
 -(void)backgrounding {
     NSLog(@"Backgrounding");
+    RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];        
+    if ([player state] == RDPlayerStatePlaying) {
+        NSLog(@"Scheduling notification %d seconds from now", ([_QUEUE secondsToEnd] - 20));
+        NSDate *alertTime = [[NSDate date] 
+                             dateByAddingTimeInterval:([_QUEUE secondsToEnd] - 20)];
+        UIApplication* app = [UIApplication sharedApplication];
+        UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
+        if (notifyAlarm)
+        {
+            notifyAlarm.fireDate = alertTime;
+            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
+            notifyAlarm.repeatInterval = 0;
+            notifyAlarm.soundName = @"Glass.aiff";
+            notifyAlarm.alertBody = @"rrrrradio needs to be reloaded";
+            [app scheduleLocalNotification:notifyAlarm];
+        }            
+        [notifyAlarm autorelease];
+    }
+    
 /*    
     [queueLoader invalidate];
     queueLoader = nil;
@@ -978,10 +1035,14 @@
 -(void)foregrounding {
     NSLog(@"We're back!");
     
+    // Cancel any local notifications
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];    
+    
     if (internetActive && hostActive) {
         RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];    
         if (player.state != RDPlayerStatePlaying) {
             NSLog(@"Initializing: Reset");
+            [self stopStream];
             [self reset];
         } else {
             NSLog(@"Initializing: UpdateQueue");            

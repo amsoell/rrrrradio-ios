@@ -18,6 +18,7 @@
 -(void) lock:(NSString*)lockedBy;
 -(void) unlock;
 -(NSMutableDictionary*) getNext;
+-(NSMutableArray*) getTrackKeys;
 -(void) cancelPlayback;
 -(NSMutableDictionary*) currentTrack;
 -(NSMutableDictionary*) trackAt:(int)index;
@@ -26,6 +27,8 @@
 -(id) initWithTrackData:(NSArray*)trackData;
 -(int) length;
 -(void) updateQueue:(NSArray*)trackData;
+-(int) secondsToEnd;
+-(void) syncToTrack:(NSString *)key;
 -(void) prune:(int) allTracks;
 
 @property (retain) NSMutableArray *q;

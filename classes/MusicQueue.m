@@ -6,8 +6,9 @@
 //  Copyright 2011 The Institute for Justice. All rights reserved.
 //
 
+#import <Rdio/Rdio.h>
+#import "rrrrradioAppDelegate.h"
 #import "MusicQueue.h"
-
 
 @implementation MusicQueue
 @synthesize q;
@@ -38,6 +39,39 @@
     [self prune:ptr];
 
     return [self currentTrack];
+}
+
+- (NSMutableArray*) getTrackKeys {
+    NSMutableArray* keys;
+    keys = [[NSMutableArray alloc] init];
+    
+    for (int i=ptr; i<[q count]; i++) {
+        [keys addObject:[[q objectAtIndex:i] objectForKey:@"key"]];
+    }
+    
+    [keys autorelease];
+    return keys;
+}
+
+- (void) syncToTrack:(NSString *)key {
+    for (int i=ptr; i<[q count];i++) {
+        if ([[[q objectAtIndex:i] objectForKey:@"key"] isEqualToString:key]) {
+            ptr = i;
+        }
+    }
+    
+    [self prune:ptr];
+}
+
+- (int) secondsToEnd {
+    RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];            
+    int seconds = 0;
+    
+    for (int i=ptr; i<[q count]; i++) {
+        seconds += [[[q objectAtIndex:i] objectForKey:@"duration"] integerValue];
+    }
+
+    return seconds - (int)player.position;
 }
 
 - (void) prune:(int) max {
