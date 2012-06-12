@@ -26,6 +26,11 @@
 		DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2CAB3C139FF9C000D74C59 /* ListenerController.m */; };
 		DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */; };
 		DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE2F044B15879E1200BF2187 /* Settings.bundle */; };
+		DE2F044E1587BD4B00BF2187 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F044D1587BD4B00BF2187 /* YAJLiOS.framework */; };
+		DE2F04561587BE2E00BF2187 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F04521587BE2E00BF2187 /* libTestFlight.a */; };
+		DE2F04571587BE2F00BF2187 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE2F04531587BE2E00BF2187 /* README.txt */; };
+		DE2F04581587BE2F00BF2187 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE2F04541587BE2E00BF2187 /* release_notes.txt */; };
+		DE2F045A1587BE8800BF2187 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F04591587BE8800BF2187 /* libz.dylib */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
@@ -88,6 +93,12 @@
 		DE2CAB3C139FF9C000D74C59 /* ListenerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenerController.m; sourceTree = "<group>"; };
 		DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPadBg.jpg; sourceTree = "<group>"; };
 		DE2F044B15879E1200BF2187 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		DE2F044D1587BD4B00BF2187 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = contrib/YAJLiOS.framework; sourceTree = SOURCE_ROOT; };
+		DE2F04521587BE2E00BF2187 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		DE2F04531587BE2E00BF2187 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		DE2F04541587BE2E00BF2187 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		DE2F04551587BE2E00BF2187 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		DE2F04591587BE8800BF2187 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
 		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
@@ -127,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE2F045A1587BE8800BF2187 /* libz.dylib in Frameworks */,
 				DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */,
 				DE7D104C13813F7100FDA0A5 /* MediaPlayer.framework in Frameworks */,
 				DE0B065A137AF28400B674C2 /* Security.framework in Frameworks */,
@@ -137,6 +149,8 @@
 				DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */,
 				DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */,
 				DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */,
+				DE2F044E1587BD4B00BF2187 /* YAJLiOS.framework in Frameworks */,
+				DE2F04561587BE2E00BF2187 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +160,7 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
+				DE2F04591587BE8800BF2187 /* libz.dylib */,
 				DE2F044B15879E1200BF2187 /* Settings.bundle */,
 				5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */,
 				5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */,
@@ -170,6 +185,18 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				DE2F04521587BE2E00BF2187 /* libTestFlight.a */,
+				DE2F04531587BE2E00BF2187 /* README.txt */,
+				DE2F04541587BE2E00BF2187 /* release_notes.txt */,
+				DE2F04551587BE2E00BF2187 /* TestFlight.h */,
+			);
+			name = TestFlightSDK1.0;
+			path = contrib/TestFlightSDK1.0;
+			sourceTree = SOURCE_ROOT;
 		};
 		DEC86012138F2DE600D2FF30 /* iPhone */ = {
 			isa = PBXGroup;
@@ -240,6 +267,8 @@
 		DEE95AD5138C1D6F00FDFF15 /* contrib */ = {
 			isa = PBXGroup;
 			children = (
+				DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */,
+				DE2F044D1587BD4B00BF2187 /* YAJLiOS.framework */,
 				DEF5053E138B02450004847E /* AVFoundation.framework */,
 				DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */,
 				DE0B0665137AF35E00B674C2 /* Rdio.framework */,
@@ -327,6 +356,8 @@
 				5A4942C713D4AC330085B0DC /* Default-Portrait~ipad.png in Resources */,
 				5A4942C913D4AC390085B0DC /* Default-Landscape~ipad.png in Resources */,
 				DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */,
+				DE2F04571587BE2F00BF2187 /* README.txt in Resources */,
+				DE2F04581587BE2F00BF2187 /* release_notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +411,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib\"",
@@ -390,6 +421,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
+				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C62F342B-9FE4-4F6A-91C2-2744C2188FD4";
@@ -460,6 +495,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
+				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				PROVISIONING_PROFILE = "15AA940B-7993-492E-9A32-E16718288179";
@@ -475,7 +514,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib\"",
@@ -485,6 +524,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
+				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				PROVISIONING_PROFILE = "2190E4D7-FDCC-441B-91FE-75148C0778E0";

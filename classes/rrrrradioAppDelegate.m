@@ -25,6 +25,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"47b88feaa535ee288e2e5133f6e87a4d_MjQyMDkyMDEyLTA1LTA4IDE0OjEzOjUzLjcyNTI0OA"];
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {    
         NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]];
 
