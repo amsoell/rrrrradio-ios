@@ -26,18 +26,19 @@
 		DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2CAB3C139FF9C000D74C59 /* ListenerController.m */; };
 		DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */; };
 		DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE2F044B15879E1200BF2187 /* Settings.bundle */; };
-		DE2F044E1587BD4B00BF2187 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F044D1587BD4B00BF2187 /* YAJLiOS.framework */; };
 		DE2F04561587BE2E00BF2187 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F04521587BE2E00BF2187 /* libTestFlight.a */; };
 		DE2F04571587BE2F00BF2187 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE2F04531587BE2E00BF2187 /* README.txt */; };
 		DE2F04581587BE2F00BF2187 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE2F04541587BE2E00BF2187 /* release_notes.txt */; };
 		DE2F045A1587BE8800BF2187 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F04591587BE8800BF2187 /* libz.dylib */; };
+		DE2F045C1587CEB000BF2187 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F045B1587CEB000BF2187 /* Default.png */; };
+		DE2F045E1587D0EA00BF2187 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F045D1587D0EA00BF2187 /* Default@2x.png */; };
+		DE2F04601587D6F800BF2187 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F045F1587D6F800BF2187 /* Default-Portrait@2x~ipad.png */; };
+		DE2F04621587D95600BF2187 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F04611587D95600BF2187 /* Default-Landscape@2x~ipad.png */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
 		DE6ED95F137DDEA700282BB8 /* trackbg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED956137DDEA600282BB8 /* trackbg.png */; };
 		DE6ED960137DDEA700282BB8 /* UITableViewCell-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED957137DDEA600282BB8 /* UITableViewCell-bg.jpg */; };
-		DE6ED962137DDF8700282BB8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED961137DDF8700282BB8 /* Default.png */; };
-		DE6ED964137DDF9400282BB8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED963137DDF9400282BB8 /* Default@2x.png */; };
 		DE7D103813800E0800FDA0A5 /* NowPlayingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */; };
 		DE7D103A13800E2500FDA0A5 /* NowPlayingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */; };
 		DE7D104C13813F7100FDA0A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */; };
@@ -51,8 +52,6 @@
 		DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF505331389EDD80004847E /* CollectionBrowser.xib */; };
 		DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF5053E138B02450004847E /* AVFoundation.framework */; };
 		DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */; };
-		DEFFCAA813998A6B007DF447 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA513998A6B007DF447 /* Default-Landscape.png */; };
-		DEFFCAA913998A6B007DF447 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCAA613998A6B007DF447 /* Default-Portrait.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -93,12 +92,15 @@
 		DE2CAB3C139FF9C000D74C59 /* ListenerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenerController.m; sourceTree = "<group>"; };
 		DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPadBg.jpg; sourceTree = "<group>"; };
 		DE2F044B15879E1200BF2187 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		DE2F044D1587BD4B00BF2187 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = contrib/YAJLiOS.framework; sourceTree = SOURCE_ROOT; };
 		DE2F04521587BE2E00BF2187 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		DE2F04531587BE2E00BF2187 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		DE2F04541587BE2E00BF2187 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
 		DE2F04551587BE2E00BF2187 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		DE2F04591587BE8800BF2187 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		DE2F045B1587CEB000BF2187 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DE2F045D1587D0EA00BF2187 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DE2F045F1587D6F800BF2187 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		DE2F04611587D95600BF2187 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
 		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
@@ -106,8 +108,6 @@
 		DE6ED954137DDEA600282BB8 /* MusicQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicQueue.m; sourceTree = "<group>"; };
 		DE6ED956137DDEA600282BB8 /* trackbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trackbg.png; sourceTree = "<group>"; };
 		DE6ED957137DDEA600282BB8 /* UITableViewCell-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "UITableViewCell-bg.jpg"; sourceTree = "<group>"; };
-		DE6ED961137DDF8700282BB8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		DE6ED963137DDF9400282BB8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DE7D103613800E0800FDA0A5 /* NowPlayingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingCell.h; sourceTree = "<group>"; };
 		DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingCell.m; sourceTree = "<group>"; };
 		DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowPlayingCell.xib; sourceTree = "<group>"; };
@@ -128,8 +128,6 @@
 		DEF5053C138AEF110004847E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DEF5053E138B02450004847E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonAdd.png; sourceTree = "<group>"; };
-		DEFFCAA513998A6B007DF447 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
-		DEFFCAA613998A6B007DF447 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		DEFFCAA713998A6B007DF447 /* Icon-Ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Ipad.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,7 +147,6 @@
 				DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */,
 				DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */,
 				DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */,
-				DE2F044E1587BD4B00BF2187 /* YAJLiOS.framework in Frameworks */,
 				DE2F04561587BE2E00BF2187 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,6 +157,10 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
+				DE2F04611587D95600BF2187 /* Default-Landscape@2x~ipad.png */,
+				DE2F045F1587D6F800BF2187 /* Default-Portrait@2x~ipad.png */,
+				DE2F045D1587D0EA00BF2187 /* Default@2x.png */,
+				DE2F045B1587CEB000BF2187 /* Default.png */,
 				DE2F04591587BE8800BF2187 /* libz.dylib */,
 				DE2F044B15879E1200BF2187 /* Settings.bundle */,
 				5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */,
@@ -242,14 +243,10 @@
 			isa = PBXGroup;
 			children = (
 				DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */,
-				DEFFCAA513998A6B007DF447 /* Default-Landscape.png */,
-				DEFFCAA613998A6B007DF447 /* Default-Portrait.png */,
 				DEFFCAA713998A6B007DF447 /* Icon-Ipad.png */,
 				DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */,
 				DEF5053C138AEF110004847E /* Icon.png */,
 				DEF5053A138AEF080004847E /* Icon@2x.png */,
-				DE6ED963137DDF9400282BB8 /* Default@2x.png */,
-				DE6ED961137DDF8700282BB8 /* Default.png */,
 				DE6ED956137DDEA600282BB8 /* trackbg.png */,
 				DE6ED957137DDEA600282BB8 /* UITableViewCell-bg.jpg */,
 			);
@@ -268,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */,
-				DE2F044D1587BD4B00BF2187 /* YAJLiOS.framework */,
 				DEF5053E138B02450004847E /* AVFoundation.framework */,
 				DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */,
 				DE0B0665137AF35E00B674C2 /* Rdio.framework */,
@@ -338,16 +334,12 @@
 			files = (
 				DE6ED95F137DDEA700282BB8 /* trackbg.png in Resources */,
 				DE6ED960137DDEA700282BB8 /* UITableViewCell-bg.jpg in Resources */,
-				DE6ED962137DDF8700282BB8 /* Default.png in Resources */,
-				DE6ED964137DDF9400282BB8 /* Default@2x.png in Resources */,
 				DE7D103A13800E2500FDA0A5 /* NowPlayingCell.xib in Resources */,
 				DEE413031383FD0F000AA02C /* UpcomingCell.xib in Resources */,
 				DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */,
 				DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */,
 				DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */,
 				DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */,
-				DEFFCAA813998A6B007DF447 /* Default-Landscape.png in Resources */,
-				DEFFCAA913998A6B007DF447 /* Default-Portrait.png in Resources */,
 				DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */,
 				DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */,
 				5A4942C113D4AC0A0085B0DC /* Icon.png in Resources */,
@@ -358,6 +350,10 @@
 				DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */,
 				DE2F04571587BE2F00BF2187 /* README.txt in Resources */,
 				DE2F04581587BE2F00BF2187 /* release_notes.txt in Resources */,
+				DE2F045C1587CEB000BF2187 /* Default.png in Resources */,
+				DE2F045E1587D0EA00BF2187 /* Default@2x.png in Resources */,
+				DE2F04601587D6F800BF2187 /* Default-Portrait@2x~ipad.png in Resources */,
+				DE2F04621587D95600BF2187 /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
