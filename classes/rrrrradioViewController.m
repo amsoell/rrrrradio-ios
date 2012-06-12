@@ -49,17 +49,6 @@
 #pragma mark -
 #pragma mark Audio interaction methods
 
-// Tell the RDPlayer object to start playing a specific track
-//- (void) playTrack:(NSDictionary *)trackData {
-//    RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
-//    [player playSource:[trackData objectForKey:@"key"]];  
-//    if (skip>0) {
-//        NSLog(@"Picking up at %d", skip);
-//        sleep(1);
-//        [player seekToPosition:skip];    
-//        skip = -1;
-//    }
-//}
 
 // Tell the RDPlayer object to start playing a bunch of tracks
 - (void) playTracks:(NSMutableArray *)trackData {
@@ -586,9 +575,16 @@
             });
         }
         
-        if ([player state] == RDPlayerStatePlaying) {        
-            NSLog(@"running RDPlayer:updateQueue:%@ withCurrentTrackAtIndex:%i", [_QUEUE getTrackKeys], [_QUEUE ptr]);
-            [player updateQueue:[_QUEUE getTrackKeys] withCurrentTrackIndex:[_QUEUE ptr]];
+        if ([player state] == RDPlayerStatePlaying) { 
+            NSArray* queue = [_QUEUE getTrackKeys];
+            int ctrkindex = [queue indexOfObject:[player currentTrack]];
+            
+            NSLog(@"running RDPlayer:updateQueue:%@ withCurrentTrackAtIndex:%i", queue, ctrkindex);
+            if (ctrkindex>=0) {
+                [player updateQueue:[_QUEUE getTrackKeys] withCurrentTrackIndex:ctrkindex];
+            } else {
+                NSLog(@"COULD NOT FIND INDEX");
+            }
         }
     });
 }
@@ -1004,7 +1000,18 @@
 -(void)foregrounding {
     NSLog(@"We're back!");
     
-    // Cancel any local notifications
+    [[NSUserDefaults standardUserDefaults] synchronize];            
+    NSLog(@"Setting value: %@", [[NSUserDefaults standardUserDefaults] stringForKey:@"logout"]);
+    
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"logout"] isEqualToString:@"1"]) {
+        NSLog(@"Resetting user account");
+        // logout active account
+        [[rrrrradioAppDelegate rdioInstance] logout];
+        
+        // reset logout flag to 0
+        [[NSUserDefaults standardUserDefaults] setBool:0 forKey:@"logout"];
+        [[NSUserDefaults standardUserDefaults] synchronize];        
+    }
     if (internetActive && hostActive) {
         RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];    
         if (player.state != RDPlayerStatePlaying) {

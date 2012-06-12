@@ -25,6 +25,7 @@
 		DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0665137AF35E00B674C2 /* Rdio.framework */; };
 		DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2CAB3C139FF9C000D74C59 /* ListenerController.m */; };
 		DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */; };
+		DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE2F044B15879E1200BF2187 /* Settings.bundle */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
@@ -86,6 +87,7 @@
 		DE2CAB3B139FF9C000D74C59 /* ListenerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenerController.h; sourceTree = "<group>"; };
 		DE2CAB3C139FF9C000D74C59 /* ListenerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenerController.m; sourceTree = "<group>"; };
 		DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPadBg.jpg; sourceTree = "<group>"; };
+		DE2F044B15879E1200BF2187 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
 		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
+				DE2F044B15879E1200BF2187 /* Settings.bundle */,
 				5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */,
 				5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */,
 				5A4942C413D4AC210085B0DC /* Icon-Ipad.png */,
@@ -323,6 +326,7 @@
 				5A4942C513D4AC210085B0DC /* Icon-Ipad.png in Resources */,
 				5A4942C713D4AC330085B0DC /* Default-Portrait~ipad.png in Resources */,
 				5A4942C913D4AC390085B0DC /* Default-Landscape~ipad.png in Resources */,
+				DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
