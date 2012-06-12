@@ -22,7 +22,6 @@
 		DE0B0656137AF27600B674C2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0655137AF27600B674C2 /* SystemConfiguration.framework */; };
 		DE0B0658137AF27D00B674C2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0657137AF27D00B674C2 /* AudioToolbox.framework */; };
 		DE0B065A137AF28400B674C2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0659137AF28400B674C2 /* Security.framework */; };
-		DE0B065C137AF2D000B674C2 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */; };
 		DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0665137AF35E00B674C2 /* Rdio.framework */; };
 		DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2CAB3C139FF9C000D74C59 /* ListenerController.m */; };
 		DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */; };
@@ -83,7 +82,6 @@
 		DE0B0655137AF27600B674C2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DE0B0657137AF27D00B674C2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DE0B0659137AF28400B674C2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = contrib/YAJLiOS.framework; sourceTree = SOURCE_ROOT; };
 		DE0B0665137AF35E00B674C2 /* Rdio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rdio.framework; path = contrib/Rdio.framework; sourceTree = SOURCE_ROOT; };
 		DE2CAB3B139FF9C000D74C59 /* ListenerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenerController.h; sourceTree = "<group>"; };
 		DE2CAB3C139FF9C000D74C59 /* ListenerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenerController.m; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 				DE0B0634137AF23A00B674C2 /* UIKit.framework in Frameworks */,
 				DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */,
 				DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */,
-				DE0B065C137AF2D000B674C2 /* YAJLiOS.framework in Frameworks */,
 				DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,7 +240,6 @@
 				DEF5053E138B02450004847E /* AVFoundation.framework */,
 				DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */,
 				DE0B0665137AF35E00B674C2 /* Rdio.framework */,
-				DE0B065B137AF2CF00B674C2 /* YAJLiOS.framework */,
 				DE0B0659137AF28400B674C2 /* Security.framework */,
 				DE0B0657137AF27D00B674C2 /* AudioToolbox.framework */,
 				DE0B0655137AF27600B674C2 /* SystemConfiguration.framework */,
@@ -283,7 +279,7 @@
 		DE0B0626137AF23A00B674C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = rrrrradio;
 			};
 			buildConfigurationList = DE0B0629137AF23A00B674C2 /* Build configuration list for PBXProject "rrrrradio" */;
@@ -364,7 +360,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -387,8 +383,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C62F342B-9FE4-4F6A-91C2-2744C2188FD4";
@@ -411,7 +408,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -431,7 +428,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -455,8 +452,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -477,8 +475,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2190E4D7-FDCC-441B-91FE-75148C0778E0";

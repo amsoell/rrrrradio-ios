@@ -37,7 +37,6 @@
     NetworkStatus networkSpeed; 
 }
 
-- (void) playTrack:(NSDictionary *)trackData;
 - (void) refreshLockDisplay;
 - (void) refreshQueueDisplay;
 - (void) updateQueue;

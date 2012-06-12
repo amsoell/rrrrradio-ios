@@ -50,16 +50,16 @@
 #pragma mark Audio interaction methods
 
 // Tell the RDPlayer object to start playing a specific track
-- (void) playTrack:(NSDictionary *)trackData {
-    RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
-    [player playSource:[trackData objectForKey:@"key"]];  
-    if (skip>0) {
-        NSLog(@"Picking up at %d", skip);
-        sleep(1);
-        [player seekToPosition:skip];    
-        skip = -1;
-    }
-}
+//- (void) playTrack:(NSDictionary *)trackData {
+//    RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
+//    [player playSource:[trackData objectForKey:@"key"]];  
+//    if (skip>0) {
+//        NSLog(@"Picking up at %d", skip);
+//        sleep(1);
+//        [player seekToPosition:skip];    
+//        skip = -1;
+//    }
+//}
 
 // Tell the RDPlayer object to start playing a bunch of tracks
 - (void) playTracks:(NSMutableArray *)trackData {
@@ -81,10 +81,11 @@
             [player addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:nil];    
             [player addObserver:self forKeyPath:@"currentTrack" options:NSKeyValueObservingOptionNew context:nil];
             
-//            NSDictionary* currentTrack = [_QUEUE getNext];
-            [_QUEUE getNext];            
-
-            [self playTracks:[_QUEUE getTrackKeys]];
+            [player addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:nil];        
+            [player addObserver:self forKeyPath:@"currentTrack" options:NSKeyValueObservingOptionNew context:nil];
+            
+            [_QUEUE getNext]; // increment the pointer
+            [player playSources:[_QUEUE getTrackKeys]];
             [self refreshLockDisplay];            
             
             UIBarButtonItem *btnOld = [[volumeToolbar items] objectAtIndex:0];
@@ -554,46 +555,7 @@
             [progress setFrame:frame];
         }
         
-    } else if([keyPath isEqualToString:@"currentTrack"]) {
-        RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];    
-        
-        NSLog(@"Playing next track in batch: %@ ", [player currentTrack]);
-        if (([player state] == RDPlayerStatePlaying) && 
-            (! [[player currentTrack] isEqualToString:[[_QUEUE currentTrack] objectForKey:@"key"]]) &&
-            (skip<0)) {
-            [_QUEUE syncToTrack:[player currentTrack]];
-            
-            if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {   
-                // If we're in the foreground, do a full reload of the tracks to play
-                NSLog(@"Reloading with a new batch");
-                [player playSources:[_QUEUE getTrackKeys]];
-            } else {
-                if (([player currentTrackIndex]+1) >= [[player trackKeys] count]) {
-                    // Playing last track in RDPlayers queue:
-                    //   schedule a local notification for 20 seconds from the end of the track
-                    NSLog(@"Scheduling notification %i seconds from now", ([[[_QUEUE currentTrack] objectForKey:@"duration"] integerValue] - 20));
-                    
-                    NSDate *alertTime = [[NSDate date] 
-                                         dateByAddingTimeInterval:([[[_QUEUE currentTrack] objectForKey:@"duration"] integerValue] - 20)];
-                    UIApplication* app = [UIApplication sharedApplication];
-                    UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
-                    if (notifyAlarm)
-                    {
-                        notifyAlarm.fireDate = alertTime;
-                        notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
-                        notifyAlarm.repeatInterval = 0;
-                        notifyAlarm.soundName = @"Glass.aiff";
-                        notifyAlarm.alertBody = @"rrrrradio needs to be reloaded";
-                        [app scheduleLocalNotification:notifyAlarm];
-                    }            
-                    [notifyAlarm autorelease];
-                }                
-            }
-            [self refreshQueueDisplay];
-            [self refreshLockDisplay];     
-        }
-    }
-
+    }    
 }
 
 // Get the queue from the web and update the internal queue
@@ -622,6 +584,11 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self refreshQueueDisplay];
             });
+        }
+        
+        if ([player state] == RDPlayerStatePlaying) {        
+            NSLog(@"running RDPlayer:updateQueue:%@ withCurrentTrackAtIndex:%i", [_QUEUE getTrackKeys], [_QUEUE ptr]);
+            [player updateQueue:[_QUEUE getTrackKeys] withCurrentTrackIndex:[_QUEUE ptr]];
         }
     });
 }
@@ -809,6 +776,12 @@
 - (void)rdioPlayerChangedFromState:(RDPlayerState)oldState toState:(RDPlayerState)newState {
     if (newState == 2) {
         NSLog(@"Play State");
+        if (oldState == 2) {
+            NSLog(@"...new track!");
+            [_QUEUE getNext];
+            [self refreshQueueDisplay]; 
+            [self refreshLockDisplay];               
+        }
         // Enter a playing state
         if ((oldState!=2) && (skip>0)) {
             RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];            
@@ -831,9 +804,9 @@
             }            
         } else 
         if (skip < 0) {
-            NSLog(@"New Track!");
-            [_QUEUE getNext];
-            [self playTracks:[_QUEUE getTrackKeys]];
+            NSLog(@"New Track! (this code shouldn't ever fire)");
+//            NSDictionary* currentTrack = [_QUEUE getNext];
+//            [self playTrack:currentTrack];
             [self refreshQueueDisplay];
             [self refreshLockDisplay];
         } else {
@@ -858,6 +831,7 @@
 {
     RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];
     [player removeObserver:self forKeyPath:@"position"];
+    [player removeObserver:self forKeyPath:@"currentTrack"];    
     [player stop];
     
     [super dealloc];
@@ -920,10 +894,6 @@
 - (void)viewDidLoad
 {
     // Let me know when the app goes foreground/background
-/*    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backgrounding:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foregrounding:) name:UIApplicationDidBecomeActiveNotification object: nil];
-*/    
     // Add volume slider
     MPVolumeView *volumeView = [[[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)] autorelease];
     [volumeView setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+35, 22)];
@@ -1028,18 +998,13 @@
 
 -(void)backgrounding {
     NSLog(@"Backgrounding");
-/*    
-    [queueLoader invalidate];
-    queueLoader = nil;
-*/ 
+
 }
 
 -(void)foregrounding {
     NSLog(@"We're back!");
     
     // Cancel any local notifications
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];    
-    
     if (internetActive && hostActive) {
         RDPlayer* player = [[rrrrradioAppDelegate rdioInstance] player];    
         if (player.state != RDPlayerStatePlaying) {

@@ -41,14 +41,13 @@
     return [self currentTrack];
 }
 
-- (NSMutableArray*) getTrackKeys {
+- (NSMutableArray*) getTrackKeys {    
     NSMutableArray* keys;
+
     keys = [[NSMutableArray alloc] init];
-    
     for (int i=ptr; i<[q count]; i++) {
         [keys addObject:[[q objectAtIndex:i] objectForKey:@"key"]];
     }
-    
     [keys autorelease];
     return keys;
 }

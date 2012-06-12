@@ -18,7 +18,7 @@
     NSString* accessToken = [[Settings settings] accessToken];
     NSError* lookupError = nil;
     NSURL *reqURL = [[NSURL alloc] initWithString:[[NSString stringWithFormat:@"http://rrrrradio.com/%@&userKey=%@&client=ios&version=%@&%@", command, userKey, version, accessToken] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//    NSLog(@"Data Interface Request: %@", [reqURL absoluteURL]);
+    NSLog(@"Data Interface Request: %@", [reqURL absoluteURL]);
     NSString *reqData = [[NSString alloc] initWithContentsOfURL:reqURL encoding:NSUTF8StringEncoding error:&lookupError];
     
     [reqURL release];
