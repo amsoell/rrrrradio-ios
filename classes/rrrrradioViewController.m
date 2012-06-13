@@ -860,6 +860,12 @@
 
 - (void)rdioDidAuthorizeUser:(NSDictionary *)user withAccessToken:(NSString *)accessToken {
     NSLog(@"user info: %@", user);    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   [user valueForKey:@"key"], @"keys", 
+                                   @"isUnlimited", @"extras", 
+                                   nil];
+
+    [[rrrrradioAppDelegate rdioInstance] callAPIMethod:@"get" withParameters:params delegate:self];    
         
     [[Settings settings] setUser:[NSString stringWithFormat:@"%@ %@", [user valueForKey:@"firstName"], [user valueForKey:@"lastName"]]];
     [[Settings settings] setAccessToken:accessToken];
@@ -879,9 +885,29 @@
  * to see what method has returned.
  */
 - (void)rdioRequest:(RDAPIRequest *)request didLoadData:(id)data {
+    NSLog(@"Returned data: %@", data);
     NSString *method = [request.parameters objectForKey:@"method"];
     if([method isEqualToString:@"get"]) {
-        NSLog(@"isUnlimited: %@", [data objectForKey:@"isUnlimited"]);
+        if ([data objectForKey:[[Settings settings] userKey]]!=nil) {
+            // Returned data to see if logged in user has Unlimited account
+            if ([[[data objectForKey:[[Settings settings] userKey]] objectForKey:@"isUnlimited"] integerValue] == 0 ) {
+                TFLog(@"Authenticated user doesn't have Unlimited account");
+                // logout active account
+                [[rrrrradioAppDelegate rdioInstance] logout];                
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unlimited account required" 
+                                                                      message:@"rrrrradio requires an Rdio Unlimited account." 
+                                                                     delegate:nil 
+                                                            cancelButtonTitle:@"OK" 
+                                                            otherButtonTitles:nil];
+                [alert show];                
+                [alert release];
+            } else {
+                TFLog(@"Unlimited account verified");
+            }
+        } else {
+            NSLog(@"some other api result came in");
+        }
         // we are returned a dictionary but it will be easier to work with an array
         // for our needs
 //        [albums release];
