@@ -8,8 +8,10 @@
 
 #import "CollectionBrowser.h"
 #import "DataInterface.h"
+#import "rrrrradioAppDelegate.h"
 #import <YAJLiOS/YAJL.h>
 #import <dispatch/dispatch.h>
+#import "Settings.h"
 
 @implementation CollectionBrowser
 @synthesize dataSource;
@@ -140,16 +142,27 @@
     NSLog(@"Item::%@", item);
     
     if ([[item valueForKey:@"type"] isEqualToString:@"tl"] || [[item valueForKey:@"type"] isEqualToString:@"t"]) {
-        // Track selected: Queue it up
-        NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
-        [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
-        [owner updateQueue];
-        
-        [cell setAccessoryView:nil];
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {            
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        } else {
-            [self dismissModalViewControllerAnimated:YES];
+        NSLog(@"Settings: %@", [Settings settings]);
+        if ([[Settings settings] accessToken]!=nil) {
+            // Track selected: Queue it up
+            [TestFlight passCheckpoint:@"Track Requested"];
+            
+            NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
+            [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
+            [owner updateQueue];
+            
+            [cell setAccessoryView:nil];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {            
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            } else {
+                [self dismissModalViewControllerAnimated:YES];
+            }
+        } else {            
+            // Turn off spinner and ask user to login
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            [cell setAccessoryView:nil];
+            
+            [[rrrrradioAppDelegate rdioInstance] authorizeFromController:self];            
         }
     } else {
         // Artist or album selected

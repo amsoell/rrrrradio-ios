@@ -516,10 +516,12 @@
     RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
     
         if (buttonIndex==0) {
+            [TestFlight passCheckpoint:@"Track loved"];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                     [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=1",[player currentTrack]]];
             });
         } else if (buttonIndex==1) {
+            [TestFlight passCheckpoint:@"Track hated"];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                 [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=-1",[player currentTrack]]];
             });
@@ -864,7 +866,7 @@
                                    [user valueForKey:@"key"], @"keys", 
                                    @"isUnlimited", @"extras", 
                                    nil];
-
+    [TestFlight passCheckpoint:@"Authenticated"];
     [[rrrrradioAppDelegate rdioInstance] callAPIMethod:@"get" withParameters:params delegate:self];    
         
     [[Settings settings] setUser:[NSString stringWithFormat:@"%@ %@", [user valueForKey:@"firstName"], [user valueForKey:@"lastName"]]];
@@ -874,6 +876,14 @@
     [[Settings settings] save];  
 
     [self enableRequests];
+}
+
+- (void)rdioDidLogout {
+    [[Settings settings] setUser:nil];
+    [[Settings settings] setAccessToken:nil];
+    [[Settings settings] setUserKey:nil];
+    [[Settings settings] setIcon:nil];
+    [[Settings settings] save];      
 }
 
 /**
@@ -903,6 +913,7 @@
                 [alert show];                
                 [alert release];
             } else {
+                [TestFlight passCheckpoint:@"Unlimited confirmed"];
                 TFLog(@"Unlimited account verified");
             }
         } else {
