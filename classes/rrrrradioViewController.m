@@ -708,7 +708,7 @@
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {                    
             if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
-                    self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]]; 
+                    self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?v=newalbums"] yajl_JSON]]; 
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self enableRequests];            

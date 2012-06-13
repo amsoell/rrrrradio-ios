@@ -140,6 +140,7 @@
     NSLog(@"Item::%@", item);
     
     if ([[item valueForKey:@"type"] isEqualToString:@"tl"] || [[item valueForKey:@"type"] isEqualToString:@"t"]) {
+        // Track selected: Queue it up
         NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
         [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
         [owner updateQueue];
@@ -151,6 +152,7 @@
             [self dismissModalViewControllerAnimated:YES];
         }
     } else {
+        // Artist or album selected
         CollectionBrowser *collection = [[CollectionBrowser alloc] initWithNibName:@"CollectionBrowser" bundle:nil];
         [collection setOwner:self.owner];
         [collection setTitle:[item valueForKey:@"name"]];
@@ -158,10 +160,18 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                                
             if ([[item valueForKey:@"type"] isEqualToString:@"al"] || [[item valueForKey:@"type"] isEqualToString:@"a"]) {
+                // Album selected -- this data already exists
                 
                 collection.dataSource = [item objectForKey:@"tracks"];
             } else if ([[item valueForKey:@"type"] isEqualToString:@"rl"] || [[item valueForKey:@"type"] isEqualToString:@"r"]) {
+                // Artist selected
                 NSString *requestUrl = [NSString stringWithFormat:@"data.php?r=%@", [item valueForKey:@"key"]];
+                NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
+                
+                collection.dataSource = albumInformation;
+            } else if ([[item valueForKey:@"type"] isEqualToString:@"nr"]) {
+                // New album range selected
+                NSString *requestUrl = [NSString stringWithFormat:@"data.php?n=%@&extra=prependartist", [item valueForKey:@"key"]];
                 NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
                 
                 collection.dataSource = albumInformation;
