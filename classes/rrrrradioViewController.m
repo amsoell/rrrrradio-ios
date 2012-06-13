@@ -859,6 +859,8 @@
 #pragma mark RdioDelegate methods
 
 - (void)rdioDidAuthorizeUser:(NSDictionary *)user withAccessToken:(NSString *)accessToken {
+    NSLog(@"user info: %@", user);    
+        
     [[Settings settings] setUser:[NSString stringWithFormat:@"%@ %@", [user valueForKey:@"firstName"], [user valueForKey:@"lastName"]]];
     [[Settings settings] setAccessToken:accessToken];
     [[Settings settings] setUserKey:[user objectForKey:@"key"]];
@@ -867,6 +869,35 @@
 
     [self enableRequests];
 }
+
+/**
+ * Our API call has returned successfully.
+ * the data parameter can be an NSDictionary, NSArray, or NSData 
+ * depending on the call we made.
+ *
+ * Here we will inspect the parameters property of the returned RDAPIRequest
+ * to see what method has returned.
+ */
+- (void)rdioRequest:(RDAPIRequest *)request didLoadData:(id)data {
+    NSString *method = [request.parameters objectForKey:@"method"];
+    if([method isEqualToString:@"get"]) {
+        NSLog(@"isUnlimited: %@", [data objectForKey:@"isUnlimited"]);
+        // we are returned a dictionary but it will be easier to work with an array
+        // for our needs
+//        [albums release];
+//        albums = [[NSMutableArray alloc] initWithCapacity:[data count]];
+//        for(NSString *key in [data allKeys]) {
+//            [albums addObject:[data objectForKey:key]];
+//        }
+//        [self loadAlbumChoices];
+    }
+}
+
+- (void)rdioRequest:(RDAPIRequest *)request didFailWithError:(NSError*)error {
+    
+}
+
+
 
 /**
  * Authentication failed so we should alert the user.

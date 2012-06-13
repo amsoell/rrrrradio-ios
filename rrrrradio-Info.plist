@@ -11,12 +11,12 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>iPhone-Icon.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>Icon.png</string>
-		<string>Icon@2x.png</string>
-		<string>Icon-Ipad.png</string>
+		<string>iPhone-Icon.png</string>
+		<string>iPhone-Icon@2x.png</string>
+		<string>iPad-Icon.png</string>
 		<string>Icon.png</string>
 		<string>Icon@2x.png</string>
 		<string>Icon-Ipad.png</string>
@@ -26,6 +26,7 @@
 		<string>Default@2x.png</string>
 		<string>Default-Portrait@2x~ipad.png</string>
 		<string>Default-Landscape@2x~ipad.png</string>
+		<string>iPad-Icon@2x.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -33,9 +34,9 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>Icon.png</string>
-				<string>Icon@2x.png</string>
-				<string>Icon-Ipad.png</string>
+				<string>iPhone-Icon.png</string>
+				<string>iPhone-Icon@2x.png</string>
+				<string>iPad-Icon.png</string>
 				<string>Icon.png</string>
 				<string>Icon@2x.png</string>
 				<string>Icon-Ipad.png</string>
@@ -45,6 +46,7 @@
 				<string>Default@2x.png</string>
 				<string>Default-Portrait@2x~ipad.png</string>
 				<string>Default-Landscape@2x~ipad.png</string>
+				<string>iPad-Icon@2x.png</string>
 			</array>
 		</dict>
 	</dict>

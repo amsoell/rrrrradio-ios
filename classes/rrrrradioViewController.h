@@ -15,7 +15,7 @@
 
 @class Reachability;
 
-@interface rrrrradioViewController : UIViewController <RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UISplitViewControllerDelegate> {
+@interface rrrrradioViewController : UIViewController <RDAPIRequestDelegate,RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UISplitViewControllerDelegate> {
     IBOutlet UITableView *upcoming;
     IBOutlet UIImageView *progress;
     IBOutlet UIToolbar *volumeToolbar;  
