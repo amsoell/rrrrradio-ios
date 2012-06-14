@@ -90,17 +90,11 @@
         }
     } else {
         if (!self.internetActive) {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
-//            [alert show];
-//            [alert release];
             [hud setBlockTouches:NO];
             [hud setCaption:@"rrrrradio requires an internet connection."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
             [hud show];            
         } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alert show];
-//            [alert release];
             [hud setBlockTouches:NO];
             [hud setCaption:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
@@ -506,18 +500,12 @@
         }
     } else {
         if (!self.internetActive) {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
-//            [alert show];
-//            [alert release];
             [hud setBlockTouches:NO];
             [hud setCaption:@"rrrrradio requires an internet connection."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
             [hud show];
             
         } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alert show];
-//            [alert release];
             [hud setBlockTouches:NO];
             [hud setCaption:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
@@ -775,18 +763,12 @@
         queueLoader = nil;         
         
         if (internetStatus==NotReachable) {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
-//            [alert show];
-//            [alert release];
             [hud setBlockTouches:NO];
             [hud setCaption:@"rrrrradio requires an internet connection."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
             [hud show];
 
         } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alert show];
-//            [alert release];
             [hud setBlockTouches:NO];
             [hud setCaption:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
@@ -969,13 +951,6 @@
                 // logout active account
                 [[rrrrradioAppDelegate rdioInstance] logout];                
                 
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unlimited account required" 
-//                                                                      message:@"rrrrradio requires an Rdio Unlimited account." 
-//                                                                     delegate:nil 
-//                                                            cancelButtonTitle:@"OK" 
-//                                                            otherButtonTitles:nil];
-//                [alert show];                
-//                [alert release];
                 [hud setBlockTouches:NO];
                 [hud setCaption:@"rrrrradio requires an Rdio Unlimited account."];
                 [hud setImage:[UIImage imageNamed:@"11-x"]];
@@ -989,14 +964,6 @@
         } else {
             NSLog(@"some other api result came in");
         }
-        // we are returned a dictionary but it will be easier to work with an array
-        // for our needs
-//        [albums release];
-//        albums = [[NSMutableArray alloc] initWithCapacity:[data count]];
-//        for(NSString *key in [data allKeys]) {
-//            [albums addObject:[data objectForKey:key]];
-//        }
-//        [self loadAlbumChoices];
     }
 }
 
