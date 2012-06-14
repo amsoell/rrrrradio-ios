@@ -49,6 +49,17 @@
 		DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */; };
 		DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793E138C226B00B03B3D /* MainWindow.xib */; };
 		DEC83CE1138D3D0C00772F57 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC83CE0138D3D0C00772F57 /* Reachability.m */; };
+		DEDEA4A0158A4C4500604DFD /* 19-check.png in Resources */ = {isa = PBXBuildFile; fileRef = DEDEA49F158A4C4500604DFD /* 19-check.png */; };
+		DEDEA4D8158A4FC500604DFD /* ATMHud.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDEA4CC158A4FC500604DFD /* ATMHud.m */; };
+		DEDEA4D9158A4FC500604DFD /* ATMHudQueueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDEA4CF158A4FC500604DFD /* ATMHudQueueItem.m */; };
+		DEDEA4DA158A4FC500604DFD /* ATMHudView.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDEA4D1158A4FC500604DFD /* ATMHudView.m */; };
+		DEDEA4DB158A4FC500604DFD /* ATMProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDEA4D3158A4FC500604DFD /* ATMProgressLayer.m */; };
+		DEDEA4DC158A4FC500604DFD /* ATMSoundFX.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDEA4D5158A4FC500604DFD /* ATMSoundFX.m */; };
+		DEDEA4DD158A4FC500604DFD /* ATMTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDEA4D7158A4FC500604DFD /* ATMTextLayer.m */; };
+		DEDEA4DF158A4FD800604DFD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDEA4DE158A4FD800604DFD /* QuartzCore.framework */; };
+		DEDEA4E1158A601100604DFD /* 11-x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEDEA4E0158A601100604DFD /* 11-x.png */; };
+		DEDEA4E4158A656F00604DFD /* hate.png in Resources */ = {isa = PBXBuildFile; fileRef = DEDEA4E2158A656E00604DFD /* hate.png */; };
+		DEDEA4E5158A656F00604DFD /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = DEDEA4E3158A656F00604DFD /* heart.png */; };
 		DEE413001383FCF2000AA02C /* UpcomingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE412FF1383FCF2000AA02C /* UpcomingCell.m */; };
 		DEE413031383FD0F000AA02C /* UpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEE413021383FD0F000AA02C /* UpcomingCell.xib */; };
 		DEF50522138816D10004847E /* DataInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF50521138816D10004847E /* DataInterface.m */; };
@@ -125,6 +136,24 @@
 		DEA1793E138C226B00B03B3D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		DEC83CDF138D3D0C00772F57 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		DEC83CE0138D3D0C00772F57 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		DEDEA49F158A4C4500604DFD /* 19-check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-check.png"; sourceTree = "<group>"; };
+		DEDEA4CB158A4FC500604DFD /* ATMHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHud.h; sourceTree = "<group>"; };
+		DEDEA4CC158A4FC500604DFD /* ATMHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMHud.m; sourceTree = "<group>"; };
+		DEDEA4CD158A4FC500604DFD /* ATMHudDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHudDelegate.h; sourceTree = "<group>"; };
+		DEDEA4CE158A4FC500604DFD /* ATMHudQueueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHudQueueItem.h; sourceTree = "<group>"; };
+		DEDEA4CF158A4FC500604DFD /* ATMHudQueueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMHudQueueItem.m; sourceTree = "<group>"; };
+		DEDEA4D0158A4FC500604DFD /* ATMHudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHudView.h; sourceTree = "<group>"; };
+		DEDEA4D1158A4FC500604DFD /* ATMHudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMHudView.m; sourceTree = "<group>"; };
+		DEDEA4D2158A4FC500604DFD /* ATMProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMProgressLayer.h; sourceTree = "<group>"; };
+		DEDEA4D3158A4FC500604DFD /* ATMProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMProgressLayer.m; sourceTree = "<group>"; };
+		DEDEA4D4158A4FC500604DFD /* ATMSoundFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMSoundFX.h; sourceTree = "<group>"; };
+		DEDEA4D5158A4FC500604DFD /* ATMSoundFX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMSoundFX.m; sourceTree = "<group>"; };
+		DEDEA4D6158A4FC500604DFD /* ATMTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMTextLayer.h; sourceTree = "<group>"; };
+		DEDEA4D7158A4FC500604DFD /* ATMTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMTextLayer.m; sourceTree = "<group>"; };
+		DEDEA4DE158A4FD800604DFD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DEDEA4E0158A601100604DFD /* 11-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-x.png"; sourceTree = "<group>"; };
+		DEDEA4E2158A656E00604DFD /* hate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hate.png; sourceTree = "<group>"; };
+		DEDEA4E3158A656F00604DFD /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		DEE412FE1383FCF2000AA02C /* UpcomingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpcomingCell.h; sourceTree = "<group>"; };
 		DEE412FF1383FCF2000AA02C /* UpcomingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpcomingCell.m; sourceTree = "<group>"; };
 		DEE413021383FD0F000AA02C /* UpcomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingCell.xib; sourceTree = "<group>"; };
@@ -144,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEDEA4DF158A4FD800604DFD /* QuartzCore.framework in Frameworks */,
 				DE2F045A1587BE8800BF2187 /* libz.dylib in Frameworks */,
 				DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */,
 				DE7D104C13813F7100FDA0A5 /* MediaPlayer.framework in Frameworks */,
@@ -166,6 +196,7 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
+				DEDEA4DE158A4FD800604DFD /* QuartzCore.framework */,
 				DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */,
 				DE2F0470158818F300BF2187 /* iPad-Icon.png */,
 				DE2F046E158818E400BF2187 /* iPhone-Icon@2x.png */,
@@ -225,6 +256,27 @@
 			path = iPhone;
 			sourceTree = "<group>";
 		};
+		DEDEA4CA158A4FC500604DFD /* ATMHud */ = {
+			isa = PBXGroup;
+			children = (
+				DEDEA4CB158A4FC500604DFD /* ATMHud.h */,
+				DEDEA4CC158A4FC500604DFD /* ATMHud.m */,
+				DEDEA4CD158A4FC500604DFD /* ATMHudDelegate.h */,
+				DEDEA4CE158A4FC500604DFD /* ATMHudQueueItem.h */,
+				DEDEA4CF158A4FC500604DFD /* ATMHudQueueItem.m */,
+				DEDEA4D0158A4FC500604DFD /* ATMHudView.h */,
+				DEDEA4D1158A4FC500604DFD /* ATMHudView.m */,
+				DEDEA4D2158A4FC500604DFD /* ATMProgressLayer.h */,
+				DEDEA4D3158A4FC500604DFD /* ATMProgressLayer.m */,
+				DEDEA4D4158A4FC500604DFD /* ATMSoundFX.h */,
+				DEDEA4D5158A4FC500604DFD /* ATMSoundFX.m */,
+				DEDEA4D6158A4FC500604DFD /* ATMTextLayer.h */,
+				DEDEA4D7158A4FC500604DFD /* ATMTextLayer.m */,
+			);
+			name = ATMHud;
+			path = contrib/ATMHud;
+			sourceTree = SOURCE_ROOT;
+		};
 		DEE95AD1138C1D3F00FDFF15 /* classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +318,10 @@
 		DEE95AD4138C1D6100FDFF15 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				DEDEA4E2158A656E00604DFD /* hate.png */,
+				DEDEA4E3158A656F00604DFD /* heart.png */,
+				DEDEA4E0158A601100604DFD /* 11-x.png */,
+				DEDEA49F158A4C4500604DFD /* 19-check.png */,
 				DEC86012138F2DE600D2FF30 /* iPhone */,
 			);
 			path = resources;
@@ -274,6 +330,7 @@
 		DEE95AD5138C1D6F00FDFF15 /* contrib */ = {
 			isa = PBXGroup;
 			children = (
+				DEDEA4CA158A4FC500604DFD /* ATMHud */,
 				DEFF03E5158A1E98008CB495 /* FlurryAnalytics */,
 				DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */,
 				DEF5053E138B02450004847E /* AVFoundation.framework */,
@@ -379,6 +436,10 @@
 				DE2F046F158818E400BF2187 /* iPhone-Icon@2x.png in Resources */,
 				DE2F0471158818F300BF2187 /* iPad-Icon.png in Resources */,
 				DE2F0473158818F800BF2187 /* iPad-Icon@2x.png in Resources */,
+				DEDEA4A0158A4C4500604DFD /* 19-check.png in Resources */,
+				DEDEA4E1158A601100604DFD /* 11-x.png in Resources */,
+				DEDEA4E4158A656F00604DFD /* hate.png in Resources */,
+				DEDEA4E5158A656F00604DFD /* heart.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +461,12 @@
 				DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */,
 				DEC83CE1138D3D0C00772F57 /* Reachability.m in Sources */,
 				DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */,
+				DEDEA4D8158A4FC500604DFD /* ATMHud.m in Sources */,
+				DEDEA4D9158A4FC500604DFD /* ATMHudQueueItem.m in Sources */,
+				DEDEA4DA158A4FC500604DFD /* ATMHudView.m in Sources */,
+				DEDEA4DB158A4FC500604DFD /* ATMProgressLayer.m in Sources */,
+				DEDEA4DC158A4FC500604DFD /* ATMSoundFX.m in Sources */,
+				DEDEA4DD158A4FC500604DFD /* ATMTextLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +484,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -472,6 +540,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -492,6 +561,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",

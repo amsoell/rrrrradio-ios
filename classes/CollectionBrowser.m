@@ -9,9 +9,11 @@
 #import "CollectionBrowser.h"
 #import "DataInterface.h"
 #import "rrrrradioAppDelegate.h"
+#import "rrrrradioViewController.h"
 #import <YAJLiOS/YAJL.h>
 #import <dispatch/dispatch.h>
 #import "Settings.h"
+#import "ATMHud.h"
 
 @implementation CollectionBrowser
 @synthesize dataSource;
@@ -158,6 +160,13 @@
             } else {
                 [self dismissModalViewControllerAnimated:YES];
             }
+            
+            [[owner hud] setBlockTouches:YES];
+            [[owner hud] setCaption:@"Your song has been queued!"];
+            [[owner hud] setImage:[UIImage imageNamed:@"19-check"]];
+            [[owner hud] show];
+            [[owner hud] hideAfter:1.5];
+            
         } else {            
             // Turn off spinner and ask user to login
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];

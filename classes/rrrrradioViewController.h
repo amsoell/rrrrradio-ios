@@ -12,10 +12,11 @@
 #import "NowPlayingCell.h"
 #import "UpcomingCell.h"
 #import "Reachability.h"
-
+#import "ATMHudDelegate.h"
+@class ATMHud;
 @class Reachability;
 
-@interface rrrrradioViewController : UIViewController <RDAPIRequestDelegate,RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UISplitViewControllerDelegate> {
+@interface rrrrradioViewController : UIViewController <ATMHudDelegate,RDAPIRequestDelegate,RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UISplitViewControllerDelegate> {
     IBOutlet UITableView *upcoming;
     IBOutlet UIImageView *progress;
     IBOutlet UIToolbar *volumeToolbar;  
@@ -35,6 +36,7 @@
     BOOL internetActive;
     BOOL hostActive;
     NetworkStatus networkSpeed; 
+	ATMHud *hud;    
 }
 
 - (void) refreshLockDisplay;
@@ -69,5 +71,6 @@
 @property (nonatomic) BOOL internetActive;
 @property (nonatomic) BOOL hostActive;
 @property (nonatomic) NetworkStatus networkSpeed;
+@property (nonatomic, retain) ATMHud *hud;
 
 @end

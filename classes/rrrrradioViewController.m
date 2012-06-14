@@ -21,6 +21,7 @@
 #import "DataInterface.h"
 #import "Reachability.h"
 #import "Settings.h"
+#import "ATMHud.h"
 
 
 @interface rrrrradioViewController ()
@@ -44,6 +45,7 @@
 @synthesize listenerController;
 @synthesize internetActive, hostActive, networkSpeed;
 @synthesize popoverController=_myPopoverController;
+@synthesize hud;
 
 
 #pragma mark -
@@ -88,13 +90,22 @@
         }
     } else {
         if (!self.internetActive) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
-            [alert show];
-            [alert release];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
+//            [alert show];
+//            [alert release];
+            [hud setBlockTouches:NO];
+            [hud setCaption:@"rrrrradio requires an internet connection."];
+            [hud setImage:[UIImage imageNamed:@"11-x"]];
+            [hud show];
+            
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            [alert release];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//            [alert release];
+            [hud setBlockTouches:NO];
+            [hud setCaption:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance."];
+            [hud setImage:[UIImage imageNamed:@"11-x"]];
+            [hud show];
             
         }
         
@@ -497,13 +508,22 @@
         }
     } else {
         if (!self.internetActive) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
-            [alert show];
-            [alert release];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
+//            [alert show];
+//            [alert release];
+            [hud setBlockTouches:NO];
+            [hud setCaption:@"rrrrradio requires an internet connection."];
+            [hud setImage:[UIImage imageNamed:@"11-x"]];
+            [hud show];
+            
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            [alert release];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//            [alert release];
+            [hud setBlockTouches:NO];
+            [hud setCaption:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance."];
+            [hud setImage:[UIImage imageNamed:@"11-x"]];
+            [hud show];
             
         }        
     }
@@ -519,12 +539,24 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                     [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=1",[player currentTrack]]];
             });
+            [hud setBlockTouches:YES];
+            [hud setCaption:@"Song loved!"];
+            [hud setImage:[UIImage imageNamed:@"heart"]];
+            [hud show];
+            [hud hideAfter:1.5];
+            
         } else if (buttonIndex==1) {
             [TestFlight passCheckpoint:@"Track hated"];
             [FlurryAnalytics logEvent:@"Track hated"];            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                 [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=-1",[player currentTrack]]];
             });
+            [hud setBlockTouches:YES];
+            [hud setCaption:@"Song hated!"];
+            [hud setImage:[UIImage imageNamed:@"hate"]];
+            [hud show];
+            [hud hideAfter:1.5];
+            
         }
 }
 
@@ -745,13 +777,23 @@
         queueLoader = nil;         
         
         if (internetStatus==NotReachable) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
-            [alert show];
-            [alert release];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network unreachable" message:@"rrrrradio requires an internet connection to work properly" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];            
+//            [alert show];
+//            [alert release];
+            [hud setBlockTouches:NO];
+            [hud setCaption:@"rrrrradio requires an internet connection."];
+            [hud setImage:[UIImage imageNamed:@"11-x"]];
+            [hud show];
+
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            [alert release];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//            [alert release];
+            [hud setBlockTouches:NO];
+            [hud setCaption:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance."];
+            [hud setImage:[UIImage imageNamed:@"11-x"]];
+            [hud show];
+            
             
         }
     } else if (hostStatus != networkSpeed) {
@@ -771,6 +813,11 @@
             [self enableBackgroundPooling:poolingInterval];            
         }
     }
+}
+
+#pragma mark ATMHudDelegate
+- (void)userDidTapHud:(ATMHud *)_hud {
+	[_hud hide];
 }
 
 #pragma mark -
@@ -891,6 +938,7 @@
     [FlurryAnalytics setGender:[user objectForKey:@"gender"]];
 
     [self enableRequests];
+    
 }
 
 - (void)rdioDidLogout {
@@ -923,13 +971,18 @@
                 // logout active account
                 [[rrrrradioAppDelegate rdioInstance] logout];                
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unlimited account required" 
-                                                                      message:@"rrrrradio requires an Rdio Unlimited account." 
-                                                                     delegate:nil 
-                                                            cancelButtonTitle:@"OK" 
-                                                            otherButtonTitles:nil];
-                [alert show];                
-                [alert release];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unlimited account required" 
+//                                                                      message:@"rrrrradio requires an Rdio Unlimited account." 
+//                                                                     delegate:nil 
+//                                                            cancelButtonTitle:@"OK" 
+//                                                            otherButtonTitles:nil];
+//                [alert show];                
+//                [alert release];
+                [hud setBlockTouches:NO];
+                [hud setCaption:@"rrrrradio requires an Rdio Unlimited account."];
+                [hud setImage:[UIImage imageNamed:@"11-x"]];
+                [hud show];
+                
             } else {
                 [TestFlight passCheckpoint:@"Unlimited confirmed"];
                 [FlurryAnalytics logEvent:@"Unlimited confirmed"];
@@ -977,6 +1030,11 @@
 - (void)viewDidLoad
 {
     // Let me know when the app goes foreground/background
+    
+    // Add HUD
+	hud = [[ATMHud alloc] initWithDelegate:self];
+    [upcoming addSubview:hud.view];
+    
     // Add volume slider
     MPVolumeView *volumeView = [[[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)] autorelease];
     [volumeView setCenter:CGPointMake(((self.toolbar.frame.size.width-55)/2)+35, 22)];
@@ -1039,7 +1097,7 @@
     
     [listenersLabel release];
     [listenersBg release];
-    [listenerButton release];
+    [listenerButton release];    
 
     [super viewDidLoad];
 }
@@ -1055,6 +1113,7 @@
 -(void) remoteControlReceivedWithEvent:(UIEvent *)event {
     
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];    

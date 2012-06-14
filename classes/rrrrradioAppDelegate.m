@@ -5,6 +5,10 @@
 //  Created by Andy Soell on 5/11/11.
 //  Copyright 2011 The Institute for Justice. All rights reserved.
 //
+//  Several icons from the Glyphish icon set,
+//  with kind permission of Joseph Wain.
+//  You can get them here: http://glyphish.com/
+//
 
 #import "rrrrradioAppDelegate.h"
 #import "rrrrradioViewController.h"
