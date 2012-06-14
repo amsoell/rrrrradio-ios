@@ -163,22 +163,15 @@
 // Toggle the display of Heads-Up-Display objects (toolbars)
 - (void)toggleHUD {
     NSLog(@"Toggling the HUD");
+    [FlurryAnalytics logEvent:@"HUD Toggle"];
     [UIView beginAnimations:@"volumeToolbar" context:nil];
     if (volumeToolbar.alpha==0.0) {
         [volumeToolbar setFrame:CGRectOffset([volumeToolbar frame], 0, +volumeToolbar.frame.size.height)];
         [volumeToolbar setAlpha:1.0];     
-/*        
-        [opsToolbar setFrame:CGRectOffset([opsToolbar frame], 0, -opsToolbar.frame.size.height)];
-        [opsToolbar setAlpha:1.0];         
- */
     } else {
         [volumeToolbar setFrame:CGRectOffset([volumeToolbar frame], 0, -volumeToolbar.frame.size.height)];
         [volumeToolbar setAlpha:0.0];
    
-/*        
-        [opsToolbar setFrame:CGRectOffset([opsToolbar frame], 0, +opsToolbar.frame.size.height)];
-        [opsToolbar setAlpha:0.0];    
- */
     }
     [UIView commitAnimations];
 }
@@ -197,16 +190,20 @@
                                                nil];
     
         if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
-            MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageWithContentsOfFile:albumArtCachedFullPath]];            
-            [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
+            MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageWithContentsOfFile:albumArtCachedFullPath]]; 
+            if (coverart != nil) {
+                [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
+            }
             [coverart autorelease];
         } else {
             NSString *artUrl = [[_QUEUE currentTrack] objectForKey:@"bigIcon"];
             image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-            MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:image];
-            [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
-            [coverart autorelease];
-            
+            if (image != nil) {
+                MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:image];
+                [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
+                [coverart autorelease];
+            }
+
             // save it to disk
             NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
             [imageData writeToFile:albumArtCachedFullPath atomically:YES];
@@ -237,7 +234,8 @@
 }
 
 - (void) displayListeners {
-    NSLog(@"Show current listeners");    
+    NSLog(@"Show current listeners");   
+    [FlurryAnalytics logEvent:@"View listeners"];
     
     UITableViewController *listenerView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
     [listenerView.tableView setTag:2];
@@ -517,11 +515,13 @@
     
         if (buttonIndex==0) {
             [TestFlight passCheckpoint:@"Track loved"];
+            [FlurryAnalytics logEvent:@"Track loved"];            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                     [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=1",[player currentTrack]]];
             });
         } else if (buttonIndex==1) {
             [TestFlight passCheckpoint:@"Track hated"];
+            [FlurryAnalytics logEvent:@"Track hated"];            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                 [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=-1",[player currentTrack]]];
             });
@@ -582,7 +582,7 @@
             int ctrkindex = [queue indexOfObject:[player currentTrack]];
             
             NSLog(@"running RDPlayer:updateQueue:%@ withCurrentTrackAtIndex:%i", queue, ctrkindex);
-            if (ctrkindex>=0) {
+            if (([queue count]>ctrkindex) && (ctrkindex>=0)) {
                 [player updateQueue:[_QUEUE getTrackKeys] withCurrentTrackIndex:ctrkindex];
             } else {
                 NSLog(@"COULD NOT FIND INDEX");
@@ -692,8 +692,10 @@
         NSLog(@"Host is reachable but before it wasn't");
         self.hostActive = YES;
         if (hostStatus == ReachableViaWiFi) {
+            [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];
             [self setNetworkSpeed:ReachableViaWiFi];
         } else {
+            [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];            
             [self setNetworkSpeed:ReachableViaWWAN];
         }
         
@@ -734,6 +736,7 @@
                  hostStatus==NotReachable ||
                                    internetStatus==NotReachable)) {
         NSLog(@"internet suddenly down -- shut it all down");
+        [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Off", @"speed", nil]];        
         self.hostActive = NO;
         self.networkSpeed = NotReachable;
         
@@ -758,8 +761,10 @@
             NSLog(@"Resetting background pooling");
             int poolingInterval = 120;
             if (hostStatus==ReachableViaWiFi) {
+                [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];                
                 poolingInterval = 20;
             } else if (hostStatus==ReachableViaWWAN) {
+                [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];                
                 poolingInterval = 60;
             }
             
@@ -787,10 +792,13 @@
             sleep(1);
             [player seekToPosition:skip];
             skip = -1;
+            
+            [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Start", @"type", nil]];            
         }
     } else if (newState == 3) {
         NSLog(@"Stopped State");        
         // Enter a stopped state
+        [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Stop", @"type", nil]];                    
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
             NSLog(@"We're in the background, clean stuff up");
             [self stopStream];
@@ -803,6 +811,7 @@
         } else 
         if (skip < 0) {
             NSLog(@"New Track! (this code shouldn't ever fire)");
+            [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"New track", @"type", nil]];                        
 //            NSDictionary* currentTrack = [_QUEUE getNext];
 //            [self playTrack:currentTrack];
             [self refreshQueueDisplay];
@@ -811,6 +820,7 @@
             NSLog(@"Stopping. Skip is %d", skip);
         }
     } else {
+        [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %@", newState],@"type", nil]];                    
         NSLog(@"Some other State");        
         [self stopStream];
         [self reset];                
@@ -821,6 +831,7 @@
 
 - (BOOL)rdioIsPlayingElsewhere {
     NSLog(@"*** Rdio is playing elsewhere **");
+    [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Logged in elsewhere", @"type", nil]];                
 	return NO;
 }
 
@@ -861,12 +872,13 @@
 #pragma mark RdioDelegate methods
 
 - (void)rdioDidAuthorizeUser:(NSDictionary *)user withAccessToken:(NSString *)accessToken {
-    NSLog(@"user info: %@", user);    
+    [TestFlight passCheckpoint:@"Authenticated"];
+    [FlurryAnalytics logEvent:@"Authenticated"];    
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    [user valueForKey:@"key"], @"keys", 
                                    @"isUnlimited", @"extras", 
                                    nil];
-    [TestFlight passCheckpoint:@"Authenticated"];
     [[rrrrradioAppDelegate rdioInstance] callAPIMethod:@"get" withParameters:params delegate:self];    
         
     [[Settings settings] setUser:[NSString stringWithFormat:@"%@ %@", [user valueForKey:@"firstName"], [user valueForKey:@"lastName"]]];
@@ -874,11 +886,17 @@
     [[Settings settings] setUserKey:[user objectForKey:@"key"]];
     [[Settings settings] setIcon:[user objectForKey:@"icon"]];
     [[Settings settings] save];  
+    
+    [FlurryAnalytics setUserID:[user objectForKey:@"key"]];
+    [FlurryAnalytics setGender:[user objectForKey:@"gender"]];
 
     [self enableRequests];
 }
 
 - (void)rdioDidLogout {
+    [TestFlight passCheckpoint:@"Deauthenticated"];
+    [FlurryAnalytics logEvent:@"Deauthenticated" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Manual", @"reason", nil]];                   
+    
     [[Settings settings] setUser:nil];
     [[Settings settings] setAccessToken:nil];
     [[Settings settings] setUserKey:nil];
@@ -914,6 +932,7 @@
                 [alert release];
             } else {
                 [TestFlight passCheckpoint:@"Unlimited confirmed"];
+                [FlurryAnalytics logEvent:@"Unlimited confirmed"];
                 TFLog(@"Unlimited account verified");
             }
         } else {
@@ -1062,10 +1081,11 @@
 
 -(void)backgrounding {
     NSLog(@"Backgrounding");
-
+    [FlurryAnalytics logEvent:@"Backgrounded" timed:YES];
 }
 
 -(void)foregrounding {
+    [TestFlight takeOff:@"47b88feaa535ee288e2e5133f6e87a4d_MjQyMDkyMDEyLTA1LTA4IDE0OjEzOjUzLjcyNTI0OA"];        
     NSLog(@"We're back!");
     
     [[NSUserDefaults standardUserDefaults] synchronize];            
@@ -1087,7 +1107,8 @@
             [self stopStream];
             [self reset];
         } else {
-            NSLog(@"Initializing: UpdateQueue");            
+            NSLog(@"Initializing: UpdateQueue");
+            [FlurryAnalytics endTimedEvent:@"Backgrounded" withParameters:nil];                
             [self updateQueue];        
         }
         if (queueLoader == nil) {

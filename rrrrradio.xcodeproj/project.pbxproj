@@ -55,6 +55,7 @@
 		DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF505321389EDD80004847E /* CollectionBrowser.m */; };
 		DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF505331389EDD80004847E /* CollectionBrowser.xib */; };
 		DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF5053E138B02450004847E /* AVFoundation.framework */; };
+		DEFF03E8158A1E98008CB495 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFF03E7158A1E98008CB495 /* libFlurryAnalytics.a */; };
 		DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,8 @@
 		DEF505321389EDD80004847E /* CollectionBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionBrowser.m; sourceTree = "<group>"; };
 		DEF505331389EDD80004847E /* CollectionBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrowser.xib; sourceTree = "<group>"; };
 		DEF5053E138B02450004847E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DEFF03E6158A1E98008CB495 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
+		DEFF03E7158A1E98008CB495 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonAdd.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +156,7 @@
 				DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */,
 				DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */,
 				DE2F04561587BE2E00BF2187 /* libTestFlight.a in Frameworks */,
+				DEFF03E8158A1E98008CB495 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +274,7 @@
 		DEE95AD5138C1D6F00FDFF15 /* contrib */ = {
 			isa = PBXGroup;
 			children = (
+				DEFF03E5158A1E98008CB495 /* FlurryAnalytics */,
 				DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */,
 				DEF5053E138B02450004847E /* AVFoundation.framework */,
 				DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */,
@@ -285,6 +290,16 @@
 			name = contrib;
 			path = /Users/amsoell/Projects/rrrrradio;
 			sourceTree = "<absolute>";
+		};
+		DEFF03E5158A1E98008CB495 /* FlurryAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				DEFF03E6158A1E98008CB495 /* FlurryAnalytics.h */,
+				DEFF03E7158A1E98008CB495 /* libFlurryAnalytics.a */,
+			);
+			name = FlurryAnalytics;
+			path = contrib/FlurryAnalytics;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -431,6 +446,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
+					"\"$(SRCROOT)/contrib/FlurryAnalytics\"",
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
@@ -506,6 +522,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
+					"\"$(SRCROOT)/contrib/FlurryAnalytics\"",
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
@@ -535,6 +552,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
+					"\"$(SRCROOT)/contrib/FlurryAnalytics\"",
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;

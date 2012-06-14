@@ -20,15 +20,26 @@
 @synthesize splitController, navigationController, mainController;
 
 + (Rdio*)rdioInstance {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]; 
+    
+    [defaults setObject:version forKey:@"version"];
+
+    
     return[(rrrrradioAppDelegate*)[[UIApplication sharedApplication] delegate] rdio];
+}
+
+void uncaughtExceptionHandler(NSException *exception) {
+    [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"47b88feaa535ee288e2e5133f6e87a4d_MjQyMDkyMDEyLTA1LTA4IDE0OjEzOjUzLjcyNTI0OA"];
-    
+//    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler); 
+    [FlurryAnalytics setAppVersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];    
+    [FlurryAnalytics startSession:@"PMLKQP2STQCRL1C2VBG5"];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {    
-        NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?"] yajl_JSON]];
+        NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?v=newalbums"] yajl_JSON]];
 
         navigationController = [[UINavigationController alloc] init];
         [navigationController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
@@ -119,6 +130,8 @@
     [rdio release];
     [super dealloc];
 }
+
+
 
 
 

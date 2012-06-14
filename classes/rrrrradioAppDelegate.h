@@ -21,6 +21,7 @@
 }
 
 + (Rdio*)rdioInstance;
+void uncaughtExceptionHandler(NSException *exception);
 
 @property (readonly) Rdio *rdio;
 @property (nonatomic, retain) IBOutlet UIWindow *window;

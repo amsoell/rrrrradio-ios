@@ -146,6 +146,7 @@
         if ([[Settings settings] accessToken]!=nil) {
             // Track selected: Queue it up
             [TestFlight passCheckpoint:@"Track Requested"];
+            [FlurryAnalytics logEvent:@"Track Requested"];            
             
             NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
             [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
