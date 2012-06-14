@@ -151,7 +151,7 @@
             [FlurryAnalytics logEvent:@"Track Requested"];            
             
             NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
-            [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
+            NSDictionary *arrayData = [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
             [owner updateQueue];
             
             [cell setAccessoryView:nil];
@@ -161,11 +161,19 @@
                 [self dismissModalViewControllerAnimated:YES];
             }
             
-            [[owner hud] setBlockTouches:YES];
-            [[owner hud] setCaption:@"Your song has been queued!"];
-            [[owner hud] setImage:[UIImage imageNamed:@"19-check"]];
-            [[owner hud] show];
-            [[owner hud] hideAfter:1.5];
+            if ([arrayData objectForKey:@"response"]!=nil) {
+                [[owner hud] setBlockTouches:NO];
+                [[owner hud] setCaption:[arrayData objectForKey:@"response"]];
+                [[owner hud] setImage:[UIImage imageNamed:@"11-x"]];
+                [[owner hud] show];
+                [[owner hud] hideAfter:3.0];
+            } else {
+                [[owner hud] setBlockTouches:YES];
+                [[owner hud] setCaption:@"Your song has been queued!"];
+                [[owner hud] setImage:[UIImage imageNamed:@"19-check"]];
+                [[owner hud] show];
+                [[owner hud] hideAfter:1.5];
+            }                
             
         } else {            
             // Turn off spinner and ask user to login

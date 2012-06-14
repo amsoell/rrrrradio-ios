@@ -96,8 +96,7 @@
             [hud setBlockTouches:NO];
             [hud setCaption:@"rrrrradio requires an internet connection."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
-            [hud show];
-            
+            [hud show];            
         } else {
 //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"rrrrradio unreachable" message:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //            [alert show];
@@ -106,7 +105,6 @@
             [hud setCaption:@"rrrrradio cannot be contacted. Probably some more unscheduled maintenance."];
             [hud setImage:[UIImage imageNamed:@"11-x"]];
             [hud show];
-            
         }
         
     }
@@ -982,7 +980,7 @@
                 [hud setCaption:@"rrrrradio requires an Rdio Unlimited account."];
                 [hud setImage:[UIImage imageNamed:@"11-x"]];
                 [hud show];
-                
+                [hud hideAfter:3.0];                            
             } else {
                 [TestFlight passCheckpoint:@"Unlimited confirmed"];
                 [FlurryAnalytics logEvent:@"Unlimited confirmed"];
