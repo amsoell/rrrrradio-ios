@@ -161,19 +161,25 @@
                 [self dismissModalViewControllerAnimated:YES];
             }
             
-            if ([arrayData objectForKey:@"response"]!=nil) {
-                [[owner hud] setBlockTouches:NO];
-                [[owner hud] setCaption:[arrayData objectForKey:@"response"]];
-                [[owner hud] setImage:[UIImage imageNamed:@"11-x"]];
-                [[owner hud] show];
-                [[owner hud] hideAfter:3.0];
-            } else {
-                [[owner hud] setBlockTouches:YES];
-                [[owner hud] setCaption:@"Your song has been queued!"];
-                [[owner hud] setImage:[UIImage imageNamed:@"19-check"]];
-                [[owner hud] show];
-                [[owner hud] hideAfter:1.5];
-            }                
+            ATMHud *hud;
+            if ([owner hud] != nil) {
+                hud = [owner hud];
+                
+                if ([arrayData objectForKey:@"response"]!=nil) {
+                    [hud setBlockTouches:NO];
+                    [hud setCaption:[arrayData objectForKey:@"response"]];
+                    [hud setImage:[UIImage imageNamed:@"11-x"]];
+                    [hud show];
+                    [hud hideAfter:3.0];
+                } else {
+                    [hud setBlockTouches:YES];
+                    [hud setCaption:@"Your song has been queued!"];
+                    [hud setImage:[UIImage imageNamed:@"19-check"]];
+                    [hud show];
+                    [hud hideAfter:1.5];
+                }                
+            }
+            
             
         } else {            
             // Turn off spinner and ask user to login

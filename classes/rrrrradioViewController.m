@@ -190,6 +190,8 @@
         NSMutableDictionary* nowPlayingInfo = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                                [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
                                                [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist,
+                                               [[_QUEUE currentTrack] objectForKey:@"album"], MPMediaItemPropertyAlbumTitle,
+                                               @"Suck it, Jay", MPMediaItemPropertyComments,
                                                nil];
     
         if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
@@ -525,7 +527,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                     [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=1",[player currentTrack]]];
             });
-            [hud setBlockTouches:YES];
+            [hud setBlockTouches:NO];
             [hud setCaption:@"Song loved!"];
             [hud setImage:[UIImage imageNamed:@"heart"]];
             [hud show];
@@ -537,7 +539,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                 [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=-1",[player currentTrack]]];
             });
-            [hud setBlockTouches:YES];
+            [hud setBlockTouches:NO];
             [hud setCaption:@"Song hated!"];
             [hud setImage:[UIImage imageNamed:@"hate"]];
             [hud show];
@@ -998,7 +1000,7 @@
     
     // Add HUD
 	hud = [[ATMHud alloc] initWithDelegate:self];
-    [upcoming addSubview:hud.view];
+    [self.view addSubview:hud.view];
     
     // Add volume slider
     MPVolumeView *volumeView = [[[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, self.toolbar.frame.size.width-55, 20)] autorelease];

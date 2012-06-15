@@ -10,7 +10,7 @@
 #import "rrrrradioViewController.h"
 
 
-@interface CollectionBrowser : UIViewController <UITableViewDataSource,UITableViewDelegate> {
+@interface CollectionBrowser : UIViewController <UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate> {
     NSArray *dataSource;
     NSString *indexChars;
     NSMutableArray *indexSize;

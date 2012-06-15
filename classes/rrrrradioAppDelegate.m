@@ -58,7 +58,7 @@ void uncaughtExceptionHandler(NSException *exception) {
         mainController = [[rrrrradioViewController alloc] initWithNibName:@"rrrrradioViewControllerIpad" bundle:nil];        
         
         splitController = [[UISplitViewController alloc] init];
-        [splitController setDelegate:self.mainController];
+        [splitController setDelegate:self.mainController];        
         
         splitController.viewControllers = [NSArray arrayWithObjects:navigationController, mainController, nil];
         

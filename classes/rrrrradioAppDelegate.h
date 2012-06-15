@@ -17,7 +17,7 @@
     Rdio *rdio;
     UISplitViewController *splitController;
     UINavigationController *navigationController;
-    rrrrradioViewController *mainController;
+    rrrrradioViewController *mainController;   
 }
 
 + (Rdio*)rdioInstance;
