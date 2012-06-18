@@ -42,6 +42,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler); 
     [FlurryAnalytics setAppVersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];    
     [FlurryAnalytics startSession:@"PMLKQP2STQCRL1C2VBG5"];
+    
+    [[LocalyticsSession sharedLocalyticsSession] startSession:@"4c0659da8169501c0a83fa2-2366c090-b951-11e1-4078-00ef75f32667"];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {    
         NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?v=newalbums"] yajl_JSON]];
 
@@ -92,6 +94,8 @@ void uncaughtExceptionHandler(NSException *exception) {
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     NSLog(@"applicationDidEnterBackground");
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];    
     [self.viewController backgrounding];
 }
 
@@ -101,6 +105,8 @@ void uncaughtExceptionHandler(NSException *exception) {
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
     NSLog(@"applicationWillEnterForeground");    
+    [[LocalyticsSession sharedLocalyticsSession] resume];
+    [[LocalyticsSession sharedLocalyticsSession] upload];    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -119,7 +125,8 @@ void uncaughtExceptionHandler(NSException *exception) {
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-    
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];    
 }
 
 - (void)dealloc

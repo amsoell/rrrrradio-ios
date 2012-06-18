@@ -13,4 +13,5 @@
     #import <Foundation/Foundation.h>
     #import "TestFlight.h"
     #import "FlurryAnalytics.h"
+    #import "LocalyticsSession.h"
 #endif

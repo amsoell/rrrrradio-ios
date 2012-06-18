@@ -167,6 +167,8 @@
 - (void)toggleHUD {
     NSLog(@"Toggling the HUD");
     [FlurryAnalytics logEvent:@"HUD Toggle"];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"HUD Toggle"];
+    
     [UIView beginAnimations:@"volumeToolbar" context:nil];
     if (volumeToolbar.alpha==0.0) {
         [volumeToolbar setFrame:CGRectOffset([volumeToolbar frame], 0, +volumeToolbar.frame.size.height)];
@@ -241,6 +243,7 @@
 - (void) displayListeners {
     NSLog(@"Show current listeners");   
     [FlurryAnalytics logEvent:@"View listeners"];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"View Listeners"];
     
     UITableViewController *listenerView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
     [listenerView.tableView setTag:2];
@@ -524,6 +527,8 @@
         if (buttonIndex==0) {
             [TestFlight passCheckpoint:@"Track loved"];
             [FlurryAnalytics logEvent:@"Track loved"];            
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Track loved"];
+            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                     [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=1",[player currentTrack]]];
             });
@@ -536,6 +541,8 @@
         } else if (buttonIndex==1) {
             [TestFlight passCheckpoint:@"Track hated"];
             [FlurryAnalytics logEvent:@"Track hated"];            
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Track hated"];
+            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                 [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=-1",[player currentTrack]]];
             });
@@ -713,9 +720,12 @@
         self.hostActive = YES;
         if (hostStatus == ReachableViaWiFi) {
             [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];
+            
             [self setNetworkSpeed:ReachableViaWiFi];
         } else {
             [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];            
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];
             [self setNetworkSpeed:ReachableViaWWAN];
         }
         
@@ -757,6 +767,7 @@
                                    internetStatus==NotReachable)) {
         NSLog(@"internet suddenly down -- shut it all down");
         [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Off", @"speed", nil]];        
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Off", @"speed", nil]];
         self.hostActive = NO;
         self.networkSpeed = NotReachable;
         
@@ -786,9 +797,11 @@
             int poolingInterval = 120;
             if (hostStatus==ReachableViaWiFi) {
                 [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];                
+                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];
                 poolingInterval = 20;
             } else if (hostStatus==ReachableViaWWAN) {
                 [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];                
+                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];
                 poolingInterval = 60;
             }
             
@@ -823,11 +836,13 @@
             skip = -1;
             
             [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Start", @"type", nil]];            
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Start", @"type", nil]];            
         }
     } else if (newState == 3) {
         NSLog(@"Stopped State");        
         // Enter a stopped state
         [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Stop", @"type", nil]];                    
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Stop", @"type", nil]];        
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
             NSLog(@"We're in the background, clean stuff up");
             [self stopStream];
@@ -841,6 +856,7 @@
         if (skip < 0) {
             NSLog(@"New Track! (this code shouldn't ever fire)");
             [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"New track", @"type", nil]];                        
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"New track", @"type", nil]];            
 //            NSDictionary* currentTrack = [_QUEUE getNext];
 //            [self playTrack:currentTrack];
             [self refreshQueueDisplay];
@@ -850,6 +866,8 @@
         }
     } else {
         [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %@", newState],@"type", nil]];                    
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %@", newState],@"type", nil]];                    
+
         NSLog(@"Some other State");        
         [self stopStream];
         [self reset];                
@@ -861,6 +879,8 @@
 - (BOOL)rdioIsPlayingElsewhere {
     NSLog(@"*** Rdio is playing elsewhere **");
     [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Logged in elsewhere", @"type", nil]];                
+    
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Logged in elsewhere", @"type", nil]];                
 	return NO;
 }
 
@@ -903,6 +923,7 @@
 - (void)rdioDidAuthorizeUser:(NSDictionary *)user withAccessToken:(NSString *)accessToken {
     [TestFlight passCheckpoint:@"Authenticated"];
     [FlurryAnalytics logEvent:@"Authenticated"];    
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Authenticated"];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    [user valueForKey:@"key"], @"keys", 

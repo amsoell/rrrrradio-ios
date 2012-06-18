@@ -38,6 +38,10 @@
 		DE2F046F158818E400BF2187 /* iPhone-Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F046E158818E400BF2187 /* iPhone-Icon@2x.png */; };
 		DE2F0471158818F300BF2187 /* iPad-Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F0470158818F300BF2187 /* iPad-Icon.png */; };
 		DE2F0473158818F800BF2187 /* iPad-Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */; };
+		DE490F6E158F721C00482A8C /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F68158F721C00482A8C /* LocalyticsDatabase.m */; };
+		DE490F6F158F721C00482A8C /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F6A158F721C00482A8C /* LocalyticsSession.m */; };
+		DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F6C158F721C00482A8C /* LocalyticsUploader.m */; };
+		DE490F73158F72F600482A8C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE490F72158F72F600482A8C /* libsqlite3.dylib */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
@@ -121,6 +125,14 @@
 		DE2F046E158818E400BF2187 /* iPhone-Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone-Icon@2x.png"; sourceTree = "<group>"; };
 		DE2F0470158818F300BF2187 /* iPad-Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-Icon.png"; sourceTree = "<group>"; };
 		DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-Icon@2x.png"; sourceTree = "<group>"; };
+		DE490F67158F721C00482A8C /* LocalyticsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsDatabase.h; sourceTree = "<group>"; };
+		DE490F68158F721C00482A8C /* LocalyticsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsDatabase.m; sourceTree = "<group>"; };
+		DE490F69158F721C00482A8C /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsSession.h; sourceTree = "<group>"; };
+		DE490F6A158F721C00482A8C /* LocalyticsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsSession.m; sourceTree = "<group>"; };
+		DE490F6B158F721C00482A8C /* LocalyticsUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsUploader.h; sourceTree = "<group>"; };
+		DE490F6C158F721C00482A8C /* LocalyticsUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsUploader.m; sourceTree = "<group>"; };
+		DE490F6D158F721C00482A8C /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceConstants.h; sourceTree = "<group>"; };
+		DE490F72158F72F600482A8C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
 		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
@@ -173,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE490F73158F72F600482A8C /* libsqlite3.dylib in Frameworks */,
 				DEDEA4DF158A4FD800604DFD /* QuartzCore.framework in Frameworks */,
 				DE2F045A1587BE8800BF2187 /* libz.dylib in Frameworks */,
 				DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */,
@@ -196,6 +209,7 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
+				DE490F72158F72F600482A8C /* libsqlite3.dylib */,
 				DEDEA4DE158A4FD800604DFD /* QuartzCore.framework */,
 				DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */,
 				DE2F0470158818F300BF2187 /* iPad-Icon.png */,
@@ -241,6 +255,21 @@
 			);
 			name = TestFlightSDK1.0;
 			path = contrib/TestFlightSDK1.0;
+			sourceTree = SOURCE_ROOT;
+		};
+		DE490F66158F721C00482A8C /* Localytics */ = {
+			isa = PBXGroup;
+			children = (
+				DE490F67158F721C00482A8C /* LocalyticsDatabase.h */,
+				DE490F68158F721C00482A8C /* LocalyticsDatabase.m */,
+				DE490F69158F721C00482A8C /* LocalyticsSession.h */,
+				DE490F6A158F721C00482A8C /* LocalyticsSession.m */,
+				DE490F6B158F721C00482A8C /* LocalyticsUploader.h */,
+				DE490F6C158F721C00482A8C /* LocalyticsUploader.m */,
+				DE490F6D158F721C00482A8C /* WebserviceConstants.h */,
+			);
+			name = Localytics;
+			path = contrib/Localytics;
 			sourceTree = SOURCE_ROOT;
 		};
 		DEC86012138F2DE600D2FF30 /* iPhone */ = {
@@ -330,6 +359,7 @@
 		DEE95AD5138C1D6F00FDFF15 /* contrib */ = {
 			isa = PBXGroup;
 			children = (
+				DE490F66158F721C00482A8C /* Localytics */,
 				DEDEA4CA158A4FC500604DFD /* ATMHud */,
 				DEFF03E5158A1E98008CB495 /* FlurryAnalytics */,
 				DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */,
@@ -467,6 +497,9 @@
 				DEDEA4DB158A4FC500604DFD /* ATMProgressLayer.m in Sources */,
 				DEDEA4DC158A4FC500604DFD /* ATMSoundFX.m in Sources */,
 				DEDEA4DD158A4FC500604DFD /* ATMTextLayer.m in Sources */,
+				DE490F6E158F721C00482A8C /* LocalyticsDatabase.m in Sources */,
+				DE490F6F158F721C00482A8C /* LocalyticsSession.m in Sources */,
+				DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +510,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -490,8 +524,10 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Distribution;
 		};
@@ -518,8 +554,9 @@
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
-				PROVISIONING_PROFILE = "4FB36ADB-4F3E-493C-A58B-A5652E5E4D96";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4FB36ADB-4F3E-493C-A58B-A5652E5E4D96";
+				PROVISIONING_PROFILE = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -530,7 +567,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -545,8 +583,10 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -554,6 +594,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -567,8 +608,10 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PROVISIONING_PROFILE = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -576,8 +619,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andy Soell (C395UDHLJ4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Soell (C395UDHLJ4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -596,8 +639,9 @@
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
-				PROVISIONING_PROFILE = "15AA940B-7993-492E-9A32-E16718288179";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "15AA940B-7993-492E-9A32-E16718288179";
+				PROVISIONING_PROFILE = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -626,8 +670,9 @@
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
-				PROVISIONING_PROFILE = "4FB36ADB-4F3E-493C-A58B-A5652E5E4D96";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4FB36ADB-4F3E-493C-A58B-A5652E5E4D96";
+				PROVISIONING_PROFILE = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2190E4D7-FDCC-441B-91FE-75148C0778E0";
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
