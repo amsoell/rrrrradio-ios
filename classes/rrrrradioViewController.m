@@ -22,6 +22,7 @@
 #import "Reachability.h"
 #import "Settings.h"
 #import "ATMHud.h"
+#import "Common.h"
 
 
 @interface rrrrradioViewController ()
@@ -182,42 +183,23 @@
 }
 
 - (void)refreshLockDisplay {
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                    
-        MPNowPlayingInfoCenter *infoCenter = [MPNowPlayingInfoCenter defaultCenter];
+    MPNowPlayingInfoCenter *infoCenter = [MPNowPlayingInfoCenter defaultCenter];
         
-        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [[_QUEUE currentTrack] objectForKey:@"albumKey"]];
-        NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
-                                            stringByAppendingPathComponent:albumArtCachedName];
-        UIImage *image = nil;
-        NSMutableDictionary* nowPlayingInfo = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                               [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
-                                               [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist,
-                                               [[_QUEUE currentTrack] objectForKey:@"album"], MPMediaItemPropertyAlbumTitle,
-                                               @"Suck it, Jay", MPMediaItemPropertyComments,
-                                               nil];
+    UIImage *image = [Common getAsset:[NSString stringWithFormat:@"%@-bigIcon.png", [[_QUEUE currentTrack] objectForKey:@"albumKey"]] fromUrl:[NSURL URLWithString:[[_QUEUE currentTrack] objectForKey:@"bigIcon"]]];
+    NSMutableDictionary* nowPlayingInfo = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                           [[_QUEUE currentTrack] objectForKey:@"name"], MPMediaItemPropertyTitle,
+                                           [[_QUEUE currentTrack] objectForKey:@"artist"], MPMediaItemPropertyArtist,
+                                           [[_QUEUE currentTrack] objectForKey:@"album"], MPMediaItemPropertyAlbumTitle,
+                                           @"Suck it, Jay", MPMediaItemPropertyComments,
+                                           nil];
+    MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:image]; 
+    if (coverart != nil) {
+        [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
+    }
+    [coverart autorelease];
     
-        if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
-            MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageWithContentsOfFile:albumArtCachedFullPath]]; 
-            if (coverart != nil) {
-                [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
-            }
-            [coverart autorelease];
-        } else {
-            NSString *artUrl = [[_QUEUE currentTrack] objectForKey:@"bigIcon"];
-            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-            if (image != nil) {
-                MPMediaItemArtwork* coverart = [[MPMediaItemArtwork alloc] initWithImage:image];
-                [nowPlayingInfo setObject:coverart forKey:MPMediaItemPropertyArtwork];
-                [coverart autorelease];
-            }
-
-            // save it to disk
-            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-            [imageData writeToFile:albumArtCachedFullPath atomically:YES];
-        }
-        
-        infoCenter.nowPlayingInfo = nowPlayingInfo;
-        [nowPlayingInfo autorelease];
+    infoCenter.nowPlayingInfo = nowPlayingInfo;
+    [nowPlayingInfo autorelease];
 
   NSLog(@"Lock Info Set");
 //    });
@@ -320,19 +302,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ListenerCell"];
         [cell.textLabel setText:[NSString stringWithFormat:@"%@ %@", [listener objectForKey:@"firstName"], [listener objectForKey:@"lastName"]]];
 
-        NSString *userArtCachedName = [NSString stringWithFormat:@"%@.png", [listener objectForKey:@"key"]];
-        NSString *userArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
-                                           stringByAppendingPathComponent:userArtCachedName];
-        UIImage *image = nil;
-        if([[NSFileManager defaultManager] fileExistsAtPath:userArtCachedFullPath]) {
-            image = [UIImage imageWithContentsOfFile:userArtCachedFullPath];
-        } else {
-            NSString *artUrl = [listener objectForKey:@"icon"];
-            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-            // save it to disk
-            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-            [imageData writeToFile:userArtCachedFullPath atomically:YES];
-        }
+        UIImage *image = [Common getAsset:[NSString stringWithFormat:@"%@.png", [listener objectForKey:@"key"]] fromUrl:[NSURL URLWithString:[listener objectForKey:@"icon"]]];
                 
         [cell.imageView setImage:image];
         [cell autorelease];

@@ -7,6 +7,7 @@
 //
 
 #import "NowPlayingCell.h"
+#import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation NowPlayingCell
@@ -33,19 +34,7 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{    
             // user Icon
-            NSString *userArtCachedName = [NSString stringWithFormat:@"%@.png", [user objectForKey:@"key"]];
-            NSString *userArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
-                                               stringByAppendingPathComponent:userArtCachedName];
-            UIImage *image = nil;
-            if([[NSFileManager defaultManager] fileExistsAtPath:userArtCachedFullPath]) {
-                image = [UIImage imageWithContentsOfFile:userArtCachedFullPath];
-            } else {
-                NSString *artUrl = [user objectForKey:@"icon"];
-                image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-                // save it to disk
-                NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-                [imageData writeToFile:userArtCachedFullPath atomically:YES];
-            }
+            UIImage *image = [Common getAsset:[NSString stringWithFormat:@"%@.png", [user objectForKey:@"key"]] fromUrl:[NSURL URLWithString:[user objectForKey:@"icon"]]];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [userImage setImage:image];
@@ -88,21 +77,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{    
         // big icon - see if the image exists on disk
-        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-bigIcon.png", [track objectForKey:@"albumKey"]];
-        NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
-                                            stringByAppendingPathComponent:albumArtCachedName];
-        UIImage *image = nil;
-        if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
-            image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
-            NSLog(@"Pulling art from cache");
-        } else {
-            NSLog(@"Pulling art from web");
-            NSString *artUrl = [track objectForKey:@"bigIcon"];
-            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-            // save it to disk
-            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-            [imageData writeToFile:albumArtCachedFullPath atomically:YES];
-        }
+        UIImage *image = [Common getAsset:[NSString stringWithFormat:@"%@-bigIcon.png", [track objectForKey:@"albumKey"]] fromUrl:[NSURL URLWithString:[track objectForKey:@"bigIcon"]]];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [imageView setImage:image];   

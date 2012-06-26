@@ -43,6 +43,7 @@
 		DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F6C158F721C00482A8C /* LocalyticsUploader.m */; };
 		DE490F73158F72F600482A8C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE490F72158F72F600482A8C /* libsqlite3.dylib */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
+		DE64EABE15993E8900845AE0 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64EABD15993E8900845AE0 /* Common.m */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
 		DE6ED95F137DDEA700282BB8 /* trackbg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED956137DDEA600282BB8 /* trackbg.png */; };
@@ -134,6 +135,8 @@
 		DE490F6D158F721C00482A8C /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceConstants.h; sourceTree = "<group>"; };
 		DE490F72158F72F600482A8C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
+		DE64EABC15993E8900845AE0 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		DE64EABD15993E8900845AE0 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		DE6ED94C137DDE8300282BB8 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		DE6ED953137DDEA600282BB8 /* MusicQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicQueue.h; sourceTree = "<group>"; };
@@ -210,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				DE490F72158F72F600482A8C /* libsqlite3.dylib */,
-				DEDEA4DE158A4FD800604DFD /* QuartzCore.framework */,
 				DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */,
 				DE2F0470158818F300BF2187 /* iPad-Icon.png */,
 				DE2F046E158818E400BF2187 /* iPhone-Icon@2x.png */,
@@ -309,6 +311,8 @@
 		DEE95AD1138C1D3F00FDFF15 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				DE64EABC15993E8900845AE0 /* Common.h */,
+				DE64EABD15993E8900845AE0 /* Common.m */,
 				DE0B0642137AF23A00B674C2 /* rrrrradioAppDelegate.h */,
 				DE0B0643137AF23A00B674C2 /* rrrrradioAppDelegate.m */,
 				DE0B0648137AF23A00B674C2 /* rrrrradioViewController.h */,
@@ -363,6 +367,7 @@
 				DEDEA4CA158A4FC500604DFD /* ATMHud */,
 				DEFF03E5158A1E98008CB495 /* FlurryAnalytics */,
 				DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */,
+				DEDEA4DE158A4FD800604DFD /* QuartzCore.framework */,
 				DEF5053E138B02450004847E /* AVFoundation.framework */,
 				DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */,
 				DE0B0665137AF35E00B674C2 /* Rdio.framework */,
@@ -395,6 +400,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE0B0650137AF23A00B674C2 /* Build configuration list for PBXNativeTarget "rrrrradio" */;
 			buildPhases = (
+				DE64EAC31599442F00845AE0 /* ShellScript */,
 				DE0B062B137AF23A00B674C2 /* Sources */,
 				DE0B062C137AF23A00B674C2 /* Frameworks */,
 				DE0B062D137AF23A00B674C2 /* Resources */,
@@ -475,6 +481,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DE64EAC31599442F00845AE0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/rrrrradio-Info.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TARGET=\"$PROJECT_DIR/rrrrradio-Info.plist\"\necho $TARGET\nif [ ! -f \"$TARGET\" ]; then\necho \"missing file $TARGET\"\nexit 1;\nfi\n\n# the perl regex splits out the last part of a build number (ie: 1.1.1) and increments it by one\n# if you have a build number that is more than 3 components, add a '\\.\\d+' into the first part of the regex.\n\nNEW_VERSION=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$TARGET\" | /usr/bin/perl -pe 's/(\\d+)/($1+1)/eg'`\necho $NEW_VERSION;\n/usr/libexec/PListBuddy -c \"Set CFBundleVersion $NEW_VERSION\" \"$TARGET\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DE0B062B137AF23A00B674C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -500,6 +523,7 @@
 				DE490F6E158F721C00482A8C /* LocalyticsDatabase.m in Sources */,
 				DE490F6F158F721C00482A8C /* LocalyticsSession.m in Sources */,
 				DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */,
+				DE64EABE15993E8900845AE0 /* Common.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

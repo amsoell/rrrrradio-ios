@@ -14,6 +14,7 @@
 #import <dispatch/dispatch.h>
 #import "Settings.h"
 #import "ATMHud.h"
+#import "Common.h"
 
 @implementation CollectionBrowser
 @synthesize dataSource;
@@ -90,27 +91,9 @@
     } else if ([[item objectForKey:@"type"] isEqualToString:@"al"] || [[item objectForKey:@"type"] isEqualToString:@"a"]) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
 
-        NSString *albumArtCachedName = [NSString stringWithFormat:@"%@-icon.png", [item objectForKey:@"key"]];
-        NSString *albumArtCachedFullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
-                                            stringByAppendingPathComponent:albumArtCachedName];
-        if([[NSFileManager defaultManager] fileExistsAtPath:albumArtCachedFullPath]) {
-            UIImage *image = [UIImage imageWithContentsOfFile:albumArtCachedFullPath];
-            NSLog(@"Pulling art from cache");
-            [cell.imageView setImage:image];            
-        } else {
-            NSLog(@"Pulling art from web");
-            NSString *artUrl = [item objectForKey:@"icon"];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                                            
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:artUrl]]];
-                // save it to disk
-                NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-                [imageData writeToFile:albumArtCachedFullPath atomically:YES];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [cell.imageView setImage:image];            
-                });
-            });
-        }
+        UIImage *image = [Common getAsset:[NSString stringWithFormat:@"%@-icon.png", [item objectForKey:@"key"]] fromUrl:[NSURL URLWithString:[item objectForKey:@"icon"]]];
+        [cell.imageView setImage:image];                    
+
     } else if ([[item objectForKey:@"type"] isEqualToString:@"tl"] || [[item objectForKey:@"type"] isEqualToString:@"t"]) {
             if ([[item objectForKey:@"randomable"] intValue] > 0) {
                 NSLog(@"randomable");

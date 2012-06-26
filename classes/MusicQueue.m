@@ -17,12 +17,10 @@
 @synthesize needsRefresh;
 
 - (void) lock:(NSString*)lockedBy {
-//    NSLog(@"**%@: LOCKED**", lockedBy);
     locked = YES;
 }
 
 - (void) unlock {
-//    NSLog(@"**UNLOCKED**");    
     locked = NO;
 }
 
