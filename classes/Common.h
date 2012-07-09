@@ -11,5 +11,6 @@
 @interface Common : NSObject
 
 + (UIImage*)getAsset:(NSString*)named fromUrl:(NSURL *)fromUrl;
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 
 @end
