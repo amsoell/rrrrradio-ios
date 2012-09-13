@@ -98,7 +98,7 @@
 @class RD_OAToken;
 
 /**
- * A request to the Rdio Web Service API. See [Rdio callAPIMethod]
+ * A request to the Rdio Web Service API. See Rdio::callAPIMethod:withParameters:delegate:
  */
 @interface RDAPIRequest : NSObject {
   id<RDAPIRequestDelegate> delegate_;
@@ -109,8 +109,11 @@
   RD_OAToken *token_;
   int numRetries_;
 }
-// Coming soon:
-// - (void)cancel;
+
+/**
+ * Cancels the Rdio API request
+ */
+ - (void)cancel;
 
 /**
  * The parameter dictionary passed to the request. Includes a "method" value

@@ -835,8 +835,8 @@
             NSLog(@"Stopping. Skip is %d", skip);
         }
     } else {
-        [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %@", newState],@"type", nil]];                    
-        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %@", newState],@"type", nil]];                    
+        [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %u", newState],@"type", nil]];                    
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %u", newState],@"type", nil]];                    
 
         NSLog(@"Some other State");        
         [self stopStream];

@@ -55,7 +55,7 @@
         [indices autorelease];
         return indices;
     } else {
-        return [NSArray arrayWithObject:[NSString stringWithString:@""]];
+        return [NSArray arrayWithObject:@""];
     }
 }
 
@@ -234,7 +234,7 @@
 {
     [super viewDidLoad];
     
-    indexChars = [NSString stringWithString:@"#ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    indexChars = @"#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     int currentIndex = 0;
     
     if ([self.title isEqualToString:@"Artists"]) {

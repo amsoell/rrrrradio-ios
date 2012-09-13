@@ -128,14 +128,16 @@
 }
 
 - (id) initWithTrackData:(NSArray *)tracks {
+    self = [super init];
+    
     while ([self locked]) { }
     [self lock:@"initWithTrackData"];
     ptr = -1;
-    q = [[NSMutableArray alloc] initWithArray:tracks];
+    q =[[NSMutableArray alloc] initWithArray:tracks];
     
     [self unlock];
 
-    return [super init];
+    return self;
 }
 
 - (int) length {

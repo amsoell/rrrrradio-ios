@@ -12,6 +12,7 @@
 		5A4942C513D4AC210085B0DC /* Icon-Ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C413D4AC210085B0DC /* Icon-Ipad.png */; };
 		5A4942C713D4AC330085B0DC /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */; };
 		5A4942C913D4AC390085B0DC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */; };
+		DE03C45116016A8D00753334 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE03C45016016A8D00753334 /* Default-568h@2x.png */; };
 		DE0B0634137AF23A00B674C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0633137AF23A00B674C2 /* UIKit.framework */; };
 		DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0635137AF23A00B674C2 /* Foundation.framework */; };
 		DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0637137AF23A00B674C2 /* CoreGraphics.framework */; };
@@ -93,6 +94,7 @@
 		5A4942C413D4AC210085B0DC /* Icon-Ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Ipad.png"; sourceTree = "<group>"; };
 		5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		DE03C45016016A8D00753334 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DE0B062F137AF23A00B674C2 /* rrrrradio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rrrrradio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0B0633137AF23A00B674C2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DE0B0635137AF23A00B674C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -212,6 +214,7 @@
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
+				DE03C45016016A8D00753334 /* Default-568h@2x.png */,
 				DE490F72158F72F600482A8C /* libsqlite3.dylib */,
 				DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */,
 				DE2F0470158818F300BF2187 /* iPad-Icon.png */,
@@ -421,7 +424,7 @@
 		DE0B0626137AF23A00B674C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = rrrrradio;
 			};
 			buildConfigurationList = DE0B0629137AF23A00B674C2 /* Build configuration list for PBXProject "rrrrradio" */;
@@ -476,6 +479,7 @@
 				DEDEA4E1158A601100604DFD /* 11-x.png in Resources */,
 				DEDEA4E4158A656F00604DFD /* hate.png in Resources */,
 				DEDEA4E5158A656F00604DFD /* heart.png in Resources */,
+				DE03C45116016A8D00753334 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +537,10 @@
 		5A07BAD713D4B64F004FE23E /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -590,7 +597,10 @@
 		DE0B064E137AF23A00B674C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -617,7 +627,10 @@
 		DE0B064F137AF23A00B674C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
