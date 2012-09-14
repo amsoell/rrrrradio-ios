@@ -44,6 +44,7 @@
 		DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F6C158F721C00482A8C /* LocalyticsUploader.m */; };
 		DE490F73158F72F600482A8C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE490F72158F72F600482A8C /* libsqlite3.dylib */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
+		DE5FAFE616036E6E00781175 /* rrrrradioSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5FAFE516036E6E00781175 /* rrrrradioSplitViewController.m */; };
 		DE64EABE15993E8900845AE0 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64EABD15993E8900845AE0 /* Common.m */; };
 		DE6ED94D137DDE8300282BB8 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED94C137DDE8300282BB8 /* Settings.m */; };
 		DE6ED95D137DDEA700282BB8 /* MusicQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED954137DDEA600282BB8 /* MusicQueue.m */; };
@@ -137,6 +138,8 @@
 		DE490F6D158F721C00482A8C /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceConstants.h; sourceTree = "<group>"; };
 		DE490F72158F72F600482A8C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
+		DE5FAFE416036E6E00781175 /* rrrrradioSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rrrrradioSplitViewController.h; sourceTree = "<group>"; };
+		DE5FAFE516036E6E00781175 /* rrrrradioSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rrrrradioSplitViewController.m; sourceTree = "<group>"; };
 		DE64EABC15993E8900845AE0 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		DE64EABD15993E8900845AE0 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		DE6ED94B137DDE8300282BB8 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -336,6 +339,8 @@
 				DEC83CE0138D3D0C00772F57 /* Reachability.m */,
 				DE6ED94B137DDE8300282BB8 /* Settings.h */,
 				DE6ED94C137DDE8300282BB8 /* Settings.m */,
+				DE5FAFE416036E6E00781175 /* rrrrradioSplitViewController.h */,
+				DE5FAFE516036E6E00781175 /* rrrrradioSplitViewController.m */,
 			);
 			path = classes;
 			sourceTree = SOURCE_ROOT;
@@ -528,6 +533,7 @@
 				DE490F6F158F721C00482A8C /* LocalyticsSession.m in Sources */,
 				DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */,
 				DE64EABE15993E8900845AE0 /* Common.m in Sources */,
+				DE5FAFE616036E6E00781175 /* rrrrradioSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

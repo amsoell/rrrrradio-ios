@@ -1096,6 +1096,14 @@
             (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad));
 }
 
+-(NSUInteger)supportedInterfaceOrientations {
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?UIInterfaceOrientationMaskAll:UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
 -(void)backgrounding {
     NSLog(@"Backgrounding");
     [FlurryAnalytics logEvent:@"Backgrounded" timed:YES];

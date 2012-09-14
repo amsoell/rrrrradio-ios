@@ -12,6 +12,7 @@
 
 #import "rrrrradioAppDelegate.h"
 #import "rrrrradioViewController.h"
+#import "rrrrradioSplitViewController.h"
 #import "CollectionBrowser.h"
 #import "DataInterface.h"
 #import <YAJLiOS/YAJL.h>
@@ -59,12 +60,12 @@ void uncaughtExceptionHandler(NSException *exception) {
 
         mainController = [[rrrrradioViewController alloc] initWithNibName:@"rrrrradioViewControllerIpad" bundle:nil];        
         
-        splitController = [[UISplitViewController alloc] init];
+        splitController = [[rrrrradioSplitViewController alloc] init];
         [splitController setDelegate:self.mainController];        
         
         splitController.viewControllers = [NSArray arrayWithObjects:navigationController, mainController, nil];
         
-        [self.window addSubview:splitController.view];
+        [self.window setRootViewController:splitController];
     } else {
         self.window.rootViewController = self.viewController;
     }
@@ -142,9 +143,13 @@ void uncaughtExceptionHandler(NSException *exception) {
     [super dealloc];
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
 
-
-
+- (BOOL) shouldAutorotate {
+    return YES;
+}
 
 
 @end
