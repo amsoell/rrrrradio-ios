@@ -142,9 +142,9 @@
 
 - (int) length {
     if (ptr<0) {
-        return [q count];
+        return (int)[q count];
     } else {
-        return [q count] - ptr;
+        return (int)[q count] - ptr;
     }
 }
 

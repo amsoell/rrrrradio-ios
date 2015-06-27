@@ -56,7 +56,8 @@
 // Tell the RDPlayer object to start playing a bunch of tracks
 - (void) playTracks:(NSMutableArray *)trackData {
     RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
-    [player playSources:trackData];
+    [player.queue add:trackData];
+    [player playFromQueue:0];
 }
 
 // Start the audio
@@ -77,7 +78,8 @@
             [player addObserver:self forKeyPath:@"currentTrack" options:NSKeyValueObservingOptionNew context:nil];
             
             [_QUEUE getNext]; // increment the pointer
-            [player playSources:[_QUEUE getTrackKeys]];
+            [player.queue add:[_QUEUE getTrackKeys]];
+            [player playFromQueue:0];
             [self refreshLockDisplay];            
             
             UIBarButtonItem *btnOld = [[volumeToolbar items] objectAtIndex:0];
@@ -167,8 +169,6 @@
 // Toggle the display of Heads-Up-Display objects (toolbars)
 - (void)toggleHUD {
     NSLog(@"Toggling the HUD");
-    [FlurryAnalytics logEvent:@"HUD Toggle"];
-    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"HUD Toggle"];
     
     [UIView beginAnimations:@"volumeToolbar" context:nil];
     if (volumeToolbar.alpha==0.0) {
@@ -208,7 +208,7 @@
 // Tell the UITableView to refresh itself. Probably a better way to do this
 - (void)refreshQueueDisplay {
     [upcoming reloadData];
-    [self.listenersLabel setText:[NSString stringWithFormat:@"%i Listener%@", [self.listeners count], [self.listeners count]!=1?@"s":@""]];    
+    [self.listenersLabel setText:[NSString stringWithFormat:@"%lu Listener%@", (unsigned long)[self.listeners count], [self.listeners count]!=1?@"s":@""]];
 }
 
 - (void) enableRequests {
@@ -223,9 +223,7 @@
 }
 
 - (void) displayListeners {
-    NSLog(@"Show current listeners");   
-    [FlurryAnalytics logEvent:@"View listeners"];
-    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"View Listeners"];
+    NSLog(@"Show current listeners");
     
     UITableViewController *listenerView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
     [listenerView.tableView setTag:2];
@@ -307,7 +305,9 @@
         [cell.imageView setImage:image];
         [cell autorelease];
     } else {
-        NSDictionary *track = [_QUEUE trackAt:indexPath.row+indexPath.section];     
+        NSUInteger idx;
+        idx = indexPath.row + indexPath.section;
+        NSDictionary *track = [_QUEUE trackAt:(int)idx];
         NSString *cellType;
 
         
@@ -495,10 +495,6 @@
     RDPlayer *player = [[rrrrradioAppDelegate rdioInstance] player];
     
         if (buttonIndex==0) {
-            [TestFlight passCheckpoint:@"Track loved"];
-            [FlurryAnalytics logEvent:@"Track loved"];            
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Track loved"];
-            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                     [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=1",[player currentTrack]]];
             });
@@ -509,10 +505,6 @@
             [hud hideAfter:1.5];
             
         } else if (buttonIndex==1) {
-            [TestFlight passCheckpoint:@"Track hated"];
-            [FlurryAnalytics logEvent:@"Track hated"];            
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Track hated"];
-            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{                
                 [DataInterface issueCommand:[NSString stringWithFormat:@"/controller.php?r=mark&key=%@&val=-1",[player currentTrack]]];
             });
@@ -576,11 +568,11 @@
         
         if ([player state] == RDPlayerStatePlaying) { 
             NSArray* queue = [_QUEUE getTrackKeys];
-            int ctrkindex = [queue indexOfObject:[player currentTrack]];
+            int ctrkindex = (int)[queue indexOfObject:[player currentTrack]];
             
             NSLog(@"running RDPlayer:updateQueue:%@ withCurrentTrackAtIndex:%i", queue, ctrkindex);
             if (([queue count]>ctrkindex) && (ctrkindex>=0)) {
-                [player updateQueue:[_QUEUE getTrackKeys] withCurrentTrackIndex:ctrkindex];
+                [player.queue add:[_QUEUE getTrackKeys]];
             } else {
                 NSLog(@"COULD NOT FIND INDEX");
             }
@@ -689,13 +681,8 @@
         NSLog(@"Host is reachable but before it wasn't");
         self.hostActive = YES;
         if (hostStatus == ReachableViaWiFi) {
-            [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];
-            
             [self setNetworkSpeed:ReachableViaWiFi];
         } else {
-            [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];            
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];
             [self setNetworkSpeed:ReachableViaWWAN];
         }
         
@@ -703,7 +690,7 @@
             NSString* savedToken = [[Settings settings] accessToken];
             if(savedToken != nil) {
                 NSLog(@"Found access token! %@", savedToken);
-                [[rrrrradioAppDelegate rdioInstance] authorizeUsingAccessToken:savedToken fromController:nil];
+//                [[rrrrradioAppDelegate rdioInstance] authorizeUsingAccessToken:savedToken fromController:nil];
             }       
         }
         
@@ -736,8 +723,6 @@
                  hostStatus==NotReachable ||
                                    internetStatus==NotReachable)) {
         NSLog(@"internet suddenly down -- shut it all down");
-        [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Off", @"speed", nil]];        
-        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Off", @"speed", nil]];
         self.hostActive = NO;
         self.networkSpeed = NotReachable;
         
@@ -766,12 +751,8 @@
             NSLog(@"Resetting background pooling");
             int poolingInterval = 120;
             if (hostStatus==ReachableViaWiFi) {
-                [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];                
-                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WiFi", @"speed", nil]];
                 poolingInterval = 20;
             } else if (hostStatus==ReachableViaWWAN) {
-                [FlurryAnalytics logEvent:@"Network speed changed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];                
-                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Network speed changed" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"WWAN", @"speed", nil]];
                 poolingInterval = 60;
             }
             
@@ -804,15 +785,10 @@
             sleep(1);
             [player seekToPosition:skip];
             skip = -1;
-            
-            [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Start", @"type", nil]];            
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Start", @"type", nil]];            
         }
     } else if (newState == 3) {
         NSLog(@"Stopped State");        
         // Enter a stopped state
-        [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Stop", @"type", nil]];                    
-        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Stop", @"type", nil]];        
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
             NSLog(@"We're in the background, clean stuff up");
             [self stopStream];
@@ -825,8 +801,6 @@
         } else 
         if (skip < 0) {
             NSLog(@"New Track! (this code shouldn't ever fire)");
-            [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"New track", @"type", nil]];                        
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"New track", @"type", nil]];            
 //            NSDictionary* currentTrack = [_QUEUE getNext];
 //            [self playTrack:currentTrack];
             [self refreshQueueDisplay];
@@ -835,10 +809,7 @@
             NSLog(@"Stopping. Skip is %d", skip);
         }
     } else {
-        [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %u", newState],@"type", nil]];                    
-        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Other event: %u", newState],@"type", nil]];                    
-
-        NSLog(@"Some other State");        
+        NSLog(@"Some other State");
         [self stopStream];
         [self reset];                
     }
@@ -848,9 +819,6 @@
 
 - (BOOL)rdioIsPlayingElsewhere {
     NSLog(@"*** Rdio is playing elsewhere **");
-    [FlurryAnalytics logEvent:@"Stream event" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Logged in elsewhere", @"type", nil]];                
-    
-    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Stream event" attributes:[NSDictionary dictionaryWithObjectsAndKeys:@"Logged in elsewhere", @"type", nil]];                
 	return NO;
 }
 
@@ -891,33 +859,23 @@
 #pragma mark RdioDelegate methods
 
 - (void)rdioDidAuthorizeUser:(NSDictionary *)user withAccessToken:(NSString *)accessToken {
-    [TestFlight passCheckpoint:@"Authenticated"];
-    [FlurryAnalytics logEvent:@"Authenticated"];    
-    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Authenticated"];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    [user valueForKey:@"key"], @"keys", 
                                    @"isUnlimited", @"extras", 
                                    nil];
-    [[rrrrradioAppDelegate rdioInstance] callAPIMethod:@"get" withParameters:params delegate:self];    
-        
+    [[rrrrradioAppDelegate rdioInstance] callAPIMethod:@"get" withParameters:params success:nil failure:nil];
+    
     [[Settings settings] setUser:[NSString stringWithFormat:@"%@ %@", [user valueForKey:@"firstName"], [user valueForKey:@"lastName"]]];
     [[Settings settings] setAccessToken:accessToken];
     [[Settings settings] setUserKey:[user objectForKey:@"key"]];
     [[Settings settings] setIcon:[user objectForKey:@"icon"]];
     [[Settings settings] save];  
-    
-    [FlurryAnalytics setUserID:[user objectForKey:@"key"]];
-    [FlurryAnalytics setGender:[user objectForKey:@"gender"]];
 
     [self enableRequests];
     
 }
 
 - (void)rdioDidLogout {
-    [TestFlight passCheckpoint:@"Deauthenticated"];
-    [FlurryAnalytics logEvent:@"Deauthenticated" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Manual", @"reason", nil]];                   
-    
     [[Settings settings] setUser:nil];
     [[Settings settings] setAccessToken:nil];
     [[Settings settings] setUserKey:nil];
@@ -940,7 +898,6 @@
         if ([data objectForKey:[[Settings settings] userKey]]!=nil) {
             // Returned data to see if logged in user has Unlimited account
             if ([[[data objectForKey:[[Settings settings] userKey]] objectForKey:@"isUnlimited"] integerValue] == 0 ) {
-                TFLog(@"Authenticated user doesn't have Unlimited account");
                 // logout active account
                 [[rrrrradioAppDelegate rdioInstance] logout];                
                 
@@ -949,10 +906,6 @@
                 [hud setImage:[UIImage imageNamed:@"11-x"]];
                 [hud show];
                 [hud hideAfter:3.0];                            
-            } else {
-                [TestFlight passCheckpoint:@"Unlimited confirmed"];
-                [FlurryAnalytics logEvent:@"Unlimited confirmed"];
-                TFLog(@"Unlimited account verified");
             }
         } else {
             NSLog(@"some other api result came in");
@@ -1106,11 +1059,9 @@
 
 -(void)backgrounding {
     NSLog(@"Backgrounding");
-    [FlurryAnalytics logEvent:@"Backgrounded" timed:YES];
 }
 
 -(void)foregrounding {
-    [TestFlight takeOff:@"47b88feaa535ee288e2e5133f6e87a4d_MjQyMDkyMDEyLTA1LTA4IDE0OjEzOjUzLjcyNTI0OA"];        
     NSLog(@"We're back!");
     
     [[NSUserDefaults standardUserDefaults] synchronize];            
@@ -1132,8 +1083,7 @@
             [self stopStream];
             [self reset];
         } else {
-            NSLog(@"Initializing: UpdateQueue");
-            [FlurryAnalytics endTimedEvent:@"Backgrounded" withParameters:nil];                
+            NSLog(@"Initializing: UpdateQueue");              
             [self updateQueue];        
         }
         if (queueLoader == nil) {

@@ -35,17 +35,12 @@
 }
 
 void uncaughtExceptionHandler(NSException *exception) {
-    [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler); 
-    [FlurryAnalytics setAppVersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];    
-    [FlurryAnalytics startSession:@"PMLKQP2STQCRL1C2VBG5"];
-    
-    [[LocalyticsSession sharedLocalyticsSession] startSession:@"4c0659da8169501c0a83fa2-2366c090-b951-11e1-4078-00ef75f32667"];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?v=newalbums"] yajl_JSON]];
 
         navigationController = [[UINavigationController alloc] init];
@@ -73,7 +68,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self.window makeKeyAndVisible];
     
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    rdio = [[Rdio alloc] initWithConsumerKey:@"q4ybz268x42yttz7k8fsfdn6" andSecret:@"3KEeT5DAVf" delegate:nil];
+    rdio = [[Rdio alloc] initWithClientId:@"pcdqbw6g7bgspaaosof43f433a" andSecret:@"bHJFj_F5k8r0Q2MDYSGv7Q" delegate:nil];
         
     
     return YES;
@@ -95,8 +90,6 @@ void uncaughtExceptionHandler(NSException *exception) {
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     NSLog(@"applicationDidEnterBackground");
-    [[LocalyticsSession sharedLocalyticsSession] close];
-    [[LocalyticsSession sharedLocalyticsSession] upload];    
     [self.viewController backgrounding];
 }
 
@@ -105,9 +98,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
-    NSLog(@"applicationWillEnterForeground");    
-    [[LocalyticsSession sharedLocalyticsSession] resume];
-    [[LocalyticsSession sharedLocalyticsSession] upload];    
+    NSLog(@"applicationWillEnterForeground");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -125,9 +116,7 @@ void uncaughtExceptionHandler(NSException *exception) {
      Called when the application is about to terminate.
      Save data if appropriate.
      See also applicationDidEnterBackground:.
-     */
-    [[LocalyticsSession sharedLocalyticsSession] close];
-    [[LocalyticsSession sharedLocalyticsSession] upload];    
+     */   
 }
 
 - (void)dealloc

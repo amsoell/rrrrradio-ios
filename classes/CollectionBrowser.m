@@ -129,10 +129,6 @@
     if ([[item valueForKey:@"type"] isEqualToString:@"tl"] || [[item valueForKey:@"type"] isEqualToString:@"t"]) {
         NSLog(@"Settings: %@", [Settings settings]);
         if ([[Settings settings] accessToken]!=nil) {
-            // Track selected: Queue it up
-            [TestFlight passCheckpoint:@"Track Requested"];
-            [FlurryAnalytics logEvent:@"Track Requested"];            
-            
             NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
             NSDictionary *arrayData = [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
             [owner updateQueue];

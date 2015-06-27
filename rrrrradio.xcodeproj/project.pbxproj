@@ -27,9 +27,6 @@
 		DE2CAB3D139FF9C100D74C59 /* ListenerController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2CAB3C139FF9C000D74C59 /* ListenerController.m */; };
 		DE2CAB4913A004FB00D74C59 /* iPadBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */; };
 		DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE2F044B15879E1200BF2187 /* Settings.bundle */; };
-		DE2F04561587BE2E00BF2187 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F04521587BE2E00BF2187 /* libTestFlight.a */; };
-		DE2F04571587BE2F00BF2187 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE2F04531587BE2E00BF2187 /* README.txt */; };
-		DE2F04581587BE2F00BF2187 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE2F04541587BE2E00BF2187 /* release_notes.txt */; };
 		DE2F045A1587BE8800BF2187 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F04591587BE8800BF2187 /* libz.dylib */; };
 		DE2F045C1587CEB000BF2187 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F045B1587CEB000BF2187 /* Default.png */; };
 		DE2F045E1587D0EA00BF2187 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F045D1587D0EA00BF2187 /* Default@2x.png */; };
@@ -39,9 +36,6 @@
 		DE2F046F158818E400BF2187 /* iPhone-Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F046E158818E400BF2187 /* iPhone-Icon@2x.png */; };
 		DE2F0471158818F300BF2187 /* iPad-Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F0470158818F300BF2187 /* iPad-Icon.png */; };
 		DE2F0473158818F800BF2187 /* iPad-Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */; };
-		DE490F6E158F721C00482A8C /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F68158F721C00482A8C /* LocalyticsDatabase.m */; };
-		DE490F6F158F721C00482A8C /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F6A158F721C00482A8C /* LocalyticsSession.m */; };
-		DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DE490F6C158F721C00482A8C /* LocalyticsUploader.m */; };
 		DE490F73158F72F600482A8C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE490F72158F72F600482A8C /* libsqlite3.dylib */; };
 		DE4983AC139C590500E911FF /* rrrrradioViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */; };
 		DE5FAFE616036E6E00781175 /* rrrrradioSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5FAFE516036E6E00781175 /* rrrrradioSplitViewController.m */; };
@@ -53,6 +47,7 @@
 		DE7D103813800E0800FDA0A5 /* NowPlayingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */; };
 		DE7D103A13800E2500FDA0A5 /* NowPlayingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */; };
 		DE7D104C13813F7100FDA0A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */; };
+		DE81365A1B3F3ED40068CC9E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE8136591B3F3ED40068CC9E /* CoreMedia.framework */; };
 		DEA1793D138C225D00B03B3D /* rrrrradioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */; };
 		DEA1793F138C226B00B03B3D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1793E138C226B00B03B3D /* MainWindow.xib */; };
 		DEC83CE1138D3D0C00772F57 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC83CE0138D3D0C00772F57 /* Reachability.m */; };
@@ -73,7 +68,6 @@
 		DEF505341389EDD80004847E /* CollectionBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF505321389EDD80004847E /* CollectionBrowser.m */; };
 		DEF505351389EDD80004847E /* CollectionBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF505331389EDD80004847E /* CollectionBrowser.xib */; };
 		DEF5053F138B02450004847E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF5053E138B02450004847E /* AVFoundation.framework */; };
-		DEFF03E8158A1E98008CB495 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFF03E7158A1E98008CB495 /* libFlurryAnalytics.a */; };
 		DEFFCA9D139983ED007DF447 /* UIBarButtonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */; };
 /* End PBXBuildFile section */
 
@@ -116,10 +110,6 @@
 		DE2CAB3C139FF9C000D74C59 /* ListenerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenerController.m; sourceTree = "<group>"; };
 		DE2CAB4813A004FB00D74C59 /* iPadBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPadBg.jpg; sourceTree = "<group>"; };
 		DE2F044B15879E1200BF2187 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		DE2F04521587BE2E00BF2187 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		DE2F04531587BE2E00BF2187 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		DE2F04541587BE2E00BF2187 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
-		DE2F04551587BE2E00BF2187 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		DE2F04591587BE8800BF2187 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		DE2F045B1587CEB000BF2187 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DE2F045D1587D0EA00BF2187 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -129,13 +119,6 @@
 		DE2F046E158818E400BF2187 /* iPhone-Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone-Icon@2x.png"; sourceTree = "<group>"; };
 		DE2F0470158818F300BF2187 /* iPad-Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-Icon.png"; sourceTree = "<group>"; };
 		DE2F0472158818F800BF2187 /* iPad-Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-Icon@2x.png"; sourceTree = "<group>"; };
-		DE490F67158F721C00482A8C /* LocalyticsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsDatabase.h; sourceTree = "<group>"; };
-		DE490F68158F721C00482A8C /* LocalyticsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsDatabase.m; sourceTree = "<group>"; };
-		DE490F69158F721C00482A8C /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsSession.h; sourceTree = "<group>"; };
-		DE490F6A158F721C00482A8C /* LocalyticsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsSession.m; sourceTree = "<group>"; };
-		DE490F6B158F721C00482A8C /* LocalyticsUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsUploader.h; sourceTree = "<group>"; };
-		DE490F6C158F721C00482A8C /* LocalyticsUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsUploader.m; sourceTree = "<group>"; };
-		DE490F6D158F721C00482A8C /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceConstants.h; sourceTree = "<group>"; };
 		DE490F72158F72F600482A8C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DE4983AB139C590500E911FF /* rrrrradioViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewControllerIpad.xib; sourceTree = "<group>"; };
 		DE5FAFE416036E6E00781175 /* rrrrradioSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rrrrradioSplitViewController.h; sourceTree = "<group>"; };
@@ -152,6 +135,7 @@
 		DE7D103713800E0800FDA0A5 /* NowPlayingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingCell.m; sourceTree = "<group>"; };
 		DE7D103913800E2500FDA0A5 /* NowPlayingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowPlayingCell.xib; sourceTree = "<group>"; };
 		DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		DE8136591B3F3ED40068CC9E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		DEA1793C138C225D00B03B3D /* rrrrradioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rrrrradioViewController.xib; sourceTree = "<group>"; };
 		DEA1793E138C226B00B03B3D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		DEC83CDF138D3D0C00772F57 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -183,8 +167,6 @@
 		DEF505321389EDD80004847E /* CollectionBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionBrowser.m; sourceTree = "<group>"; };
 		DEF505331389EDD80004847E /* CollectionBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrowser.xib; sourceTree = "<group>"; };
 		DEF5053E138B02450004847E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		DEFF03E6158A1E98008CB495 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
-		DEFF03E7158A1E98008CB495 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		DEFFCA9C139983ED007DF447 /* UIBarButtonAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonAdd.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE81365A1B3F3ED40068CC9E /* CoreMedia.framework in Frameworks */,
 				DE490F73158F72F600482A8C /* libsqlite3.dylib in Frameworks */,
 				DEDEA4DF158A4FD800604DFD /* QuartzCore.framework in Frameworks */,
 				DE2F045A1587BE8800BF2187 /* libz.dylib in Frameworks */,
@@ -206,8 +189,6 @@
 				DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */,
 				DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */,
 				DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */,
-				DE2F04561587BE2E00BF2187 /* libTestFlight.a in Frameworks */,
-				DEFF03E8158A1E98008CB495 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,33 +233,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */ = {
-			isa = PBXGroup;
-			children = (
-				DE2F04521587BE2E00BF2187 /* libTestFlight.a */,
-				DE2F04531587BE2E00BF2187 /* README.txt */,
-				DE2F04541587BE2E00BF2187 /* release_notes.txt */,
-				DE2F04551587BE2E00BF2187 /* TestFlight.h */,
-			);
-			name = TestFlightSDK1.0;
-			path = contrib/TestFlightSDK1.0;
-			sourceTree = SOURCE_ROOT;
-		};
-		DE490F66158F721C00482A8C /* Localytics */ = {
-			isa = PBXGroup;
-			children = (
-				DE490F67158F721C00482A8C /* LocalyticsDatabase.h */,
-				DE490F68158F721C00482A8C /* LocalyticsDatabase.m */,
-				DE490F69158F721C00482A8C /* LocalyticsSession.h */,
-				DE490F6A158F721C00482A8C /* LocalyticsSession.m */,
-				DE490F6B158F721C00482A8C /* LocalyticsUploader.h */,
-				DE490F6C158F721C00482A8C /* LocalyticsUploader.m */,
-				DE490F6D158F721C00482A8C /* WebserviceConstants.h */,
-			);
-			name = Localytics;
-			path = contrib/Localytics;
-			sourceTree = SOURCE_ROOT;
 		};
 		DEC86012138F2DE600D2FF30 /* iPhone */ = {
 			isa = PBXGroup;
@@ -371,10 +325,8 @@
 		DEE95AD5138C1D6F00FDFF15 /* contrib */ = {
 			isa = PBXGroup;
 			children = (
-				DE490F66158F721C00482A8C /* Localytics */,
+				DE8136591B3F3ED40068CC9E /* CoreMedia.framework */,
 				DEDEA4CA158A4FC500604DFD /* ATMHud */,
-				DEFF03E5158A1E98008CB495 /* FlurryAnalytics */,
-				DE2F04511587BE2E00BF2187 /* TestFlightSDK1.0 */,
 				DEDEA4DE158A4FD800604DFD /* QuartzCore.framework */,
 				DEF5053E138B02450004847E /* AVFoundation.framework */,
 				DE7D104B13813F7100FDA0A5 /* MediaPlayer.framework */,
@@ -390,16 +342,6 @@
 			name = contrib;
 			path = /Users/amsoell/Projects/rrrrradio;
 			sourceTree = "<absolute>";
-		};
-		DEFF03E5158A1E98008CB495 /* FlurryAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				DEFF03E6158A1E98008CB495 /* FlurryAnalytics.h */,
-				DEFF03E7158A1E98008CB495 /* libFlurryAnalytics.a */,
-			);
-			name = FlurryAnalytics;
-			path = contrib/FlurryAnalytics;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -429,7 +371,7 @@
 		DE0B0626137AF23A00B674C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = rrrrradio;
 			};
 			buildConfigurationList = DE0B0629137AF23A00B674C2 /* Build configuration list for PBXProject "rrrrradio" */;
@@ -470,8 +412,6 @@
 				5A4942C713D4AC330085B0DC /* Default-Portrait~ipad.png in Resources */,
 				5A4942C913D4AC390085B0DC /* Default-Landscape~ipad.png in Resources */,
 				DE2F044C15879E1200BF2187 /* Settings.bundle in Resources */,
-				DE2F04571587BE2F00BF2187 /* README.txt in Resources */,
-				DE2F04581587BE2F00BF2187 /* release_notes.txt in Resources */,
 				DE2F045C1587CEB000BF2187 /* Default.png in Resources */,
 				DE2F045E1587D0EA00BF2187 /* Default@2x.png in Resources */,
 				DE2F04601587D6F800BF2187 /* Default-Portrait@2x~ipad.png in Resources */,
@@ -529,9 +469,6 @@
 				DEDEA4DB158A4FC500604DFD /* ATMProgressLayer.m in Sources */,
 				DEDEA4DC158A4FC500604DFD /* ATMSoundFX.m in Sources */,
 				DEDEA4DD158A4FC500604DFD /* ATMTextLayer.m in Sources */,
-				DE490F6E158F721C00482A8C /* LocalyticsDatabase.m in Sources */,
-				DE490F6F158F721C00482A8C /* LocalyticsSession.m in Sources */,
-				DE490F70158F721C00482A8C /* LocalyticsUploader.m in Sources */,
 				DE64EABE15993E8900845AE0 /* Common.m in Sources */,
 				DE5FAFE616036E6E00781175 /* rrrrradioSplitViewController.m in Sources */,
 			);
@@ -543,18 +480,15 @@
 		5A07BAD713D4B64F004FE23E /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
@@ -581,14 +515,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
-					"\"$(SRCROOT)/contrib/FlurryAnalytics\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				PROVISIONING_PROFILE = "9F78F441-B85E-4DBD-A7E9-DDC94C6ECE96";
@@ -603,22 +534,19 @@
 		DE0B064E137AF23A00B674C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				ONLY_ACTIVE_ARCH = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -633,18 +561,15 @@
 		DE0B064F137AF23A00B674C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Soell";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
@@ -672,14 +597,11 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
-					"\"$(SRCROOT)/contrib/FlurryAnalytics\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				PROVISIONING_PROFILE = "9F78F441-B85E-4DBD-A7E9-DDC94C6ECE96";
@@ -703,14 +625,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rrrrradio-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "rrrrradio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/contrib/TestFlightSDK1.0\"",
-					"\"$(SRCROOT)/contrib/FlurryAnalytics\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = rrrrradio;
 				PROVISIONING_PROFILE = "9F78F441-B85E-4DBD-A7E9-DDC94C6ECE96";

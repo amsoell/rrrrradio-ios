@@ -16,7 +16,7 @@
 @class ATMHud;
 @class Reachability;
 
-@interface rrrrradioViewController : UIViewController <ATMHudDelegate,RDAPIRequestDelegate,RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UISplitViewControllerDelegate> {
+@interface rrrrradioViewController : UIViewController <ATMHudDelegate,RDPlayerDelegate,RdioDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UISplitViewControllerDelegate> {
     IBOutlet UITableView *upcoming;
     IBOutlet UIImageView *progress;
     IBOutlet UIToolbar *volumeToolbar;  
