@@ -12,6 +12,6 @@
 @interface DataInterface : NSObject {
 }
 
-+ (NSString*)issueCommand:(NSString*)command;
++ (NSData*)issueCommand:(NSString*)command;
 
 @end

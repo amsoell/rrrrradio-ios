@@ -41,7 +41,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 {
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler); 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        NSArray *artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?v=newalbums"] yajl_JSON]];
+        NSArray *artistData = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[DataInterface issueCommand:@"data.php?v=newalbums"] options:kNilOptions error:nil]];
 
         navigationController = [[UINavigationController alloc] init];
         [navigationController.navigationBar setTintColor:[UIColor colorWithRed:185.0f/255.0f green:80.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];

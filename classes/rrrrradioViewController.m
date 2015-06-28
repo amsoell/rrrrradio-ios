@@ -145,7 +145,7 @@
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSDictionary *arrayData = [[DataInterface issueCommand:@"controller.php?r=getQueue"] yajl_JSON];
+        NSMutableDictionary *arrayData = [NSJSONSerialization JSONObjectWithData:[DataInterface issueCommand:@"controller.php?r=getQueue"] options:kNilOptions error:nil];
         NSArray *queue = [arrayData objectForKey:@"queue"];  
         [self setListeners:[arrayData objectForKey:@"listeners"]];
         _QUEUE = [[MusicQueue alloc ] initWithTrackData:queue];
@@ -545,7 +545,7 @@
 // queue. Pointer handling should be handled elsewhere.
 - (void)updateQueue {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        NSDictionary *arrayData = [[DataInterface issueCommand:@"controller.php?r=getQueue"] yajl_JSON];
+        NSDictionary *arrayData = [NSJSONSerialization JSONObjectWithData:[DataInterface issueCommand:@"controller.php?r=getQueue"] options:kNilOptions error:nil];
         NSArray *queue = [arrayData objectForKey:@"queue"];   
         [self setListeners:[arrayData objectForKey:@"listeners"]];
         
@@ -699,7 +699,7 @@
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {                    
             if ([[rrrrradioAppDelegate rdioInstance] user] == nil) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{                        
-                    self.artistData = [NSArray arrayWithArray:[[DataInterface issueCommand:@"data.php?v=newalbums"] yajl_JSON]]; 
+                    self.artistData = [NSJSONSerialization JSONObjectWithData:[DataInterface issueCommand:@"data.php?v=newalbums"] options:kNilOptions error:nil];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self enableRequests];            

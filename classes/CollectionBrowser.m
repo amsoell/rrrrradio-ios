@@ -130,7 +130,7 @@
         NSLog(@"Settings: %@", [Settings settings]);
         if ([[Settings settings] accessToken]!=nil) {
             NSString *requestUrl = [NSString stringWithFormat:@"controller.php?r=queue&key=%@", [item valueForKey:@"key"]];
-            NSDictionary *arrayData = [[DataInterface issueCommand:requestUrl] yajl_JSON]; 
+            NSDictionary *arrayData = [NSJSONSerialization JSONObjectWithData:[DataInterface issueCommand:requestUrl] options:kNilOptions error:nil];
             [owner updateQueue];
             
             [cell setAccessoryView:nil];
@@ -182,13 +182,13 @@
             } else if ([[item valueForKey:@"type"] isEqualToString:@"rl"] || [[item valueForKey:@"type"] isEqualToString:@"r"]) {
                 // Artist selected
                 NSString *requestUrl = [NSString stringWithFormat:@"data.php?r=%@", [item valueForKey:@"key"]];
-                NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
+                NSArray *albumInformation = [NSJSONSerialization JSONObjectWithData:[DataInterface issueCommand:requestUrl] options:kNilOptions error:nil];
                 
                 collection.dataSource = albumInformation;
             } else if ([[item valueForKey:@"type"] isEqualToString:@"nr"]) {
                 // New album range selected
                 NSString *requestUrl = [NSString stringWithFormat:@"data.php?n=%@&extra=prependartist", [item valueForKey:@"key"]];
-                NSArray *albumInformation = [[DataInterface issueCommand:requestUrl] yajl_JSON];
+                NSArray *albumInformation = [NSJSONSerialization JSONObjectWithData:[DataInterface issueCommand:requestUrl] options:kNilOptions error:nil];
                 
                 collection.dataSource = albumInformation;
             }

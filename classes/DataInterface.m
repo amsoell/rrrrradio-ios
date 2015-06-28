@@ -12,7 +12,7 @@
 @implementation DataInterface
 
 // Basic wrapper to get the contents of a URL
-+ (NSString*)issueCommand:(NSString*)command {
++ (NSData*)issueCommand:(NSString*)command {
     NSString* userKey = [[Settings settings] userKey];  
     NSString* build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
@@ -24,7 +24,7 @@
     
     [reqURL release];
     [reqData autorelease];
-    return reqData;
+    return [reqData dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end
