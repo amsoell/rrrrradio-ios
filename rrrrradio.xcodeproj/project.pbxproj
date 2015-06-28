@@ -12,6 +12,7 @@
 		5A4942C513D4AC210085B0DC /* Icon-Ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C413D4AC210085B0DC /* Icon-Ipad.png */; };
 		5A4942C713D4AC330085B0DC /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */; };
 		5A4942C913D4AC390085B0DC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */; };
+		B950DD96CD312C4444E63055 /* libPods-rrrrradio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB66BDD288508602ED49F54 /* libPods-rrrrradio.a */; };
 		DE03C45116016A8D00753334 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE03C45016016A8D00753334 /* Default-568h@2x.png */; };
 		DE0B0634137AF23A00B674C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0633137AF23A00B674C2 /* UIKit.framework */; };
 		DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B0635137AF23A00B674C2 /* Foundation.framework */; };
@@ -84,11 +85,15 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		59B81C85812389927FCCCC25 /* Pods-rrrrradio.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rrrrradio.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-rrrrradio/Pods-rrrrradio.distribution.xcconfig"; sourceTree = "<group>"; };
 		5A4942C013D4AC0A0085B0DC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5A4942C213D4AC120085B0DC /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		5A4942C413D4AC210085B0DC /* Icon-Ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Ipad.png"; sourceTree = "<group>"; };
 		5A4942C613D4AC330085B0DC /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		5A4942C813D4AC390085B0DC /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		AA5E0D1385388E10311688EF /* Pods-rrrrradio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rrrrradio.release.xcconfig"; path = "Pods/Target Support Files/Pods-rrrrradio/Pods-rrrrradio.release.xcconfig"; sourceTree = "<group>"; };
+		ADB66BDD288508602ED49F54 /* libPods-rrrrradio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rrrrradio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA30884B8B2D4E2F8F1E7F56 /* Pods-rrrrradio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rrrrradio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rrrrradio/Pods-rrrrradio.debug.xcconfig"; sourceTree = "<group>"; };
 		DE03C45016016A8D00753334 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DE0B062F137AF23A00B674C2 /* rrrrradio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rrrrradio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0B0633137AF23A00B674C2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -189,12 +194,31 @@
 				DE0B0636137AF23A00B674C2 /* Foundation.framework in Frameworks */,
 				DE0B0638137AF23A00B674C2 /* CoreGraphics.framework in Frameworks */,
 				DE0B0666137AF35E00B674C2 /* Rdio.framework in Frameworks */,
+				B950DD96CD312C4444E63055 /* libPods-rrrrradio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57B7A0DEE7E139AA51A2DEEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADB66BDD288508602ED49F54 /* libPods-rrrrradio.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B2F9C7DDA0ABDF4721A43FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DA30884B8B2D4E2F8F1E7F56 /* Pods-rrrrradio.debug.xcconfig */,
+				AA5E0D1385388E10311688EF /* Pods-rrrrradio.release.xcconfig */,
+				59B81C85812389927FCCCC25 /* Pods-rrrrradio.distribution.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DE0B0624137AF23A00B674C2 = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +247,8 @@
 				DEE95AD3138C1D5A00FDFF15 /* assets */,
 				DEE95AD5138C1D6F00FDFF15 /* contrib */,
 				DE0B0630137AF23A00B674C2 /* Products */,
+				5B2F9C7DDA0ABDF4721A43FD /* Pods */,
+				57B7A0DEE7E139AA51A2DEEC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,10 +376,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE0B0650137AF23A00B674C2 /* Build configuration list for PBXNativeTarget "rrrrradio" */;
 			buildPhases = (
+				BF1EF9154BF5DD6DC87530D7 /* Check Pods Manifest.lock */,
 				DE64EAC31599442F00845AE0 /* ShellScript */,
 				DE0B062B137AF23A00B674C2 /* Sources */,
 				DE0B062C137AF23A00B674C2 /* Frameworks */,
 				DE0B062D137AF23A00B674C2 /* Resources */,
+				4E3EAD44337E6FB3323D4097 /* Copy Pods Resources */,
 			);
 			buildRules = (
 				DEEB5AC9138C2485006302A8 /* PBXBuildRule */,
@@ -431,6 +459,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4E3EAD44337E6FB3323D4097 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rrrrradio/Pods-rrrrradio-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF1EF9154BF5DD6DC87530D7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		DE64EAC31599442F00845AE0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,6 +562,7 @@
 		};
 		5A07BAD813D4B64F004FE23E /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59B81C85812389927FCCCC25 /* Pods-rrrrradio.distribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
@@ -585,6 +644,7 @@
 		};
 		DE0B0651137AF23A00B674C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA30884B8B2D4E2F8F1E7F56 /* Pods-rrrrradio.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";
@@ -614,6 +674,7 @@
 		};
 		DE0B0652137AF23A00B674C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA5E0D1385388E10311688EF /* Pods-rrrrradio.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Soell";

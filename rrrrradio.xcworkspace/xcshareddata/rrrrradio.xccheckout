@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>24534AE0-BDAE-42D7-B817-1FEEF704B54E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>rrrrradio</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>80679ED7EC82907BC39798C65FFCCE5405A16900</key>
+		<string>github.com:amsoell/rrrrradio-ios.git</string>
+		<key>82607E719876E00F8844966ADEC1A9A7B7A7F5AE</key>
+		<string>github.com:amsoell/ij-proofing.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>rrrrradio.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>80679ED7EC82907BC39798C65FFCCE5405A16900</key>
+		<string>..</string>
+		<key>82607E719876E00F8844966ADEC1A9A7B7A7F5AE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:amsoell/rrrrradio-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>80679ED7EC82907BC39798C65FFCCE5405A16900</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>82607E719876E00F8844966ADEC1A9A7B7A7F5AE</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>80679ED7EC82907BC39798C65FFCCE5405A16900</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rrrrradio-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
