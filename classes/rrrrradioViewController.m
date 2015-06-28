@@ -247,14 +247,14 @@
         [listenerController setModalInPopover:YES];
     }
     
-    [self presentModalViewController:listenerController animated:YES];    
+    [self presentViewController:listenerController animated:YES completion:nil];
 
     [listenerController release];
     [listenerView release];
 }
 
 - (void) dismissListeners {
-    [listenerController dismissModalViewControllerAnimated:YES];
+    [listenerController dismissViewControllerAnimated:NO completion:nil];
     listenerController = nil;
 }
 
@@ -462,8 +462,8 @@
             [collection.navigationItem setRightBarButtonItem:done];
             [done release];
             
-            [navigationController pushViewController:collection animated:NO];        
-            [self presentModalViewController:navigationController animated:YES];
+            [navigationController pushViewController:collection animated:NO];
+            [self presentViewController:navigationController animated:YES completion:nil];
 
             [collection release];        
             [navigationController release];
@@ -994,7 +994,7 @@
     [listenersLabel setBackgroundColor:[UIColor clearColor]];
     [listenersLabel setTextColor:[UIColor grayColor]];
     [listenersLabel setFont:[UIFont fontWithName:@"Trebuchet MS" size:12]];
-    [listenersLabel setTextAlignment:UITextAlignmentCenter];
+    [listenersLabel setTextAlignment:NSTextAlignmentCenter];
     
     [listenersBg addSubview:listenersLabel];
     

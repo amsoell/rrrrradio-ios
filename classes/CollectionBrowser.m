@@ -137,7 +137,7 @@
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {            
                 [self.navigationController popToRootViewControllerAnimated:YES];
             } else {
-                [self dismissModalViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:NO completion:nil];
             }
             
             ATMHud *hud;
@@ -208,7 +208,7 @@
 }
 
 - (void) close {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dealloc
